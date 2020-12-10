@@ -8,5 +8,5 @@ from matplotlib import pyplot as plt
 from retinaface.pre_trained_models import get_model
 from retinaface.utils import vis_annotations
 
-class FindFacesServices:
+class FacesLocatorService:
     pass
