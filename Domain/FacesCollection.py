@@ -1,16 +1,20 @@
-from Face import Face
+from Domain.Face import Face
 
 class FacesCollection:
     def __init__(self):
         self.faceCollection = []
 
-    def addFace(self, id, posX, posY, width, height) -> None:
-        self.faceCollection.append(
-            Face(id,posX, posY, width, height)
-        )
+    def addFace(self, face: Face) -> None:
+        self.faceCollection.append(face)
 
-    def getRepresentation(self) -> set:
+    def getRepresentation(self) -> dict:
         return {
-            face.packData() for face in self.faceCollection
+            face.id:face.packData() for face in self.faceCollection
         }
+
+    def getFace(self, index: int) -> Face:
+        return self.faceCollection[index]
+
+    def size(self):
+        return len(self.faceCollection)
 

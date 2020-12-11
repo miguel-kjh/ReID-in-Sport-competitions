@@ -1,3 +1,6 @@
+import os
+import re
+
 from Services.FaceLocatorService import FacesLocatorService
 from Services.SaveFacesJson import SaveFacesJson
 
@@ -7,6 +10,9 @@ class ReaderFilesController:
         self.faceLocatorService: FacesLocatorService = FacesLocatorService()
 
     def run(self, folder: str) -> None:
-        print(
-            self.faceLocatorService.locator(1, "../data/TGC2020v0.3_PRL/1/1_ParqueSur_frame_12_40_15_000.jpg")
-        )
+        print(folder)
+        for dirpath, dirnames, filenames in os.walk(folder):
+            for filename in filenames:
+                if re.search(".jpg$", filename):
+                    facesCollection = self.faceLocatorService.locate("%s/%s" % (folder,filename))
+                    self.saveService.saveFaces(folder, filename, facesCollection)

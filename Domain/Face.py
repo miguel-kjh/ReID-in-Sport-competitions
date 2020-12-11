@@ -8,7 +8,6 @@ class Face:
 
     def packData(self):
         return {
-            "id": self.id,
             "posX": self.posX,
             "posY": self.posY,
             "width": self.width,
