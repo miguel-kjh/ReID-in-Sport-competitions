@@ -14,3 +14,8 @@ class Face:
             "width": self.width,
             "height": self.height
         }
+
+    def __str__(self) -> str:
+        return "id: %s | position: (%s,%s) | dim: (%s,%s)" %(self.id, self.posY, self.posY, self.width, self.height)
+
+

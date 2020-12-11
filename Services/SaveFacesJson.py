@@ -1,4 +1,4 @@
-from SaveFacesServices import SaveFacesServices
+from Services.SaveFacesServices import SaveFacesServices
 
-class SaveFacesJson:
+class SaveFacesJson(SaveFacesServices):
     pass

@@ -1,19 +1,12 @@
 from Services.FaceLocatorService import FacesLocatorService
 from Services.SaveFacesJson import SaveFacesJson
-import argparse
 
-
-class ReaderFiles:
+class ReaderFilesController:
     def __init__(self):
         self.saveService: SaveFacesJson = SaveFacesJson()
         self.faceLocatorService: FacesLocatorService = FacesLocatorService()
 
     def run(self, folder: str) -> None:
-        pass
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("folder", help="introduce the direction of folder")
-    args = parser.parse_args()
-    print(args.folder)
+        print(
+            self.faceLocatorService.locator(1, "../data/TGC2020v0.3_PRL/1/1_ParqueSur_frame_12_40_15_000.jpg")
+        )
