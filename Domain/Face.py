@@ -6,7 +6,7 @@ class Face:
         self.width: int  = width
         self.height: int = height
 
-    def packData(self):
+    def packData(self) -> dict:
         return {
             "posX": self.posX,
             "posY": self.posY,

@@ -4,5 +4,5 @@ from Domain.FacesCollection import FacesCollection
 class SaveFacesServices:
 
     @abstractmethod
-    def saveFaces(self, folder: str, filename: str, faceCollection: FacesCollection) -> None:
+    def saveFaces(self, folder: str, filename: str, facesCollection: FacesCollection) -> None:
         pass

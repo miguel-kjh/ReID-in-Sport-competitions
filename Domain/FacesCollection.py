@@ -15,6 +15,6 @@ class FacesCollection:
     def getFace(self, index: int) -> Face:
         return self.faceCollection[index]
 
-    def size(self):
+    def size(self) -> int:
         return len(self.faceCollection)
 

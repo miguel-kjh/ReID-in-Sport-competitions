@@ -9,10 +9,12 @@ class ReaderFilesController:
         self.saveService: SaveFacesJson = SaveFacesJson()
         self.faceLocatorService: FacesLocatorService = FacesLocatorService()
 
+    def _isImage(self, filename: str):
+        return re.search(".jpg$", filename)
+
     def run(self, folder: str) -> None:
-        print(folder)
         for dirpath, dirnames, filenames in os.walk(folder):
             for filename in filenames:
-                if re.search(".jpg$", filename):
+                if self._isImage(filename):
                     facesCollection = self.faceLocatorService.locate("%s/%s" % (folder,filename))
                     self.saveService.saveFaces(folder, filename, facesCollection)
