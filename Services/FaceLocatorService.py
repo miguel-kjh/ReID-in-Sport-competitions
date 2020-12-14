@@ -2,14 +2,17 @@ import cv2
 from retinaface.pre_trained_models import get_model
 from Domain.Face import Face
 from Domain.FacesCollection import FacesCollection
+import torch
 
 
 class FacesLocatorService:
 
     def __init__(self):
+        device: str = str(torch.device("cuda" if torch.cuda.is_available() else "cpu"))
         self.model = get_model(
             "resnet50_2020-07-20",
-            max_size=2048)
+            max_size=2048,
+            device=device)
         self.model.eval()
 
     def _createFaces(self, annotations: dict) -> FacesCollection:
