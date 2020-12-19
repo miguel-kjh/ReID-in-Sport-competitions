@@ -24,7 +24,7 @@ class FacesLocatorService:
                     posY   = annotation['bbox'][1]
                     width  = annotation['bbox'][2]
                     height = annotation['bbox'][3]
-                    collection.addFace(Face(id, posX, posY, width, height))
+                    collection.addFace(Face(id, posX, posY, width, height, annotation['score']))
         return collection
 
     def locate(self, file: str) -> FacesCollection:

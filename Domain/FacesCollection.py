@@ -18,3 +18,7 @@ class FacesCollection:
     def size(self) -> int:
         return len(self.faceCollection)
 
+    def isEmpty(self) -> bool:
+        return self.size() == 0
+
+
