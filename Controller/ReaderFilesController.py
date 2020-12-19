@@ -21,4 +21,4 @@ class ReaderFilesController:
             for filename in filenames:
                 if self._isImage(filename):
                     facesCollection = self.faceLocatorService.locate("%s/%s" % (folder,filename))
-                    self.saveService.saveFaces(folder, filename, faceHeuristic.filterFaces(facesCollection))
+                    self.saveService.saveFaces(folder, filename, faceHeuristic.filterFaces(facesCollection), heuristic)
