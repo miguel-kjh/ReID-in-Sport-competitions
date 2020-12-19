@@ -3,11 +3,13 @@ import re
 
 from Services.FaceLocatorService import FacesLocatorService
 from Services.SaveFacesJson import SaveFacesJson
+from Utils.Heuristics.DimensionBasedHeuristic import DimensionBasedHeuristic
 
 class ReaderFilesController:
     def __init__(self):
         self.saveService: SaveFacesJson = SaveFacesJson()
         self.faceLocatorService: FacesLocatorService = FacesLocatorService()
+        self.heuristic: DimensionBasedHeuristic = DimensionBasedHeuristic()
 
     def _isImage(self, filename: str):
         return re.search(".jpg$", filename)

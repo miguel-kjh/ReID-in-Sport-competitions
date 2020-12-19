@@ -14,6 +14,27 @@ class Face:
             "height": self.height
         }
 
+    def getArea(self) -> float:
+        return self.width * self.height
+
+    def __lt__(self, other) -> bool:
+        return self.getArea() < other.getArea()
+
+    def __le__(self, other):
+        return self.getArea() <= other.getArea()
+
+    def __eq__(self, other):
+        return self.getArea() == other.getArea()
+
+    def __ne__(self, other):
+        return self.__eq__(other)
+
+    def __gt__(self, other) -> bool:
+        return not self.__lt__(other)
+
+    def __ge__(self, other):
+        return not self.__le__(other)
+
     def __str__(self) -> str:
         return "id: %s | position: (%s,%s) | dim: (%s,%s)" %(self.id, self.posY, self.posY, self.width, self.height)
 
