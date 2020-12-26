@@ -4,7 +4,7 @@ import json
 
 class SaveFacesJson(SaveFacesServices):
 
-    def saveFaces(self, folder: str, filename: str, facesCollection: FacesCollection, heuristic: str) -> None:
+    def saveFaces(self, folder: str, filename: str, facesCollection: FacesCollection, heuristic: str = "none") -> None:
         details = {
             "name": filename,
             "num_faces": facesCollection.size(),

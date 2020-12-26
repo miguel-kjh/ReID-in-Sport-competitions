@@ -20,7 +20,7 @@ class DimensionBasedHeuristic(FaceHeuristic):
 
         newCollection = FacesCollection()
         newCollection.addFace(max(
-            faceCollection.faceCollection,
+            faceCollection.facesCollection,
             key=lambda face: face.getArea()
         ))
         return newCollection
@@ -32,7 +32,7 @@ class ScoreBasedHeuristic(FaceHeuristic):
 
         newCollection = FacesCollection()
         newCollection.addFace(max(
-            faceCollection.faceCollection,
+            faceCollection.facesCollection,
             key=lambda face: face.score
         ))
         return newCollection

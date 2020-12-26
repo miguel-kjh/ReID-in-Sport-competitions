@@ -8,5 +8,5 @@ class SaveFacesServices:
                   folder: str,
                   filename: str,
                   facesCollection: FacesCollection,
-                  heuristic: str) -> None:
+                  heuristic: str = "none") -> None:
         pass

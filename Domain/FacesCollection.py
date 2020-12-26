@@ -2,21 +2,21 @@ from Domain.Face import Face
 
 class FacesCollection:
     def __init__(self):
-        self.faceCollection = []
+        self.facesCollection = []
 
     def addFace(self, face: Face) -> None:
-        self.faceCollection.append(face)
+        self.facesCollection.append(face)
 
     def getRepresentation(self) -> dict:
         return {
-            face.id:face.packData() for face in self.faceCollection
+            face.id:face.packData() for face in self.facesCollection
         }
 
     def getFace(self, index: int) -> Face:
-        return self.faceCollection[index]
+        return self.facesCollection[index]
 
     def size(self) -> int:
-        return len(self.faceCollection)
+        return len(self.facesCollection)
 
     def isEmpty(self) -> bool:
         return self.size() == 0
