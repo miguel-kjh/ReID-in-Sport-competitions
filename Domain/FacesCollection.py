@@ -1,8 +1,9 @@
 from Domain.Face import Face
 
 class FacesCollection:
-    def __init__(self):
+    def __init__(self, model: str = ""):
         self.facesCollection = []
+        self.model = model
 
     def addFace(self, face: Face) -> None:
         self.facesCollection.append(face)

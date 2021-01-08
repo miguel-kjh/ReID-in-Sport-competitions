@@ -1,7 +1,8 @@
 import os
 import re
 
-from Services.FaceLocatorService import FacesLocatorService
+from Services.RetinaFaceLocatorService import RetinaFacesLocatorService
+from Services.Img2PoseLocatorService import Img2PoseLocatorService
 from Services.SaveFacesJson import SaveFacesJson
 from Services.SaveFacesJpg import SaveFacesJpg
 from Utils.Heuristics.FaceHeuristic import FaceHeuristic
@@ -11,7 +12,8 @@ class ReaderFilesController:
     def __init__(self):
         self.saveService: SaveFacesJson = SaveFacesJson()
         self.saveServiceJpg: SaveFacesJpg = SaveFacesJpg()
-        self.faceLocatorService: FacesLocatorService = FacesLocatorService()
+        #self.faceLocatorService: RetinaFacesLocatorService = RetinaFacesLocatorService()
+        self.faceLocatorService: Img2PoseLocatorService = Img2PoseLocatorService()
         self.heuristicCreator: HeuristicCreator = HeuristicCreator()
 
     def _isImage(self, filename: str):

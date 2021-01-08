@@ -2,10 +2,11 @@ import cv2
 from retinaface.pre_trained_models import get_model
 from Domain.Face import Face
 from Domain.FacesCollection import FacesCollection
+from Services.FacesLocator import FacesLocator
 import torch
 
 
-class FacesLocatorService:
+class RetinaFacesLocatorService(FacesLocator):
 
     def __init__(self):
         device: str = str(torch.device("cuda" if torch.cuda.is_available() else "cpu"))
@@ -16,7 +17,7 @@ class FacesLocatorService:
         self.model.eval()
 
     def _createFaces(self, annotations: dict) -> FacesCollection:
-        collection = FacesCollection()
+        collection = FacesCollection("RetinaFaces")
         if annotations:
             for id, annotation in enumerate(annotations):
                 if annotation['bbox']:

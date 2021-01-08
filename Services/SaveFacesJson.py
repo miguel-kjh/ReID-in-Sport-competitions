@@ -8,7 +8,8 @@ class SaveFacesJson(SaveFacesServices):
         details = {
             "name": filename,
             "num_faces": facesCollection.size(),
-            "faces": facesCollection.getRepresentation()
+            "faces": facesCollection.getRepresentation(),
+            "model": facesCollection.model
         }
         filename = filename.replace('.jpg', '_%s_heuristic_faces.json' % heuristic)
         with open('%s/%s' %(folder,filename), 'w') as json_file:
