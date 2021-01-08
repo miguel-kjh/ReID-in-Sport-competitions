@@ -7,9 +7,12 @@ class FacesCollection:
     def addFace(self, face: Face) -> None:
         self.facesCollection.append(face)
 
+    def addFaces(self, faces: list) -> None:
+        self.facesCollection[len(self.facesCollection):] = faces
+
     def getRepresentation(self) -> dict:
         return {
-            face.id:face.packData() for face in self.facesCollection
+            face.id: face.packData() for face in self.facesCollection
         }
 
     def getFace(self, index: int) -> Face:

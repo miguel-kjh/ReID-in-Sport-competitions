@@ -15,6 +15,7 @@ class NonHeuristic(FaceHeuristic):
 
 class DimensionBasedHeuristic(FaceHeuristic):
 
+
     def filterFaces(self, faceCollection: FacesCollection) -> FacesCollection:
         if faceCollection.isEmpty(): return faceCollection
 
@@ -27,13 +28,15 @@ class DimensionBasedHeuristic(FaceHeuristic):
 
 class ScoreBasedHeuristic(FaceHeuristic):
 
+    def __init__(self):
+        self.threshold: int = 0.95
+
     def filterFaces(self, faceCollection: FacesCollection) -> FacesCollection:
         if faceCollection.isEmpty(): return faceCollection
 
         newCollection = FacesCollection()
-        newCollection.addFace(max(
-            faceCollection.facesCollection,
-            key=lambda face: face.score
+        newCollection.addFaces(list(
+            filter(lambda face: face.score > self.threshold, faceCollection.facesCollection)
         ))
         return newCollection
 

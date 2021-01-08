@@ -15,5 +15,5 @@ def main():
 if __name__ == '__main__':
     #main()
     rs = FacesRecognitionsController()
-    print(rs.identificationPeople("1595508042170.jpeg",
-                             "data/TGC2020v0.3_PRL/1/cropped_faces"))
+    print(rs.identificationPeople("data/data_base_faces/1_Ayagaures_frame_11_22_50_000_0_faces.jpg",
+                             "data/data_base_faces"))
