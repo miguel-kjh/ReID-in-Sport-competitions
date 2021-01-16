@@ -12,8 +12,8 @@ class ReaderFilesController:
     def __init__(self):
         self.saveService: SaveFacesJson = SaveFacesJson()
         self.saveServiceJpg: SaveFacesJpg = SaveFacesJpg()
-        #self.faceLocatorService: RetinaFacesLocatorService = RetinaFacesLocatorService()
-        self.faceLocatorService: Img2PoseLocatorService = Img2PoseLocatorService()
+        self.faceLocatorService: RetinaFacesLocatorService = RetinaFacesLocatorService()
+        #self.faceLocatorService: Img2PoseLocatorService = Img2PoseLocatorService()
         self.heuristicCreator: HeuristicCreator = HeuristicCreator()
 
     def _isImage(self, filename: str):

@@ -1,1 +1,1 @@
-{"name": "103_ParqueSur_frame_19_28_42_000.jpg", "num_faces": 2, "faces": {"0": {"posX": 78, "posY": 31, "width": 117, "height": 80, "score": 0.9971500039100647}, "1": {"posX": 52, "posY": 331, "width": 131, "height": 434, "score": 0.804026186466217}}}
+{"name": "103_ParqueSur_frame_19_28_42_000.jpg", "num_faces": 2, "faces": {"0": {"posX": 78, "posY": 31, "width": 117, "height": 80, "score": 0.9971500039100647}, "1": {"posX": 52, "posY": 331, "width": 131, "height": 434, "score": 0.804026186466217}}, "model": "RetinaFaces"}

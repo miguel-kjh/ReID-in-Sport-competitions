@@ -13,10 +13,9 @@ class SaveFacesJpg(SaveFacesServices):
 
     def __init__(self):
         self.facesFolder: str = os.path.join("data","data_base_faces")
-        if os.path.exists(self.facesFolder):
-             shutil.rmtree(self.facesFolder)
-
-        os.mkdir(self.facesFolder)
+        if not os.path.exists(self.facesFolder):
+            #shutil.rmtree(self.facesFolder)
+            os.mkdir(self.facesFolder)
 
     def _clip(self, image: str, faces: FacesCollection) -> list:
         image = Image.open(image, 'r')
