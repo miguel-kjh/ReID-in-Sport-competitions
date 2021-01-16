@@ -24,8 +24,20 @@ class RunnersStats:
     def addRunner(self, dorsal):
         self.runners.append(RunnerStats(dorsal))
 
-    def addPosition(self, dorsal, place, position):
-        self.runners[dorsal][place].append(position)
+    def addPosition(self, dorsal: int, place: str, position: int):
+        self.getRunner(dorsal).target[place].append(position)
+
+    def getRunner(self, dorsal) -> RunnerStats:
+        for runner in self.runners:
+            if runner.dorsal == dorsal:
+                return runner
+        raise RuntimeError("Not exist that runner")
 
     def isRunner(self, dorsal) -> bool:
-        return len(list(filter(lambda runner: runner.dorsal == dorsal, self.runners))) > 1
+        return len(list(filter(lambda runner: runner.dorsal == dorsal, self.runners))) >= 1
+
+    def __str__(self):
+        s = ""
+        for r in self.runners:
+            s += str(r)
+        return s
