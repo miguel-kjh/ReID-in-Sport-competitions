@@ -1,42 +1,33 @@
 import os
-import re
 import ntpath
 
 from Services.FacesRecognitionServices import FacesRecognitionService
 from Utils.Statistics.RunnersStats import RunnersStats
+from Utils.Utils import isImage,getPlace,getNumber,findFile
 
 class FacesRecognitionsController:
 
     def __init__(self):
         self._recognition = FacesRecognitionService()
         self.gallery = "data/TGC_places"
-        #self.places  = ["Arucas", "Ayagaures", "ParqueSur", "PresaDeHornos", "Teror"]
 
-    def _getPlace(self, filename: str) -> str:
-        match = re.search(r'\d+_(\w+)_frame', filename)
-        return match.group(1)
-
-    def _getNumber(self, filename: str) -> int:
-        match = re.search(r'^\d+', filename)
-        return int(match.group(0))
-
-    def identificationPeople(self, database: str) -> list:
-        #df = self._recognition.verifyImageInDataBase(personToSearch, database)
-        #return df['identity'][0] if not df.empty else ''
+    def identificationPeople(self, database: str) -> RunnersStats:
         runners = RunnersStats()
-        for dirpath, dirnames, filenames in os.walk(database):
+        for dirpath, _, filenames in os.walk(database):
             for filename in filenames:
-                dorsal = self._getNumber(filename)
-                place  = self._getPlace(filename)
+                if isImage(filename):
+                    dorsal = getNumber(filename)
+                    place  = getPlace(filename)
 
-                if not runners.isRunner(dorsal):
-                    runners.addRunner(dorsal)
+                    if not runners.isRunner(dorsal):
+                        runners.addRunner(dorsal)
 
-                df = self._recognition.verifyImageInDataBase(os.path.join(dirpath, filename), os.path.join(self.gallery, place))
-                dorsalIdentified = 0 if df.empty else self._getNumber(ntpath.basename(df['identity'][0]))
-                runners.addPosition(dorsal, place, dorsalIdentified)
-            break
-        print(runners)
+                    df = self._recognition.verifyImageInDataBase(os.path.join(dirpath, filename), os.path.join(self.gallery, place))
+                    dorsalIdentified = None if df.empty else getNumber(ntpath.basename(df['identity'][0]))
+                    position = findFile(ntpath.basename(df['identity'][0]), os.path.join(self.gallery, place))
+                    if dorsalIdentified and position:
+                        runners.addPosition(dorsal, place, dorsalIdentified, position)
+
         return runners
 
 
