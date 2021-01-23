@@ -3,7 +3,7 @@ import ntpath
 
 from Services.FacesRecognitionServices import FacesRecognitionService
 from Utils.Statistics.RunnersStats import RunnersStats
-from Utils.Utils import isImage,getPlace,getNumber,findFile
+from Utils.Utils import isImage,getPlace,getNumber
 
 class FacesRecognitionsController:
 
@@ -22,10 +22,14 @@ class FacesRecognitionsController:
                     if not runners.isRunner(dorsal):
                         runners.addRunner(dorsal)
 
-                    df = self._recognition.verifyImageInDataBase(os.path.join(dirpath, filename), os.path.join(self.gallery, place))
-                    dorsalIdentified = None if df.empty else getNumber(ntpath.basename(df['identity'][0]))
-                    if dorsalIdentified:
-                        runners.addPosition(dorsal, place, dorsalIdentified)
+                    dorsalList = self._recognition.verifyImageInDataBase(os.path.join(dirpath, filename),
+                                                                 os.path.join(self.gallery, place))
+                    try:
+                        position = dorsalList.index(dorsal) + 1
+                    except ValueError:
+                        position = -1
+
+                    runners.addPosition(dorsal, place, position)
 
         return runners
 

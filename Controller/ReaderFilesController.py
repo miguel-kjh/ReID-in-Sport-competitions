@@ -1,5 +1,4 @@
 import os
-import shutil
 
 from Services.RetinaFaceLocatorService import RetinaFacesLocatorService
 from Services.Img2PoseLocatorService import Img2PoseLocatorService
@@ -7,15 +6,9 @@ from Services.SaveFacesJson import SaveFacesJson
 from Services.SaveFacesJpg import SaveFacesJpg
 from Utils.Heuristics.FaceHeuristic import FaceHeuristic
 from Utils.Heuristics.HeuristicCreator import HeuristicCreator
-from Utils.Utils import isImage
+from Utils.Utils import isImage, createFolder
 
 class ReaderFilesController:
-
-    def _crateFolder(self, folder):
-        if os.path.exists(folder):
-            shutil.rmtree(folder)
-
-        os.mkdir(folder)
 
     def _createNameFolder(self, database, model, heuristic):
         return "%s_%s_%s" %(database, model, heuristic)
@@ -39,8 +32,8 @@ class ReaderFilesController:
         self.gallery     = self._createNameFolder(self.databaseJson, model, heuristic)
         self.facesFolder = self._createNameFolder(self.databaseFaces, model, heuristic)
 
-        self._crateFolder(self.gallery)
-        self._crateFolder(self.gallery)
+        createFolder(self.gallery)
+        createFolder(self.gallery)
 
         self.saveServiceJson: SaveFacesJson = SaveFacesJson()
         self.saveServiceJpg: SaveFacesJpg   = SaveFacesJpg(self.facesFolder)
