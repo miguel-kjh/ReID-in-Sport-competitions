@@ -17,7 +17,7 @@ class RetinaFacesLocatorService(FacesLocator):
         self.model.eval()
 
     def _createFaces(self, annotations: dict) -> FacesCollection:
-        collection = FacesCollection("RetinaFaces")
+        collection = FacesCollection(model = "RetinaFaces")
         if annotations:
             for id, annotation in enumerate(annotations):
                 if annotation['bbox']:

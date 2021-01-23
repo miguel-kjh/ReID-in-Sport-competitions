@@ -7,6 +7,5 @@ class SaveFacesServices:
     def saveFaces(self,
                   folder: str,
                   filename: str,
-                  facesCollection: FacesCollection,
-                  heuristic: str = "none") -> None:
+                  facesCollection: FacesCollection) -> None:
         pass

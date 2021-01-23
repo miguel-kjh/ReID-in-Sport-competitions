@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from Services.RetinaFaceLocatorService import RetinaFacesLocatorService
 from Services.Img2PoseLocatorService import Img2PoseLocatorService
@@ -9,20 +10,53 @@ from Utils.Heuristics.HeuristicCreator import HeuristicCreator
 from Utils.Utils import isImage
 
 class ReaderFilesController:
-    def __init__(self):
-        self.saveService: SaveFacesJson = SaveFacesJson()
-        self.saveServiceJpg: SaveFacesJpg = SaveFacesJpg()
-        self.faceLocatorService: RetinaFacesLocatorService = RetinaFacesLocatorService()
-        #self.faceLocatorService: Img2PoseLocatorService = Img2PoseLocatorService()
+
+    def _crateFolder(self, folder):
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
+
+        os.mkdir(folder)
+
+    def _createNameFolder(self, database, model, heuristic):
+        return "%s_%s_%s" %(database, model, heuristic)
+
+    def __init__(self, heuristic: str = 'none', model: str = 'retinaface'):
+
+        if model == 'retinaface':
+            self.faceLocatorService: RetinaFacesLocatorService = RetinaFacesLocatorService()
+        elif model == 'img2pose':
+            self.faceLocatorService: Img2PoseLocatorService = Img2PoseLocatorService()
+        else:
+            msg = "The model %s does not exist" %model
+            raise Exception(msg)
+
         self.heuristicCreator: HeuristicCreator = HeuristicCreator()
 
-    def run(self, folder: str, heuristic: str = 'none') -> None:
-        faceHeuristic: FaceHeuristic = self.heuristicCreator.getHeuristic(heuristic)
+        self.databaseJson  = os.path.join("data", "TGC2020v0.3_json")
+        self.databaseFaces = os.path.join("data", "TGC2020v0.3_face")
+        self.heuristic     = heuristic
+
+        self.gallery     = self._createNameFolder(self.databaseJson, model, heuristic)
+        self.facesFolder = self._createNameFolder(self.databaseFaces, model, heuristic)
+
+        self._crateFolder(self.gallery)
+        self._crateFolder(self.gallery)
+
+        self.saveServiceJson: SaveFacesJson = SaveFacesJson()
+        self.saveServiceJpg: SaveFacesJpg   = SaveFacesJpg(self.facesFolder)
+
+    def run(self, folder: str) -> None:
+        faceHeuristic: FaceHeuristic = self.heuristicCreator.getHeuristic(self.heuristic)
+
+        db = os.path.join(self.gallery, os.path.basename(folder))
+        os.mkdir(db)
+
+        print(folder)
         for dirpath, dirnames, filenames in os.walk(folder):
             for filename in filenames:
                 if isImage(filename):
                     facesCollection = faceHeuristic.filterFaces(
                         self.faceLocatorService.locate(os.path.join(folder,filename))
                     )
-                    self.saveService.saveFaces(folder, filename, facesCollection, heuristic)
-                    self.saveServiceJpg.saveFaces(folder, filename, facesCollection)
+                    self.saveServiceJson.saveFaces(db, filename, facesCollection)
+

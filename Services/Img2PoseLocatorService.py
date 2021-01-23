@@ -40,7 +40,7 @@ class Img2PoseLocatorService(FacesLocator):
 
 
     def _createFaces(self, bboxes: list, res: dict) -> FacesCollection:
-        collection = FacesCollection("Img2Pose")
+        collection = FacesCollection(model = "Img2Pose")
         for index, box in enumerate(bboxes):
             if res["scores"][index] > self.threshold:
                 posX   = round(box[0])

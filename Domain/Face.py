@@ -23,4 +23,9 @@ class Face:
         return "id: %s | position: (%s,%s) | dim: (%s,%s) | score: %s" %(self.id, self.posY, self.posY,
                                                                          self.width, self.height, self.score)
 
+    def __repr__(self) -> str:
+        return self.__str__()
+
+
+
 

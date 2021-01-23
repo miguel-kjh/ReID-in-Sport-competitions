@@ -1,45 +1,47 @@
 from PIL import Image
 import matplotlib.pyplot as plt
 import os
-import re
+import json
 
-database = "data_base_faces"
-
-def isImage(filename: str):
-    return re.search(".jpg$", filename)
+model     = "retinaface"
+heuristic = "none"
+database  = "TGC2020v0.3_json_%s_%s" %(model, heuristic)
 
 def main():
 
     data = {
-        "< 200" : 0,
-        "< 500" : 0,
-        "< 1000" : 0,
-        "< 2000" : 0,
-        "> 2000" : 0
+        "< 10" : 0,
+        "< 50" : 0,
+        "< 100" : 0,
+        "< 150" : 0,
+        ">= 150" : 0
     }
 
     for dirpath, _, filenames in os.walk(database):
         for file in filenames:
-            if isImage(file):
-                img   = Image.open(os.path.join(dirpath,file))
-                count = img.height * img.width
-                if count < 200:
-                    data["< 200"] += 1
-                elif count < 500:
-                    data["< 500"] += 1
-                elif count < 500:
-                    data["< 1000"] += 1
-                elif count < 1000:
-                    data["< 1000"] += 1
-                elif count < 2000:
-                    data["< 2000"] += 1
+            with open(os.path.join(dirpath, file)) as f:
+                faces = json.load(f)
+
+            for key in faces['faces']:
+                count = faces['faces'][key]['height']
+                if count < 10:
+                    data["< 10"] += 1
+                elif count < 50:
+                    data["< 50"] += 1
+                elif count < 100:
+                    data["< 100"] += 1
+                elif count < 150:
+                    data["< 150"] += 1
                 else:
-                    data["> 2000"] += 1
+                    data[">= 150"] += 1
 
     return data
 
 def printBar(data: dict):
     plt.bar(data.keys(), data.values())
+    plt.title(
+        "%s height of images" %model
+    )
     plt.show()
 
 

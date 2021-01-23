@@ -24,9 +24,8 @@ class FacesRecognitionsController:
 
                     df = self._recognition.verifyImageInDataBase(os.path.join(dirpath, filename), os.path.join(self.gallery, place))
                     dorsalIdentified = None if df.empty else getNumber(ntpath.basename(df['identity'][0]))
-                    position = findFile(ntpath.basename(df['identity'][0]), os.path.join(self.gallery, place))
-                    if dorsalIdentified and position:
-                        runners.addPosition(dorsal, place, dorsalIdentified, position)
+                    if dorsalIdentified:
+                        runners.addPosition(dorsal, place, dorsalIdentified)
 
         return runners
 

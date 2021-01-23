@@ -1,9 +1,21 @@
 from Domain.Face import Face
 
 class FacesCollection:
-    def __init__(self, model: str = ""):
-        self.facesCollection = []
-        self.model = model
+    def __init__(self, model: str = "", data: dict = None):
+        if not data:
+            self.facesCollection = []
+            self.model = model
+        else:
+            self.facesCollection = [
+                Face(key,
+                     face['posX'],
+                     face['posY'],
+                     face['width'],
+                     face['height'],
+                     face['score'])
+                for key,face in data['faces'].items()
+            ]
+            self.model = data['model']
 
     def addFace(self, face: Face) -> None:
         self.facesCollection.append(face)
@@ -24,5 +36,13 @@ class FacesCollection:
 
     def isEmpty(self) -> bool:
         return self.size() == 0
+
+    def __str__(self) -> str:
+        return "model: %s | collection: %s" %(self.model, self.facesCollection)
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
+
 
 
