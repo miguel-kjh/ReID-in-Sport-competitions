@@ -11,7 +11,7 @@ class FacesRecognitionsController:
         self._recognition = FacesRecognitionService()
         self.gallery = "data/TGC_places"
 
-    def identificationPeople(self, database: str) -> RunnersStats:
+    def identificationPeople(self, database: str, model: str, metric: str) -> RunnersStats:
         runners = RunnersStats()
         for dirpath, _, filenames in os.walk(database):
             for filename in filenames:
@@ -22,8 +22,12 @@ class FacesRecognitionsController:
                     if not runners.isRunner(dorsal):
                         runners.addRunner(dorsal)
 
-                    dorsalList = self._recognition.verifyImageInDataBase(os.path.join(dirpath, filename),
-                                                                 os.path.join(self.gallery, place))
+                    dorsalList = self._recognition.verifyImageInDataBase(
+                        os.path.join(dirpath, filename),
+                        os.path.join(self.gallery, place),
+                        model = model,
+                        metric = metric
+                    )
                     try:
                         position = dorsalList.index(dorsal) + 1
                     except ValueError:
