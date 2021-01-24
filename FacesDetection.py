@@ -24,7 +24,7 @@ def indentification():
     rs = FacesRecognitionsController()
     print(rs.identificationPeople("data/Gallery_faces_retinaface_none"))
 
-def test_cliping():
+def testCliping():
     directory = "data/TGC2020v0.3_json_img2pose_none"
     folders = [name for name in os.listdir(directory)]
     folders.sort(key = lambda folder: int(folder))
@@ -36,6 +36,6 @@ def test_cliping():
 
 if __name__ == '__main__':
     main()
-    indentification()
-    #test_cliping()
+    #indentification()
+    #testCliping()
 
