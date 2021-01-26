@@ -9,8 +9,8 @@ class FacesRecognitionService:
         self._models = ["VGG-Face", "Facenet", "OpenFace", "DeepFace", "DeepID", "ArcFace", "Dlib"]
 
     def verifyImageInDataBase(self, img: str, dbPath: str, model: str = "VGG-Face", metric: str = "cosine") -> list:
-        if not model in self._models:
-            return
+        if model not in self._models:
+            raise RuntimeError("The model for identification %s does not exist" % model)
 
         df = DeepFace.find(img, dbPath, model_name = model, distance_metric = metric, enforce_detection=False)
         return [getNumber(ntpath.basename(file)) for file in df['identity']]
