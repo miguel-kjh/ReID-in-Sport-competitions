@@ -28,3 +28,9 @@ def createFolder(folder):
         shutil.rmtree(folder)
 
     os.mkdir(folder)
+
+def extractModelAndHeuristics(folderName: str) -> tuple:
+    split = folderName.replace(r'/', "").split("_")
+    model = split[-2]
+    heuristic = split[-1]
+    return model,heuristic

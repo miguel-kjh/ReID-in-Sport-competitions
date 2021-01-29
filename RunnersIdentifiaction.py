@@ -1,17 +1,21 @@
 import argparse
 import os
+import numpy as np
 
 from Controller.FacesRecognitionsController import FacesRecognitionsController
+from Services.ReidentificationRepository import ReidentificationRepository
+from Utils.Utils import extractModelAndHeuristics
 
 def indentification(database, model, metric):
     rs = FacesRecognitionsController()
-    print(
-        rs.identificationPeople(
-            database,
-            model,
-            metric
-        )
+    repository = ReidentificationRepository()
+    values = rs.identificationPeople(
+        database,
+        model,
+        metric
     )
+    faceModel, heuristic = extractModelAndHeuristics(database)
+    repository.addTest(faceModel, heuristic, model, metric, values,  1., 1.)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

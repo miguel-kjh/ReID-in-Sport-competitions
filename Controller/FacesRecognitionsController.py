@@ -12,7 +12,7 @@ class FacesRecognitionsController:
         self._recognition = FacesRecognitionService()
         self.gallery = "data/TGC_places"
 
-    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 100) -> np.array:
+    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 150) -> np.array:
         embeddingCount = 0
         matches = np.zeros(topNum)
 
