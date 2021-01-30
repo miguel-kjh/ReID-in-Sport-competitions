@@ -10,7 +10,7 @@ def faceDetection(directory, model = "retinaface", heuristic = "none"):
     folders = [name for name in os.listdir(directory)]
     folders.sort(key = lambda folder: int(folder))
     for index, folder in enumerate(folders):
-        if index == 4:
+        if index == 10:
             break
         rf.run(os.path.join(directory, folder))
 
