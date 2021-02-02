@@ -1,18 +1,21 @@
 import os
-import ntpath
 import numpy as np
+from itertools import chain
 
 from Services.FacesRecognitionServices import FacesRecognitionService
-from Utils.Statistics.RunnersStats import RunnersStats
-from Utils.Utils import isImage,getPlace,getNumber
+from Utils.Utils import isImage, getPlace, getNumber
 
 class FacesRecognitionsController:
 
     def __init__(self):
         self._recognition = FacesRecognitionService()
-        self.gallery = "data/TGC_places"
+        self.gallery      = "data/TGC_places"
+        self.places       = ["Arucas", "Ayagaures", "ParqueSur", "PresaDeHornos", "Teror"]
 
-    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 150) -> np.array:
+    def _calculateMeanAPTopK(self, cmc: np.array, topK: int) -> float:
+        return 1.
+
+    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 1500) -> np.array:
         embeddingCount = 0
         matches = np.zeros(topNum)
 
@@ -20,21 +23,25 @@ class FacesRecognitionsController:
             for filename in filenames:
                 if isImage(filename):
                     dorsal = getNumber(filename)
-                    place  = getPlace(filename)
+                    sourcePlace  = getPlace(filename)
 
-                    dorsalList = self._recognition.verifyImageInDataBase(
-                        os.path.join(dirpath, filename),
-                        os.path.join(self.gallery, place),
-                        model  = model,
-                        metric = metric
-                    )
-
-                    for rank in range(topNum):
-                        if dorsalList[rank] == dorsal:
-                            matches[rank] += 1
-                            break
+                    dorsalList = list(chain.from_iterable([
+                        self._recognition.verifyImageInDataBase(
+                            os.path.join(dirpath, filename),
+                            os.path.join(self.gallery, place),
+                            model  = model,
+                            metric = metric
+                        )
+                        for place in self.places
+                        #if place != sourcePlace
+                    ]))
+                    dorsalList.sort(key=lambda x: x[1])
+                    dorsalList = [dorsal for dorsal, _ in dorsalList]
+                    matches[dorsalList.index(dorsal)] += 1
                     embeddingCount += 1
 
-        return np.cumsum(matches) / embeddingCount
+        cmc = np.cumsum(matches) / embeddingCount
+
+        return cmc, self._calculateMeanAPTopK(cmc, 1), self._calculateMeanAPTopK(cmc, 5)
 
 

@@ -9,13 +9,14 @@ from Utils.Utils import extractModelAndHeuristics
 def indentification(database, model, metric):
     rs = FacesRecognitionsController()
     repository = ReidentificationRepository()
-    values = rs.identificationPeople(
+    values, mAptop_1, mAptop_5 = rs.identificationPeople(
         database,
         model,
         metric
     )
+    print(mAptop_1, mAptop_5)
     faceModel, heuristic = extractModelAndHeuristics(database)
-    repository.addTest(faceModel, heuristic, model, metric, values,  1., 1.)
+    repository.addTest(faceModel, heuristic, model, metric, values,  mAptop_1, mAptop_5)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

@@ -13,4 +13,4 @@ class FacesRecognitionService:
             raise RuntimeError("The model for identification %s does not exist" % model)
 
         df = DeepFace.find(img, dbPath, model_name = model, distance_metric = metric, enforce_detection=False)
-        return [getNumber(ntpath.basename(file)) for file in df['identity']]
+        return [(getNumber(ntpath.basename(file)),distance) for file, distance in zip(df['identity'], df["%s_%s" %(model, metric)])]

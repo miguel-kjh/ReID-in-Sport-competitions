@@ -1,8 +1,6 @@
 import re
 import os
 import shutil
-
-
 def isImage(filename: str):
     return re.search(".jpg$", filename)
 
@@ -20,13 +18,11 @@ def findFile(file: str, folder: str) -> int:
             return filenames.index(file)
         except:
             return None
-
     raise RuntimeError("File not found")
 
 def createFolder(folder):
     if os.path.exists(folder):
         shutil.rmtree(folder)
-
     os.mkdir(folder)
 
 def extractModelAndHeuristics(folderName: str) -> tuple:
