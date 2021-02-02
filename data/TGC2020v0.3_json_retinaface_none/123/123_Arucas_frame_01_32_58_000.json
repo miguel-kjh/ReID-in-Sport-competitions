@@ -1,0 +1,1 @@
+{"name": "123_Arucas_frame_01_32_58_000.jpg", "num_faces": 3, "faces": {"0": {"posX": 111, "posY": 53, "width": 160, "height": 118, "score": 0.9960557222366333}, "1": {"posX": 81, "posY": 66, "width": 106, "height": 93, "score": 0.7812091112136841}, "2": {"posX": -6, "posY": 97, "width": 21, "height": 132, "score": 0.7096048593521118}}, "model": "RetinaFaces"}
