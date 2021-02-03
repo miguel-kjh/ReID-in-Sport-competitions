@@ -23,7 +23,6 @@ class FacesRecognitionsController:
             for filename in filenames:
                 if isImage(filename):
                     dorsal = getNumber(filename)
-                    sourcePlace  = getPlace(filename)
 
                     dorsalList = list(chain.from_iterable([
                         self._recognition.verifyImageInDataBase(
@@ -33,7 +32,6 @@ class FacesRecognitionsController:
                             metric = metric
                         )
                         for place in self.places
-                        #if place != sourcePlace
                     ]))
                     dorsalList.sort(key=lambda x: x[1])
                     dorsalList = [dorsal for dorsal, _ in dorsalList]
