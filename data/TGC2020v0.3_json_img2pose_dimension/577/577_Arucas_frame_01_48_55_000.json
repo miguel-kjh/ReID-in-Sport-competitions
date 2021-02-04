@@ -1,1 +1,1 @@
-{"name": "577_Arucas_frame_01_48_55_000.jpg", "num_faces": 3, "faces": {"0": {"posX": 30, "posY": 70, "width": 57, "height": 103, "score": 0.9910690784454346}, "1": {"posX": 15, "posY": 139, "width": 38, "height": 166, "score": 0.9612624645233154}, "3": {"posX": 122, "posY": 63, "width": 175, "height": 126, "score": 0.8660235404968262}}, "model": ""}
+{"name": "577_Arucas_frame_01_48_55_000.json", "num_faces": 1, "faces": {"3": {"posX": 122, "posY": 63, "width": 175, "height": 126, "score": 0.8660235404968262}}, "model": ""}

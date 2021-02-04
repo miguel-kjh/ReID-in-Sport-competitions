@@ -23,7 +23,7 @@ class DimensionBasedHeuristic(FaceHeuristic):
 
     def __init__(self, type: str):
         super().__init__(type)
-        self.thresholdHeight: int   = 100
+        self.thresholdHeight: int   = 50
         self.thresholdScore: float  = 0.80
 
 

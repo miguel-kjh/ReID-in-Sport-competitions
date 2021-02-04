@@ -35,7 +35,8 @@ class FacesRecognitionsController:
         }
 
         for dirpath, _, filenames in os.walk(database):
-            for filename in filenames:
+            for index, filename in enumerate(filenames):
+                if index == 30: break
                 if isImage(filename):
                     dorsal = getNumber(filename)
 

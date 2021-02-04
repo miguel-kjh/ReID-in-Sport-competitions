@@ -1,41 +1,25 @@
-from PIL import Image
 import matplotlib.pyplot as plt
 import os
 import json
 
-model     = "img2pose"
+model     = "retinaface"
 heuristic = "none"
 database  = "TGC2020v0.3_json_%s_%s" %(model, heuristic)
 
-def main():
+def pixelsCount():
 
-    data = {
-        "< 10" : 0,
-        "< 50" : 0,
-        "< 100" : 0,
-        "< 150" : 0,
-        ">= 150" : 0
-    }
+    pixels_count = []
 
     for dirpath, _, filenames in os.walk(database):
         for file in filenames:
             with open(os.path.join(dirpath, file)) as f:
                 faces = json.load(f)
 
-            for key in faces['faces']:
-                count = abs(faces['faces'][key]['height'] - faces['faces'][key]['posY'])
-                if count < 10:
-                    data["< 10"] += 1
-                elif count < 50:
-                    data["< 50"] += 1
-                elif count < 100:
-                    data["< 100"] += 1
-                elif count < 150:
-                    data["< 150"] += 1
-                else:
-                    data[">= 150"] += 1
+            pixels_count[len(pixels_count):] = list(
+                map(lambda key: abs(faces['faces'][key]['height'] - faces['faces'][key]['posY']), faces['faces'])
+            )
 
-    return data
+    return pixels_count
 
 def printBar(data: dict):
     plt.bar(data.keys(), data.values())
@@ -44,6 +28,19 @@ def printBar(data: dict):
     )
     plt.show()
 
+def filterPixels(cond, pixels):
+    return len(list(filter(cond, pixels)))
+
 
 if __name__ == '__main__':
-    printBar(main())
+    pixels_count = pixelsCount()
+    print(len(pixels_count))
+    cutPoints = range(25,300,25)
+
+
+    data = {
+        "< %s" % cutPoints[index]: filterPixels(lambda x: cutPoints[index - 1] < x < cutPoints[index], pixels_count)
+        for index in range(1,len(cutPoints))
+    }
+    data[">= 300"] = filterPixels(lambda x: x >= 300, pixels_count)
+    printBar(data)
