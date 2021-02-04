@@ -12,19 +12,34 @@ class FacesRecognitionsController:
         self.gallery      = "data/TGC_places"
         self.places       = ["Arucas", "Ayagaures", "ParqueSur", "PresaDeHornos", "Teror"]
 
-    def _calculateMeanAPTopK(self, cmc: np.array, topK: int) -> float:
-        return 1.
+    def _calculateAveragePrecision(self, dorsalList: list, query: int) -> tuple:
+        averagePrecision = []
+        count = 0
 
-    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 1500) -> np.array:
-        embeddingCount = 0
+        for index, dorsal in enumerate(dorsalList):
+            if dorsal == query:
+                count += 1
+                averagePrecision.append(count / (index + 1))
+            else:
+                averagePrecision.append(0)
+
+        return averagePrecision[0], sum(averagePrecision)
+
+
+    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 821) -> np.array:
+        querysCount = 0
         matches = np.zeros(topNum)
+        average_precision = {
+            "top_1": [],
+            "top_5": []
+        }
 
         for dirpath, _, filenames in os.walk(database):
             for filename in filenames:
                 if isImage(filename):
                     dorsal = getNumber(filename)
 
-                    dorsalList = list(chain.from_iterable([
+                    elementsList = list(chain.from_iterable([
                         self._recognition.verifyImageInDataBase(
                             os.path.join(dirpath, filename),
                             os.path.join(self.gallery, place),
@@ -33,13 +48,24 @@ class FacesRecognitionsController:
                         )
                         for place in self.places
                     ]))
-                    dorsalList.sort(key=lambda x: x[1])
-                    dorsalList = [dorsal for dorsal, _ in dorsalList]
-                    matches[dorsalList.index(dorsal)] += 1
-                    embeddingCount += 1
 
-        cmc = np.cumsum(matches) / embeddingCount
+                    elementsList.sort(key=lambda element: element.distance)
+                    dorsalList = [element.dorsal for element in elementsList]
 
-        return cmc, self._calculateMeanAPTopK(cmc, 1), self._calculateMeanAPTopK(cmc, 5)
+                    try:
+                        matches[dorsalList.index(dorsal)] += 1
+                    except IndexError:
+                        matches[-1] += 1
+
+                    countTP = 1 / dorsalList.count(dorsal)
+                    avTop1, avTop5 = self._calculateAveragePrecision(dorsalList[0:5], dorsal)
+                    average_precision["top_1"].append(countTP * avTop1)
+                    average_precision["top_5"].append(countTP * avTop5)
+
+                    querysCount += 1
+
+        cmc = np.cumsum(matches) / querysCount
+
+        return cmc, sum(average_precision["top_1"]) / querysCount, sum(average_precision["top_5"]) / querysCount
 
 

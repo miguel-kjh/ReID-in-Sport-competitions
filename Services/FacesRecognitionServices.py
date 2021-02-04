@@ -1,7 +1,11 @@
 from deepface import DeepFace
-import pandas as pd
 from Utils.Utils import getNumber
 import ntpath
+
+class ElementRunnersRanking:
+    def __init__(self, dorsal: int, distance: float):
+        self.dorsal   = dorsal
+        self.distance = distance
 
 class FacesRecognitionService:
 
@@ -13,4 +17,6 @@ class FacesRecognitionService:
             raise RuntimeError("The model for identification %s does not exist" % model)
 
         df = DeepFace.find(img, dbPath, model_name = model, distance_metric = metric, enforce_detection=False)
-        return [(getNumber(ntpath.basename(file)),distance) for file, distance in zip(df['identity'], df["%s_%s" %(model, metric)])]
+
+        return [ElementRunnersRanking(getNumber(ntpath.basename(file)),distance)
+                for file, distance in zip(df['identity'], df["%s_%s" %(model, metric)])]
