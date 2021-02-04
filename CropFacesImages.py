@@ -8,10 +8,7 @@ def testCliping(directory):
     folders = [name for name in os.listdir(directory)]
     folders.sort(key = lambda folder: int(folder))
     fc = FaceClippingController(directory)
-    for index, folder in enumerate(folders):
-        if index == 4:
-            break
-        fc.getImageClippings(TGC)
+    fc.getImageClippings(TGC)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

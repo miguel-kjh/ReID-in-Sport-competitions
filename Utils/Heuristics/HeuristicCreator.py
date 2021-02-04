@@ -5,9 +5,8 @@ class HeuristicCreator:
 
     def __init__(self):
         self.heuristics = {
-            "none": NonHeuristic(),
-            "dimension": DimensionBasedHeuristic(),
-            "score": ScoreBasedHeuristic()
+            "none": NonHeuristic("none"),
+            "dimension": DimensionBasedHeuristic("dimension")
         }
 
     def getHeuristic(self, nameOfHeuristic: str) -> FaceHeuristic:

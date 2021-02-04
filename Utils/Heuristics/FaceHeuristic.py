@@ -3,11 +3,17 @@ from Domain.FacesCollection import FacesCollection
 
 class FaceHeuristic:
 
+    def __init__(self, type: str):
+        self.type = type
+
     @abstractmethod
     def filterFaces(self, faceCollection: FacesCollection) -> FacesCollection:
         pass
 
 class NonHeuristic(FaceHeuristic):
+
+    def __init__(self, type: str):
+        super().__init__(type)
 
     def filterFaces(self, faceCollection: FacesCollection) -> FacesCollection:
         return faceCollection
@@ -15,31 +21,22 @@ class NonHeuristic(FaceHeuristic):
 
 class DimensionBasedHeuristic(FaceHeuristic):
 
-    def __init__(self):
-        self.thresholdHeight: int = 100
+    def __init__(self, type: str):
+        super().__init__(type)
+        self.thresholdHeight: int   = 100
+        self.thresholdScore: float  = 0.80
 
 
-    def filterFaces(self, faceCollection: FacesCollection) -> FacesCollection:
-        if faceCollection.isEmpty(): return faceCollection
-
-        newCollection = FacesCollection()
-        newCollection.addFaces(list(
-            filter(lambda face: face.height > self.thresholdHeight, faceCollection.facesCollection)
-        ))
-        return newCollection
-
-class ScoreBasedHeuristic(FaceHeuristic):
-
-    def __init__(self):
-        self.threshold: int = 0.95
 
     def filterFaces(self, faceCollection: FacesCollection) -> FacesCollection:
         if faceCollection.isEmpty(): return faceCollection
 
         newCollection = FacesCollection()
         newCollection.addFaces(list(
-            filter(lambda face: face.score > self.threshold, faceCollection.facesCollection)
+            filter(lambda face:
+                   abs(face.height - face.posY) > self.thresholdHeight
+                   and face.score > self.thresholdScore,
+                   faceCollection.facesCollection)
         ))
         return newCollection
-
 

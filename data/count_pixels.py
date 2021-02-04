@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 import json
 
-model     = "retinaface"
+model     = "img2pose"
 heuristic = "none"
 database  = "TGC2020v0.3_json_%s_%s" %(model, heuristic)
 
@@ -23,7 +23,7 @@ def main():
                 faces = json.load(f)
 
             for key in faces['faces']:
-                count = faces['faces'][key]['height']
+                count = abs(faces['faces'][key]['height'] - faces['faces'][key]['posY'])
                 if count < 10:
                     data["< 10"] += 1
                 elif count < 50:

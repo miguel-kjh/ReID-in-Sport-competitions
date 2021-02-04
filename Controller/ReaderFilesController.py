@@ -47,9 +47,14 @@ class ReaderFilesController:
         print(folder)
         for dirpath, dirnames, filenames in os.walk(folder):
             for filename in filenames:
-                if isImage(filename):
-                    facesCollection = faceHeuristic.filterFaces(
-                        self.faceLocatorService.locate(os.path.join(folder,filename))
-                    )
-                    self.saveServiceJson.saveFaces(db, filename, facesCollection)
-
+                    if faceHeuristic.type == "none":
+                        if isImage(filename):
+                            facesCollection = faceHeuristic.filterFaces(
+                                self.faceLocatorService.locate(os.path.join(folder,filename))
+                            )
+                            self.saveServiceJson.saveFaces(db, filename, facesCollection)
+                    else:
+                        facesCollection = faceHeuristic.filterFaces(
+                            self.saveServiceJson.loadFaces(os.path.join(folder,filename))
+                        )
+                        self.saveServiceJson.saveFaces(db, filename, facesCollection)
