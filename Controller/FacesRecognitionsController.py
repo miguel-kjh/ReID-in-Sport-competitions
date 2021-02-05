@@ -55,10 +55,11 @@ class FacesRecognitionsController:
 
                     try:
                         matches[dorsalList.index(dorsal)] += 1
-                    except IndexError or ValueError:
+                    except Exception:
                         matches[-1] += 0
 
-                    countTP = 1 / dorsalList.count(dorsal)
+                    countTP = dorsalList.count(dorsal)
+                    countTP = 0 if countTP == 0 else 1 / countTP
                     avTop1, avTop5 = self._calculateAveragePrecision(dorsalList[0:5], dorsal)
                     average_precision["top_1"].append(countTP * avTop1)
                     average_precision["top_5"].append(countTP * avTop5)
