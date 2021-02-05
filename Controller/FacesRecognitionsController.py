@@ -26,7 +26,7 @@ class FacesRecognitionsController:
         return averagePrecision[0], sum(averagePrecision)
 
 
-    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 821) -> np.array:
+    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 150) -> np.array:
         querysCount = 0
         matches = np.zeros(topNum)
         average_precision = {
@@ -36,7 +36,7 @@ class FacesRecognitionsController:
 
         for dirpath, _, filenames in os.walk(database):
             for index, filename in enumerate(filenames):
-                if index == 30: break
+                if index == 4: break
                 if isImage(filename):
                     dorsal = getNumber(filename)
 
@@ -55,8 +55,8 @@ class FacesRecognitionsController:
 
                     try:
                         matches[dorsalList.index(dorsal)] += 1
-                    except IndexError:
-                        matches[-1] += 1
+                    except IndexError or ValueError:
+                        matches[-1] += 0
 
                     countTP = 1 / dorsalList.count(dorsal)
                     avTop1, avTop5 = self._calculateAveragePrecision(dorsalList[0:5], dorsal)
