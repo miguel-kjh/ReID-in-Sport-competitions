@@ -4,7 +4,7 @@ from itertools import chain
 import random
 
 from Services.FacesRecognitionServices import FacesRecognitionService
-from Utils.Utils import isImage, getPlace, getNumber
+from Utils.Utils import getPlace, getNumber
 
 class FacesRecognitionsController:
 
@@ -14,6 +14,9 @@ class FacesRecognitionsController:
         self.places       = ["Arucas", "Ayagaures", "ParqueSur", "PresaDeHornos", "Teror"]
 
     def _calculateAveragePrecision(self, dorsalList: list, query: int) -> tuple:
+        if not dorsalList:
+            return 0., 0.
+
         averagePrecision = []
         count = 0
 
@@ -57,7 +60,7 @@ class FacesRecognitionsController:
                 try:
                     matches[dorsalList.index(dorsal)] += 1
                 except Exception:
-                    matches[-1] += 0
+                    pass
 
                 countTP = dorsalList.count(dorsal)
                 countTP = 0 if countTP == 0 else 1 / countTP
