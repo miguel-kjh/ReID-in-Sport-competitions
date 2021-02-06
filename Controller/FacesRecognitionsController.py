@@ -1,6 +1,7 @@
 import os
 import numpy as np
 from itertools import chain
+import random
 
 from Services.FacesRecognitionServices import FacesRecognitionService
 from Utils.Utils import isImage, getPlace, getNumber
@@ -35,36 +36,36 @@ class FacesRecognitionsController:
         }
 
         for dirpath, _, filenames in os.walk(database):
-            for index, filename in enumerate(filenames):
-                if index == 4: break
-                if isImage(filename):
-                    dorsal = getNumber(filename)
+            filenames = random.sample(filenames, 5)
 
-                    elementsList = list(chain.from_iterable([
-                        self._recognition.verifyImageInDataBase(
-                            os.path.join(dirpath, filename),
-                            os.path.join(self.gallery, place),
-                            model  = model,
-                            metric = metric
-                        )
-                        for place in self.places
-                    ]))
+            for filename in filenames:
+                dorsal = getNumber(filename)
 
-                    elementsList.sort(key=lambda element: element.distance)
-                    dorsalList = [element.dorsal for element in elementsList]
+                elementsList = list(chain.from_iterable([
+                    self._recognition.verifyImageInDataBase(
+                        os.path.join(dirpath, filename),
+                        os.path.join(self.gallery, place),
+                        model  = model,
+                        metric = metric
+                    )
+                    for place in self.places
+                ]))
 
-                    try:
-                        matches[dorsalList.index(dorsal)] += 1
-                    except Exception:
-                        matches[-1] += 0
+                elementsList.sort(key=lambda element: element.distance)
+                dorsalList = [element.dorsal for element in elementsList]
 
-                    countTP = dorsalList.count(dorsal)
-                    countTP = 0 if countTP == 0 else 1 / countTP
-                    avTop1, avTop5 = self._calculateAveragePrecision(dorsalList[0:5], dorsal)
-                    average_precision["top_1"].append(countTP * avTop1)
-                    average_precision["top_5"].append(countTP * avTop5)
+                try:
+                    matches[dorsalList.index(dorsal)] += 1
+                except Exception:
+                    matches[-1] += 0
 
-                    querysCount += 1
+                countTP = dorsalList.count(dorsal)
+                countTP = 0 if countTP == 0 else 1 / countTP
+                avTop1, avTop5 = self._calculateAveragePrecision(dorsalList[0:5], dorsal)
+                average_precision["top_1"].append(countTP * avTop1)
+                average_precision["top_5"].append(countTP * avTop5)
+
+                querysCount += 1
 
         cmc = np.cumsum(matches) / querysCount
 
