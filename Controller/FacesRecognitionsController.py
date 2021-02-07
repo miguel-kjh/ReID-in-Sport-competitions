@@ -39,10 +39,11 @@ class FacesRecognitionsController:
         }
 
         for dirpath, _, filenames in os.walk(database):
-            filenames = random.sample(filenames, 5)
+            filenames = random.sample(filenames, topNum)
 
             for filename in filenames:
                 dorsal = getNumber(filename)
+                sourcePlace = getPlace(filename)
 
                 elementsList = list(chain.from_iterable([
                     self._recognition.verifyImageInDataBase(
@@ -52,6 +53,7 @@ class FacesRecognitionsController:
                         metric = metric
                     )
                     for place in self.places
+                    if place != sourcePlace
                 ]))
 
                 elementsList.sort(key=lambda element: element.distance)
