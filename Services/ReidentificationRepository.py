@@ -19,22 +19,26 @@ class ReidentificationRepository:
 
     def addTest(self, faceModel: str, heuristics: str, identificationModel: str, metric: str,
                 values: np.array, mAPtop1: float, mAPtop5: float):
+
         queryResult = self.df.query(self._getQuery(faceModel, heuristics, identificationModel, metric),
                                     inplace = False)
 
         values = ",".join(map(lambda x: str(x), list(values)))
 
         if queryResult.empty:
+
             row = {'Face_Model': faceModel,
              'Heuristics': heuristics,
              'Identification_Model': identificationModel,
-             'Metric': metric,
+             'Metric': metric if identificationModel != 'Ensemble' else None,
              'Values': values,
              'mAPtop1': mAPtop1,
              'mAPtop5': mAPtop5}
             self.df = self.df.append(row, ignore_index=True)
             self._save()
+
         else:
+
             self.df.iloc[queryResult.index,  self.df.columns.get_loc('mAPtop1')] = mAPtop1
             self.df.iloc[queryResult.index,  self.df.columns.get_loc('mAPtop5')] = mAPtop5
             self.df.iloc[queryResult.index,  self.df.columns.get_loc('Values')]  = values

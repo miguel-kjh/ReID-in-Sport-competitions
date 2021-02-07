@@ -35,5 +35,5 @@ if __name__ == '__main__':
                 print("%s - %s + %s - %s" %(hastag, model, metric, hastag))
                 indentification(args.database, model, metric)
 
-        print("%s - [ Ensemble ] - %s" %(hastag, hastag))
-        indentification(args.database, "Ensemble")
+        #print("%s - [ Ensemble ] - %s" %(hastag, hastag))
+        #indentification(args.database, "Ensemble")
