@@ -4,7 +4,7 @@ from Controller.FacesRecognitionsController import FacesRecognitionsController
 from Services.ReidentificationRepository import ReidentificationRepository
 from Utils.Utils import extractModelAndHeuristics
 
-MODELS  = ["VGG-Face", "Facenet", "OpenFace", "DeepFace"]
+MODELS  = ["VGG-Face", "Facenet", "OpenFace"]
 METRICS = ['cosine', 'euclidean', 'euclidean_l2']
 
 def indentification(database, model, metric = "cosine"):
