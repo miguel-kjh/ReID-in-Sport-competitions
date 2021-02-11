@@ -28,7 +28,7 @@ class FacesRecognitionsController:
         return averagePrecision[0], sum(averagePrecision)
 
 
-    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 150) -> np.array:
+    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 107) -> np.array:
         querysCount = 0
         matches = np.zeros(topNum)
         average_precision = {

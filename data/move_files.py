@@ -8,7 +8,7 @@ metrics_folder = "TGC_places"
 def _isImage(filename: str):
     return re.search("000.jpg$", filename)
 
-def main():
+def TGC_places():
     list_news_folders = []
     for index in range(1,822):
         for dirpath, dirnames, filenames in os.walk(os.path.join(folder, str(index))):
@@ -25,8 +25,11 @@ def main():
                         copyfile(os.path.join(dirpath,filename), os.path.join(fold,filename))
     print(list_news_folders)
 
+def create_probe_by_places(gallery, name_probe):
+    pass
+
 
 
 
 if __name__ == '__main__':
-    main()
+    TGC_places()

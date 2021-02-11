@@ -30,15 +30,6 @@ def main():
     dorsals  = countDorsal(database)
     dorsalsRepeated = extractRepeatedDorsal(dorsals)
 
-    """for key, elements in dorsals.items():
-        print(key)
-        print(len(dorsals[key]))
-        dorsals[key] = list(filter(
-            lambda dorsal: dorsal in dorsalsRepeated,
-            elements
-        ))
-        print(len(dorsals[key]))"""
-
     for dirpath, _, filenames in os.walk(database):
         for file in filenames:
             if isImage(file) and getNumber(file) not in dorsalsRepeated:
@@ -48,29 +39,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    # TDD
-    # {[]} -> []
-    # [1,1,2], [4,5,6] -> []
-    # [1,1,2], [1,2,3] -> [1,2]
-    # [1,1,2], [1,3,2], [1,2,4,5,6] -> [1,2]
-    # [1,1,2], [3,3,3], [3,3,4,5,6] -> []
-    print(extractRepeatedDorsal({}) == [])
-    print(extractRepeatedDorsal({
-        "a": [1,1,2],
-        "b": [4,5,6]
-    }) == [])
-    print(extractRepeatedDorsal({
-        "a": [1,1,2],
-        "b": [1,2,3]
-    }) == [1,2])
-    print(extractRepeatedDorsal({
-        "a": [1,1,2],
-        "b": [1,3,2],
-        "c": [1,2,4,5,6]
-    }) == [1,2])
-    print(extractRepeatedDorsal({
-        "a": [1,1,2],
-        "b": [3,3,3],
-        "c": [3,3,4,5,6]
-    }) == [])
