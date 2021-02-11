@@ -24,8 +24,6 @@ class FacesRecognitionsController:
             if dorsal == query:
                 count += 1
                 averagePrecision.append(count / (index + 1))
-            else:
-                averagePrecision.append(0)
 
         return averagePrecision[0], sum(averagePrecision)
 
