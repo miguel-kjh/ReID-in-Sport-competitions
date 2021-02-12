@@ -25,7 +25,7 @@ def extractRepeatedDorsal(dorsals: dict) -> list:
 
     return [item for item, count in collections.Counter(listDorsals).items() if count == len(dorsals)]
 
-def main():
+def modifyGallery():
     database = 'TGC_places'
     dorsals  = countDorsal(database)
     dorsalsRepeated = extractRepeatedDorsal(dorsals)
@@ -35,7 +35,21 @@ def main():
             if isImage(file) and getNumber(file) not in dorsalsRepeated:
                 os.remove(os.path.join(dirpath,file))
 
+def modifyProbes():
+    probes = ['Probe_faces_img2pose_dimension', 'Probe_faces_img2pose_none',
+              'Probe_faces_retinaface_dimension', 'Probe_faces_retinaface_none']
 
+    database = 'TGC_places'
+    dorsals  = countDorsal(database)
+    dorsalsRepeated = extractRepeatedDorsal(dorsals)
+    print(dorsalsRepeated)
+
+    for probe in probes:
+        for dirpath, _, filenames in os.walk(probe):
+            for file in filenames:
+                if isImage(file) and getNumber(file) not in dorsalsRepeated:
+                    os.remove(os.path.join(dirpath, file))
 
 if __name__ == '__main__':
-    main()
+    #modifyGallery()
+    modifyProbes()

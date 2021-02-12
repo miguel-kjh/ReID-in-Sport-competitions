@@ -1,23 +1,27 @@
 import argparse
+import os
 
 from Controller.FacesRecognitionsController import FacesRecognitionsController
 from Services.ReidentificationRepository import ReidentificationRepository
 from Utils.Utils import extractModelAndHeuristics
+from Utils.constant import PLACES, MODELS, METRICS
 
-MODELS  = ["VGG-Face", "Facenet", "OpenFace"]
-METRICS = ['cosine', 'euclidean', 'euclidean_l2']
 
-def indentification(database, model, metric = "cosine"):
+
+def indentification(database, model, metric):
     rs = FacesRecognitionsController()
     repository = ReidentificationRepository()
-    values, mAptop_1, mAptop_5 = rs.identificationPeople(
-        database,
-        model,
-        metric
-    )
-    print(mAptop_1, mAptop_5)
-    faceModel, heuristic = extractModelAndHeuristics(database)
-    repository.addTest(faceModel, heuristic, model, metric, values,  mAptop_1, mAptop_5)
+    for probe_place in PLACES: # probe
+        for gallery_place in PLACES:
+            if probe_place != gallery_place:
+                values, mAptop_1, mAptop_5 = rs.identificationPeople(
+                    os.path.join(database, probe_place),
+                    model,
+                    metric,
+                    gallery_place
+                )
+                faceModel, heuristic = extractModelAndHeuristics(database)
+                repository.addTest(faceModel, heuristic, model, metric, values,  mAptop_1, mAptop_5, probe_place, gallery_place)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

@@ -25,9 +25,6 @@ def TGC_places():
                         copyfile(os.path.join(dirpath,filename), os.path.join(fold,filename))
     print(list_news_folders)
 
-def create_probe_by_places(gallery, name_probe):
-    pass
-
 
 
 

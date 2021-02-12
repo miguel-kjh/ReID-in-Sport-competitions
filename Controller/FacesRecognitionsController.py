@@ -1,20 +1,17 @@
 import os
 import numpy as np
-from itertools import chain
-import random
 
 from Services.FacesRecognitionServices import FacesRecognitionService
-from Utils.Utils import getPlace, getNumber
+from Utils.Utils import getNumber
 
 class FacesRecognitionsController:
 
     def __init__(self):
         self._recognition = FacesRecognitionService()
         self.gallery      = "data/TGC_places"
-        self.places       = ["Arucas", "Ayagaures", "ParqueSur", "PresaDeHornos", "Teror"]
 
     def _calculateAveragePrecision(self, dorsalList: list, query: int) -> tuple:
-        if not dorsalList:
+        if not dorsalList or query not in dorsalList:
             return 0., 0.
 
         averagePrecision = []
@@ -28,7 +25,7 @@ class FacesRecognitionsController:
         return averagePrecision[0], sum(averagePrecision)
 
 
-    def identificationPeople(self, database: str, model: str, metric: str, topNum: int = 107) -> np.array:
+    def identificationPeople(self, probe: str, model: str, metric: str, galleryPlace: str, topNum: int = 107) -> tuple:
         querysCount = 0
         matches = np.zeros(topNum)
         average_precision = {
@@ -36,26 +33,17 @@ class FacesRecognitionsController:
             "top_5": []
         }
 
-        for dirpath, _, filenames in os.walk(database):
-            filenames = random.sample(filenames, topNum)
+        for dirpath, _, filenames in os.walk(probe):
 
             for filename in filenames:
                 dorsal = getNumber(filename)
-                sourcePlace = getPlace(filename)
 
-                elementsList = list(chain.from_iterable([
-                    self._recognition.verifyImageInDataBase(
-                        os.path.join(dirpath, filename),
-                        os.path.join(self.gallery, place),
-                        model  = model,
-                        metric = metric
-                    )
-                    for place in self.places
-                    if place != sourcePlace
-                ]))
-
-                elementsList.sort(key=lambda element: element.distance)
-                dorsalList = [element.dorsal for element in elementsList]
+                dorsalList = self._recognition.verifyImageInDataBase(
+                    os.path.join(dirpath, filename),
+                    os.path.join(self.gallery, galleryPlace),
+                    model  = model,
+                    metric = metric
+                )
 
                 try:
                     matches[dorsalList.index(dorsal)] += 1

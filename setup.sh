@@ -26,7 +26,16 @@ if [ $1 == "--i" ];then
   python3 RunnersIdentifiaction.py --d data/Gallery_faces_retinaface_dimension/ --all
 
   #python3 RunnersIdentifiaction.py --d data/Gallery_faces_img2pose_none --all
-  python3 RunnersIdentifiaction.py --d data/Gallery_faces_img2pose_dimension/ --all
+  #python3 RunnersIdentifiaction.py --d data/Gallery_faces_img2pose_dimension/ --all
+
+fi
+
+if [ $1 == "--r" ];then
+
+  python3 CropFacesImages.py --j data/TGC2020v0.3_json_img2pose_dimension/
+  python3 CropFacesImages.py --j data/TGC2020v0.3_json_img2pose_none/
+  python3 CropFacesImages.py --j data/TGC2020v0.3_json_retinaface_dimension/
+  python3 CropFacesImages.py --j data/TGC2020v0.3_json_retinaface_none/
 
 fi
 

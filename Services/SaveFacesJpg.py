@@ -6,6 +6,7 @@ import numpy as np
 
 from Domain.FacesCollection import FacesCollection
 from Services.SaveFacesServices import SaveFacesServices
+from Utils.Utils import getPlace
 
 
 class SaveFacesJpg(SaveFacesServices):
@@ -22,7 +23,10 @@ class SaveFacesJpg(SaveFacesServices):
     def saveFaces(self, folder: str, filename: str, facesCollection: FacesCollection) -> None:
         for index, imageClipping in enumerate(self._clip(os.path.join(folder, filename), facesCollection)):
             try:
-                newFilename = os.path.join(self.facesFolder, filename.replace('.jpg', '_%i_faces.jpg' % index))
+                newFilename = os.path.join(
+                    os.path.join(self.facesFolder, getPlace(filename)),
+                    filename.replace('.jpg', '_%i_faces.jpg' % index)
+                )
                 cv2.imwrite(newFilename, imageClipping)
             except:
                 continue
