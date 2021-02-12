@@ -26,8 +26,4 @@ class FacesRecognitionService:
 
         df = DeepFace.find(img, dbPath, model_name = model, distance_metric = metric, enforce_detection = False)
 
-        if model == self._models[-1]:
-            return [ElementRunnersRanking(getNumber(ntpath.basename(file)), 1 - score)
-                    for file, score in zip(df['identity'], df["score"])]
-        else:
-            return [getNumber(ntpath.basename(file)) for file in df['identity']]
+        return [getNumber(ntpath.basename(file)) for file in df['identity']]

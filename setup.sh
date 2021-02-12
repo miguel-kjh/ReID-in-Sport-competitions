@@ -22,11 +22,11 @@ fi
 
 if [ $1 == "--i" ];then
 
-  #python3 RunnersIdentifiaction.py --d data/Gallery_faces_retinaface_none --all
-  python3 RunnersIdentifiaction.py --d data/Gallery_faces_retinaface_dimension/ --all
+  python3 RunnersIdentifiaction.py --d data/Probe_faces_retinaface_none --all
+  python3 RunnersIdentifiaction.py --d data/Probe_faces_retinaface_dimension/ --all
 
-  #python3 RunnersIdentifiaction.py --d data/Gallery_faces_img2pose_none --all
-  #python3 RunnersIdentifiaction.py --d data/Gallery_faces_img2pose_dimension/ --all
+  python3 RunnersIdentifiaction.py --d data/Probe_faces_img2pose_none --all
+  python3 RunnersIdentifiaction.py --d data/Probe_faces_img2pose_dimension/ --all
 
 fi
 

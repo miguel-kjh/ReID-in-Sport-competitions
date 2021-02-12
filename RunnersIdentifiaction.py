@@ -11,7 +11,7 @@ from Utils.constant import PLACES, MODELS, METRICS
 def indentification(database, model, metric):
     rs = FacesRecognitionsController()
     repository = ReidentificationRepository()
-    for probe_place in PLACES: # probe
+    for probe_place in PLACES:
         for gallery_place in PLACES:
             if probe_place != gallery_place:
                 values, mAptop_1, mAptop_5 = rs.identificationPeople(
