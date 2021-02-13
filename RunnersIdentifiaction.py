@@ -4,24 +4,21 @@ import os
 from Controller.FacesRecognitionsController import FacesRecognitionsController
 from Services.ReidentificationRepository import ReidentificationRepository
 from Utils.Utils import extractModelAndHeuristics
-from Utils.constant import PLACES, MODELS, METRICS
+from Utils.constant import PLACES_PROBE_TEST, PLACES_GALLERY_TEST, MODELS, METRICS
 
 
 
 def indentification(database, model, metric):
     rs = FacesRecognitionsController()
     repository = ReidentificationRepository()
-    for probe_place in PLACES:
-        for gallery_place in PLACES:
-            if probe_place != gallery_place:
-                values, mAptop_1, mAptop_5 = rs.identificationPeople(
-                    os.path.join(database, probe_place),
-                    model,
-                    metric,
-                    gallery_place
-                )
-                faceModel, heuristic = extractModelAndHeuristics(database)
-                repository.addTest(faceModel, heuristic, model, metric, values,  mAptop_1, mAptop_5, probe_place, gallery_place)
+    values, mAptop_1, mAptop_5 = rs.identificationPeople(
+        os.path.join(database, PLACES_PROBE_TEST),
+        model,
+        metric,
+        PLACES_GALLERY_TEST
+    )
+    faceModel, heuristic = extractModelAndHeuristics(database)
+    repository.addTest(faceModel, heuristic, model, metric, values,  mAptop_1, mAptop_5, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
