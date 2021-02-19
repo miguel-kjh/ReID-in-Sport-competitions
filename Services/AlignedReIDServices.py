@@ -15,11 +15,7 @@ from Domain.BodyCollection import BodyCollection
 
 class AlignedReIDServices:
 
-    def __init__(self,
-                 folder: str,
-                 checkpoint: str = os.path.join("models", "weights", "checkpoint_ep300.pth.tar")
-                 ):
-        self.folder = folder
+    def __init__(self,checkpoint: str = os.path.join("models", "weights", "checkpoint_ep300.pth.tar")):
 
         # Initialize Cuda device
         os.environ['CUDA_VISIBLE_DEVICES'] = "0"
@@ -44,11 +40,11 @@ class AlignedReIDServices:
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ])
 
-    def imgToEmbedding(self) -> dict:
+    def imgToEmbedding(self, folder: str) -> dict:
 
         embeddingCollection = {}
 
-        for dirpath, _, filenames in os.walk(self.folder):
+        for dirpath, _, filenames in os.walk(folder):
             collection = BodyCollection()
             place = os.path.basename(dirpath)
 
