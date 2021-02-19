@@ -7,13 +7,15 @@ import os
 
 class SaveBodyPkl(SaveBodyService):
 
-    def __init__(self):
-        self._folder = 'data/TCG_alignedReId'
-        createFolder(self._folder)
+    def __init__(self, folder):
+        self._folder = folder
 
     def saveBodyInformation(self, filename: str, collection: BodyCollection) -> None:
         with open(os.path.join(self._folder, "%s.pkl" %filename), 'wb') as output:
             pickle.dump(collection, output, pickle.HIGHEST_PROTOCOL)
 
     def loadBodyInformation(self, filename: str) -> BodyCollection:
-        pass
+        with open(filename, 'rb') as f:
+            collection = pickle.load(f)
+
+        return collection

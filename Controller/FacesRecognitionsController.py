@@ -1,17 +1,23 @@
 import os
 import numpy as np
 from Services.FacesRecognitionServices import FacesRecognitionService
+from Services.SaveBodyPkl import SaveBodyPkl
 from Utils.fileUtils import getNumber
+from Utils.distance import compute_dist
+from Utils.utils import dtw
+from statistics import mean
 
 class FacesRecognitionsController:
 
     def __init__(self):
         self._recognition = FacesRecognitionService()
-        self.gallery = "data/TGC_places"
+        self.facesGallery = "data/TGC_places"
+        self.alignedGallery = "data/TCG_alignedReId"
+        self._loadServices = SaveBodyPkl(self.alignedGallery)
 
-    def _calculateAveragePrecision(self, dorsalList: list, query: int) -> tuple:
+    def _calculateAveragePrecision(self, dorsalList: list, query: int) -> float:
         if not dorsalList or query not in dorsalList:
-            return 0., 0.
+            return 0.
 
         averagePrecision = []
         count = 0
@@ -21,20 +27,18 @@ class FacesRecognitionsController:
                 count += 1
                 averagePrecision.append(count / (index + 1))
 
-        return averagePrecision[0], sum(averagePrecision)
+        return sum(averagePrecision)
 
 
-    def identificationPeople(self, probe: str, model: str, metric: str, galleryPlace: str, topNum: int = 107) -> tuple:
+    def identificationRunnersByFaces(self, probe: str, model: str, metric: str, galleryPlace: str, topNum: int = 107) -> tuple:
         querysCount = 0
         matches = np.zeros(topNum)
-        average_precision = {
-            "top_1": [],
-            "top_5": []
-        }
+        average_precision = []
 
-        actualGallery = os.path.join(self.gallery, galleryPlace)
+        actualGallery = os.path.join(self.facesGallery, galleryPlace)
 
         for dirpath, _, filenames_probe in os.walk(probe):
+
             for filename in filenames_probe:
                 dorsal = getNumber(filename)
 
@@ -52,14 +56,39 @@ class FacesRecognitionsController:
 
                 countTP = classification.count(dorsal)
                 countTP = 0 if countTP == 0 else 1 / countTP
-                avTop1, avTop5 = self._calculateAveragePrecision(classification[0:5], dorsal)
-                average_precision["top_1"].append(countTP * avTop1)
-                average_precision["top_5"].append(countTP * avTop5)
-
+                ap = self._calculateAveragePrecision(classification, dorsal)
+                average_precision.append(countTP * ap)
                 querysCount += 1
 
         cmc = np.cumsum(matches) / querysCount
 
-        return cmc, sum(average_precision["top_1"]) / querysCount, sum(average_precision["top_5"]) / querysCount
+        return cmc, sum(average_precision) / querysCount
+
+    def identificationRunnersByBody(self, probe: str, metric: str, galleryPlace: str, topNum: int = 107) -> tuple:
+        matches = np.zeros(topNum)
+        average_precision = []
+
+        probe = self._loadServices.loadBodyInformation(probe)
+        gallery = self._loadServices.loadBodyInformation(galleryPlace)
+
+        for query in probe.bodies:
+            dist = [(galleryData.dorsal, dtw(compute_dist(query.embedding, galleryData.embedding, metric))[0])
+                    for galleryData in gallery.bodies]
+            dist.sort(key = lambda ele: ele[1])
+
+            classification = [ runner[0] for runner in dist]
+
+            try:
+                matches[classification.index(query.dorsal)] += 1
+            except Exception:
+                pass
+
+            countTP = classification.count(query.dorsal)
+            countTP = 0 if countTP == 0 else 1 / countTP
+            ap = self._calculateAveragePrecision(classification, query.dorsal)
+            average_precision.append(countTP * ap)
+
+        cmc = np.cumsum(matches) / len(probe.bodies)
+        return cmc, mean(average_precision)
 
 

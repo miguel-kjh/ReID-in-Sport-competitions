@@ -22,7 +22,7 @@ class ReidentificationRepository:
         self.df.to_csv(self.filename)
 
     def addTest(self, faceModel: str, heuristics: str, identificationModel: str, metric: str,
-                values: np.array, mAPtop1: float, mAPtop5: float, probe_place: str, gallery_place: str):
+                values: np.array, mAP: float, probe_place: str, gallery_place: str):
 
         queryResult = self.df.query(self._getQuery(faceModel, heuristics, identificationModel, metric, probe_place, gallery_place),
                                     inplace = False)
@@ -36,16 +36,14 @@ class ReidentificationRepository:
              'Identification_Model': identificationModel,
              'Metric': metric if identificationModel != 'Ensemble' else None,
              'Values': values,
-             'mAPtop1': mAPtop1,
-             'mAPtop5': mAPtop5,
              'Probe_place': probe_place,
-             'Gallery_place': gallery_place}
+             'Gallery_place': gallery_place,
+             'mAP': mAP}
             self.df = self.df.append(row, ignore_index=True)
             self._save()
 
         else:
 
-            self.df.iloc[queryResult.index,  self.df.columns.get_loc('mAPtop1')] = mAPtop1
-            self.df.iloc[queryResult.index,  self.df.columns.get_loc('mAPtop5')] = mAPtop5
             self.df.iloc[queryResult.index,  self.df.columns.get_loc('Values')]  = values
+            self.df.iloc[queryResult.index,  self.df.columns.get_loc('mAP')]     = mAP
             self._save()

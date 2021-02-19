@@ -7,3 +7,7 @@ class BodyCollection:
 
     def addBody(self, body: Body):
         self._bodies.append(body)
+
+    @property
+    def bodies(self):
+        return self._bodies
