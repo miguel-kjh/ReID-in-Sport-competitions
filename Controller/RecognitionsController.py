@@ -7,7 +7,7 @@ from Utils.distance import compute_dist
 from Utils.utils import dtw
 from statistics import mean
 
-class FacesRecognitionsController:
+class RecognitionsController:
 
     def __init__(self):
         self._recognition = FacesRecognitionService()

@@ -20,13 +20,20 @@ if [ $1 == "--d" ];then
   chown miguel -R *;
 fi
 
-if [ $1 == "--i" ];then
+if [ $1 == "--if" ];then
 
   python3 RunnersIdentifiaction.py --d data/Probe_faces_retinaface_none --all
   python3 RunnersIdentifiaction.py --d data/Probe_faces_retinaface_dimension/ --all
 
   python3 RunnersIdentifiaction.py --d data/Probe_faces_img2pose_none --all
   python3 RunnersIdentifiaction.py --d data/Probe_faces_img2pose_dimension/ --all
+
+fi
+
+if [ $1 == "--ia" ];then
+
+   python3 RunnersIdentifiaction.py --aligenReId --met cosine
+   python3 RunnersIdentifiaction.py --aligenReId --met euclidean
 
 fi
 

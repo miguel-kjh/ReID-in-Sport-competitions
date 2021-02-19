@@ -1,15 +1,15 @@
 import argparse
 import os
 
-from Controller.FacesRecognitionsController import FacesRecognitionsController
+from Controller.RecognitionsController import RecognitionsController
 from Services.ReidentificationRepository import ReidentificationRepository
 from Utils.fileUtils import extractModelAndHeuristics
-from Utils.constant import PLACES_PROBE_TEST, PLACES_GALLERY_TEST, MODELS, METRICS
+from Utils.constant import PLACES_PROBE_TEST, PLACES_GALLERY_TEST, MODELS, METRICS, PLACES
 
 
 
 def indentificationByFaces(database, model, metric):
-    rs = FacesRecognitionsController()
+    rs = RecognitionsController()
     repository = ReidentificationRepository()
 
     cmc, mAP = rs.identificationRunnersByFaces(
@@ -22,16 +22,19 @@ def indentificationByFaces(database, model, metric):
     repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 def identificationByBody(metric):
-    rs = FacesRecognitionsController()
+    rs = RecognitionsController()
     repository = ReidentificationRepository()
 
-    cmc, mAP = rs.identificationRunnersByBody(
-        os.path.join("data/TCG_alignedReId/%s.pkl" %PLACES_PROBE_TEST),
-        metric,
-        os.path.join("data/TCG_alignedReId/%s.pkl" %PLACES_GALLERY_TEST)
-    )
+    for probe in PLACES:
+        for gallery in PLACES:
+            if probe != gallery:
+                cmc, mAP = rs.identificationRunnersByBody(
+                    os.path.join("data/TCG_alignedReId/%s.pkl" %probe),
+                    metric,
+                    os.path.join("data/TCG_alignedReId/%s.pkl" %gallery)
+                )
 
-    repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
+                repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, probe, gallery)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
