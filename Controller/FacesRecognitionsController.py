@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from Services.FacesRecognitionServices import FacesRecognitionService
-from Utils.Utils import getNumber
+from Utils.fileUtils import getNumber
 
 class FacesRecognitionsController:
 

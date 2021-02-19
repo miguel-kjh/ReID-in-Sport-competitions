@@ -1,4 +1,4 @@
-from Utils.Utils import getNumber, isImage, extractModelAndHeuristics
+from Utils.fileUtils import getNumber, isImage, extractModelAndHeuristics
 from Utils.constant import PLACES
 from shutil import copyfile
 import os

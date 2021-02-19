@@ -2,7 +2,7 @@ import os
 
 from Services.SaveFacesJpg import SaveFacesJpg
 from Services.SaveFacesJson import SaveFacesJson
-from Utils.Utils import createFolder
+from Utils.fileUtils import createFolder
 from Utils.constant import PLACES
 
 

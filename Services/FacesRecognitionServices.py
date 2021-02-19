@@ -1,5 +1,5 @@
 from deepface import DeepFace
-from Utils.Utils import getNumber
+from Utils.fileUtils import getNumber
 import ntpath
 
 class ElementRunnersRanking:

@@ -6,7 +6,7 @@ import numpy as np
 
 from Domain.FacesCollection import FacesCollection
 from Services.SaveFacesServices import SaveFacesServices
-from Utils.Utils import getPlace
+from Utils.fileUtils import getPlace
 
 
 class SaveFacesJpg(SaveFacesServices):

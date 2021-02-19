@@ -3,7 +3,7 @@ import os
 
 from Controller.FacesRecognitionsController import FacesRecognitionsController
 from Services.ReidentificationRepository import ReidentificationRepository
-from Utils.Utils import extractModelAndHeuristics
+from Utils.fileUtils import extractModelAndHeuristics
 from Utils.constant import PLACES_PROBE_TEST, PLACES_GALLERY_TEST, MODELS, METRICS
 
 

@@ -6,7 +6,7 @@ from Services.SaveFacesJson import SaveFacesJson
 from Services.SaveFacesJpg import SaveFacesJpg
 from Utils.Heuristics.FaceHeuristic import FaceHeuristic
 from Utils.Heuristics.HeuristicCreator import HeuristicCreator
-from Utils.Utils import isImage, createFolder
+from Utils.fileUtils import isImage, createFolder
 
 class ReaderFilesController:
 
