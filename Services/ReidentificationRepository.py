@@ -6,7 +6,7 @@ class ReidentificationRepository:
 
     def __init__(self):
 
-        self.filename = 'data/Results/ReidentificationTests.csv'
+        self.filename = 'Results/ReidentificationTests.csv'
         self.df: pd.DataFrame = pd.read_csv(self.filename)
 
     def _getQuery(self, faceModel: str, heuristics: str, identificationModel: str,
