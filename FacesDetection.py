@@ -8,7 +8,6 @@ def faceDetection(directory, model = "retinaface", heuristic = "none"):
     rf = ReaderFilesController(heuristic, model=model)
 
     folders = [name for name in os.listdir(directory)]
-    folders.sort(key = lambda folder: int(folder))
     for folder in folders:
         rf.run(os.path.join(directory, folder))
 

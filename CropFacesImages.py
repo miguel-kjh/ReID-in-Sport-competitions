@@ -2,7 +2,7 @@ import os
 import argparse
 from Controller.FaceClippingController import FaceClippingController
 
-TGC = "data/TGC2020v0.3_PRL"
+TGC = "data/TGC_places"
 
 def testCliping(directory):
     folders = [name for name in os.listdir(directory)]

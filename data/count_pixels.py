@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import os
 import json
 
-model     = "retinaface"
+model     = "img2pose"
 heuristic = "none"
 database  = "TGC2020v0.3_json_%s_%s" %(model, heuristic)
 
@@ -35,11 +35,11 @@ def filterPixels(cond, pixels):
 if __name__ == '__main__':
     pixels_count = pixelsCount()
     print(len(pixels_count))
-    cutPoints = range(25,300,25)
+    cutPoints = range(15,300,15)
 
 
     data = {
-        "< %s" % cutPoints[index]: filterPixels(lambda x: cutPoints[index - 1] < x < cutPoints[index], pixels_count)
+        "%s" % cutPoints[index]: filterPixels(lambda x: cutPoints[index - 1] < x < cutPoints[index], pixels_count)
         for index in range(1,len(cutPoints))
     }
     data[">= 300"] = filterPixels(lambda x: x >= 300, pixels_count)

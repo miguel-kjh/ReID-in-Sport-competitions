@@ -43,7 +43,7 @@ class FacesRecognitionService:
 
     def computeClassification(self, probe: np.array, gallery: list, metric: str = "cosine") -> list:
         distances = [
-            (dorsal, self._metrics[metric](probe, embedding))
+            (dorsal, self._metrics[metric](embedding, probe))
             for dorsal, embedding in gallery
         ]
 
