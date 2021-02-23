@@ -25,16 +25,24 @@ def identificationByBody(metric):
     rs = RecognitionsController()
     repository = ReidentificationRepository()
 
-    for probe in PLACES:
+    """for probe in PLACES:
         for gallery in PLACES:
             if probe != gallery:
+                print("[ %s - %s]" % (probe, gallery))
                 cmc, mAP = rs.identificationRunnersByBody(
                     os.path.join("data/TCG_alignedReId/%s.pkl" %probe),
                     metric,
                     os.path.join("data/TCG_alignedReId/%s.pkl" %gallery)
                 )
 
-                repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, probe, gallery)
+                repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, probe, gallery)"""
+    cmc, mAP = rs.identificationRunnersByBody(
+        os.path.join("data/TCG_alignedReId/%s.pkl" %PLACES_PROBE_TEST),
+        metric,
+        os.path.join("data/TCG_alignedReId/%s.pkl" %PLACES_GALLERY_TEST)
+    )
+
+    repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

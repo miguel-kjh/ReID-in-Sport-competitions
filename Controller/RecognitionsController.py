@@ -3,7 +3,9 @@ from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
 from Utils.fileUtils import getNumber
 from Utils.distance import compute_dist
 from Utils.utils import dtw
+from Utils.re_ranking import re_ranking
 from statistics import mean
+import torch
 
 import os
 import numpy as np
@@ -95,8 +97,13 @@ class RecognitionsController:
         gallery = self._loadServices.loadInformation(galleryPlace)
 
         for query in probe.bodies:
-            dist = [(galleryData.dorsal, dtw(compute_dist(query.embedding, galleryData.embedding, metric))[0])
-                    for galleryData in gallery.bodies]
+            if metric == 're-ranking':
+                dist = [(galleryData.dorsal, dtw(re_ranking(torch.tensor(query.embedding), torch.tensor(galleryData.embedding)))[0])
+                        for galleryData in gallery.bodies]
+            else:
+                dist = [(galleryData.dorsal, dtw(compute_dist(query.embedding, galleryData.embedding, metric))[0])
+                        for galleryData in gallery.bodies]
+
             dist.sort(key = lambda ele: ele[1])
 
             classification = [ runner[0] for runner in dist]
