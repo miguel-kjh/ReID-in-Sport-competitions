@@ -16,7 +16,7 @@ Matlab version: https://github.com/zhunzhong07/person-re-ranking
 API
 
 probFea: all feature vectors of the query set (torch tensor)
-probFea: all feature vectors of the gallery set (torch tensor)
+galFea: all feature vectors of the gallery set (torch tensor)
 k1,k2,lambda: parameters, the original paper is (k1=20,k2=6,lambda=0.3)
 MemorySave: set to 'True' when using MemorySave mode
 Minibatch: avaliable when 'MemorySave' is 'True'
