@@ -1,6 +1,5 @@
 from Domain.BodyCollection import BodyCollection
 from Services.SaveEmbeddingService import SaveEmbeddingService
-from Utils.fileUtils import createFolder
 
 import pickle
 import os

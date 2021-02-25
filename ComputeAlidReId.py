@@ -6,7 +6,7 @@ FOLDER = "data/TGC_places"
 def computeEmbeddings():
     controller = AlignedReIDController()
 
-    controller.run(FOLDER)
+    controller.run(FOLDER, compression=False)
 
 
 if __name__ == '__main__':

@@ -7,11 +7,13 @@ class AlignedReIDController:
     def __init__(self):
         self._alignedService = AlignedReIDServices()
         self._folder = 'data/TCG_alignedReId'
-        createFolder(self._folder)
+        #createFolder(self._folder)
         self._saveService = SaveEmbeddingPkl(self._folder)
 
-    def run(self, folder):
-        embeddingCollection = self._alignedService.imgToEmbedding(folder)
+    def run(self, folder: str, compression: bool = False):
+        embeddingCollection = self._alignedService.imgToEmbedding(folder, compression)
         for filename, collection in embeddingCollection.items():
+            if compression:
+                filename = filename + "_pca"
             self._saveService.saveBodyInformation(filename, collection)
 
