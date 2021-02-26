@@ -21,9 +21,10 @@ def indentificationByFaces(database, model, metric):
     faceModel, heuristic = extractModelAndHeuristics(database)
     repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
-def identificationByBody(metric):
+def identificationByBody(metric, compression):
     rs = RecognitionsController()
     repository = ReidentificationRepository()
+    folder = "data/TCG_alignedReId/%s.pkl" if not compression else "data/TCG_alignedReId/%s_pca.pkl"
 
     """for probe in PLACES:
         for gallery in PLACES:
@@ -37,12 +38,16 @@ def identificationByBody(metric):
 
                 repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, probe, gallery)"""
     cmc, mAP = rs.identificationRunnersByBody(
-        os.path.join("data/TCG_alignedReId/%s.pkl" %PLACES_PROBE_TEST),
+        os.path.join(folder %PLACES_PROBE_TEST),
         metric,
-        os.path.join("data/TCG_alignedReId/%s.pkl" %PLACES_GALLERY_TEST)
+        os.path.join(folder %PLACES_GALLERY_TEST),
+        compression
     )
 
-    repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
+    print(cmc, mAP)
+    if compression:
+        metric = metric + "+ pca"
+    #repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -51,9 +56,12 @@ if __name__ == '__main__':
     parser.add_argument("--metric", action='store', type=str, help="introduce the model")
     parser.add_argument("--all",action='count', help="test with all models and metrics")
     parser.add_argument("--aligenReId", action='count', help="using only body information")
+    parser.add_argument("--pca", action='count', help="apply pca to reduction the dimensions")
+
+
     args = parser.parse_args()
     if args.aligenReId:
-        identificationByBody(args.metric)
+        identificationByBody(args.metric, args.pca)
     else:
         if not args.all:
            indentificationByFaces(args.database, args.model, args.metric)

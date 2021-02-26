@@ -5,11 +5,6 @@ from deepface.commons import distance as dst
 import ntpath
 import numpy as np
 
-class ElementRunnersRanking:
-    def __init__(self, dorsal: int, distance: float):
-        self.dorsal   = dorsal
-        self.distance = distance
-
 class FacesRecognitionService:
 
     def __init__(self):

@@ -89,13 +89,13 @@ class AlignedReIDServices:
                 fBase = self.extractor(imgBase)
                 embedding = normalize(pool2d(fBase[0], type='max'))
 
-                embeddings.append(embedding)
+                embeddings.append(embedding.reshape(embedding.shape[0] * embedding.shape[1]))
                 runners.append(getNumber(baseImg))
 
         embeddings = np.array(embeddings)
-        embeddings = pca.fit_transform(
-            embeddings.reshape(-1, embeddings.shape[1] * embeddings.shape[2])
-        )
+        print(embeddings.shape)
+        embeddings = pca.fit_transform(embeddings)
+        print(embeddings.shape)
 
         for runner, embedding in zip(runners, embeddings):
             collection.addBody(Body(runner, embedding))
