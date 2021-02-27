@@ -21,5 +21,5 @@ class AlignedReIDController:
         body_collection = self._saveService.loadInformation(bodies)
         faces_array = self._saveService.loadInformation(faces)
 
-        self._alignedService.compactedEmbeddings(faces_array, body_collection)
+        self._alignedService.compactedEmbeddings(faces_array, body_collection, compression=compression)
         self._saveService.saveBodyInformation(filename, body_collection)

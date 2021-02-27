@@ -1,6 +1,7 @@
 import torch
 import os
 from Utils.FeatureExtractor import FeatureExtractor
+from Utils.constant import COMPRESSION_FACTOR
 from torchvision import transforms
 from IPython import embed
 import models
@@ -44,7 +45,7 @@ class AlignedReIDServices:
         ])
 
         #compression
-        self._compression_factor = 0.95
+        self._pca = PCA(n_components = COMPRESSION_FACTOR)
 
 
     def _computedVectors(self, dirpath: str, filenames: list) -> BodyCollection:
@@ -73,7 +74,6 @@ class AlignedReIDServices:
 
     def _computedVectorsPCA(self, dirpath: str, filenames: list) -> BodyCollection:
         collection = BodyCollection()
-        pca = PCA(n_components = self._compression_factor)
 
         embeddings = []
         runners = []
@@ -95,7 +95,7 @@ class AlignedReIDServices:
 
         embeddings = np.array(embeddings)
         print(embeddings.shape)
-        embeddings = pca.fit_transform(embeddings)
+        embeddings = self._pca.fit_transform(embeddings)
         print(embeddings.shape)
 
         for runner, embedding, file in zip(runners, embeddings, filenames):
@@ -119,14 +119,20 @@ class AlignedReIDServices:
     def compactedEmbeddings(self, faces: np.array, bodyCollection: BodyCollection, compression: bool = False) -> None:
 
         runners = [getNumber(os.path.basename(a[0])) for a in faces]
+        files = [os.path.basename(a[0]) for a in faces]
         dim = len(faces[0][1])
 
         for body in bodyCollection.bodies:
+            aux = body.file.replace('.jpg','')
+            ocurrences = sorted([file for file in files if aux in file])
             try:
-                index = runners.index(body.dorsal)
+                index = files.index(ocurrences[0]) #runners.index(body.dorsal)
                 body.embedding = np.append(body.embedding, faces[index][1])
             except:
                 body.embedding = np.append(body.embedding, np.zeros(dim))
 
+
         if compression:
-            pass
+                X, _ = bodyCollection.get_dataset()
+                X = self._pca.fit_transform(X)
+                bodyCollection.set_embeddings(X)
