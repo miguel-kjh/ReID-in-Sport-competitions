@@ -51,6 +51,7 @@ class RecognitionsController:
             dorsal = getNumber(os.path.basename(query[0]))
             classification = self._face_recognition.computeClassification(query[1], gallery, metric = metric)
 
+
             try:
                 matches[classification.index(dorsal)] += 1
             except Exception:
@@ -65,18 +66,17 @@ class RecognitionsController:
 
         return cmc, sum(average_precision) / len(probes)
 
-    def identificationRunnersByBody(self, probe: str, metric: str, galleryPlace: str, pca: bool, topNum: int = 107) -> tuple:
+    def identificationRunnersByBody(self, probe: str, metric: str, galleryPlace: str, topNum: int = 107) -> tuple:
         matches = np.zeros(topNum)
         average_precision = []
 
         probe = self._loadServices.loadInformation(probe)
         gallery = self._loadServices.loadInformation(galleryPlace)
-        getClassfication = self._body_recognition.computeClassificationPCA \
-            if pca else self._body_recognition.computeClassification
 
         for query in probe.bodies:
 
-            classification = getClassfication(query, gallery, metric)
+            classification = self._body_recognition.computeClassification(query, gallery, metric)
+
 
             try:
                 matches[classification.index(query.dorsal)] += 1

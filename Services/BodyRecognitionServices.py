@@ -33,7 +33,7 @@ class BodyRecognitionServices:
 
         return self._metrics[metric](v1, v2)
 
-    def computeClassification(self, query: Body, gallery: BodyCollection, metric: str = "euclidean") -> list:
+    """def computeClassification(self, query: Body, gallery: BodyCollection, metric: str = "euclidean") -> list:
         if not self._isDistance(metric):
             raise ValueError("%s is not a distance function" % metric)
 
@@ -47,9 +47,9 @@ class BodyRecognitionServices:
 
         dist.sort(key = lambda ele: ele[1])
 
-        return [ runner[0] for runner in dist]
+        return [ runner[0] for runner in dist]"""
 
-    def computeClassificationPCA(self, query: Body, gallery: BodyCollection, metric: str = "euclidean") -> list:
+    def computeClassification(self, query: Body, gallery: BodyCollection, metric: str = "euclidean") -> list:
         if not self._isDistance(metric):
             raise ValueError("%s is not a distance function" % metric)
 

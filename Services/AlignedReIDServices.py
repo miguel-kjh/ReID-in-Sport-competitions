@@ -65,7 +65,8 @@ class AlignedReIDServices:
 
                 collection.addBody(Body(
                     getNumber(baseImg),
-                    embedding
+                    embedding.reshape(embedding.shape[0] * embedding.shape[1]),
+                    baseImg
                 ))
 
         return collection
@@ -97,8 +98,8 @@ class AlignedReIDServices:
         embeddings = pca.fit_transform(embeddings)
         print(embeddings.shape)
 
-        for runner, embedding in zip(runners, embeddings):
-            collection.addBody(Body(runner, embedding))
+        for runner, embedding, file in zip(runners, embeddings, filenames):
+            collection.addBody(Body(runner, embedding, file))
 
         return collection
 
@@ -114,3 +115,18 @@ class AlignedReIDServices:
                     if compression else self._computedVectors(dirpath, filenames)
 
         return embeddingCollection
+
+    def compactedEmbeddings(self, faces: np.array, bodyCollection: BodyCollection, compression: bool = False) -> None:
+
+        runners = [getNumber(os.path.basename(a[0])) for a in faces]
+        dim = len(faces[0][1])
+
+        for body in bodyCollection.bodies:
+            try:
+                index = runners.index(body.dorsal)
+                body.embedding = np.append(body.embedding, faces[index][1])
+            except:
+                body.embedding = np.append(body.embedding, np.zeros(dim))
+
+        if compression:
+            pass
