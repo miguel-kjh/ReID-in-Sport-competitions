@@ -38,14 +38,14 @@ def identificationByBody(metric, compression):
 
                 repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, probe, gallery)"""
     cmc, mAP = rs.identificationRunnersByBody(
-        os.path.join( folder %'ParqueSur_retinaface_none_vgg_face'),
+        os.path.join( folder %'Arucas_retinaface_none_vgg_face'),
         metric,
-        os.path.join( folder %'ParqueSur_retinaface_none_vgg_face'),
+        os.path.join( folder %'Teror_retinaface_none_vgg_face'),
     )
-    print(cmc, mAP)
+    #print(cmc, mAP)
     if compression:
-        metric = metric + "+ pca"
-    #repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
+        metric = "%s + %s" %('pca', metric)
+    repository.addTest("AlignedReId + Retinaface", "None", "VGG-Face", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

@@ -13,11 +13,11 @@ def computeBodyAndFacesEmbeddings(faces, bodies, filename):
 
 if __name__ == '__main__':
     #computeEmbeddings()
-    for place in PLACES:
-        for model in MODELS:
+    for place in ['Ayagaures', 'ParqueSur']:
+        for model in ['VGG-Face']:
             model = model.lower().replace('-', '_')
             computeBodyAndFacesEmbeddings(
-                'data/Probe_faces_retinaface_none/%s/representations_%s.pkl' %(place, model),
+                'data/Probe_faces_img2pose_dimension/%s/representations_%s.pkl' %(place, model),
                 'data/TCG_alignedReId/%s.pkl' %place,
-                '%s_retinaface_none_%s_pca' % (place, model)
+                '%s_img2pose_dimension_%s_pca' % (place, model)
             )
