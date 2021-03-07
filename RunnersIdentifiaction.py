@@ -24,7 +24,7 @@ def indentificationByFaces(database, model, metric):
 def identificationByBody(metric, compression):
     rs = RecognitionsController()
     repository = ReidentificationRepository()
-    folder = "data/TCG_alignedReId/%s.pkl" if not compression else "data/TCG_alignedReId/%s_pca.pkl"
+    folder = "data/TCG_alignedReId/%s.pkl" if not compression else "data/TCG_alignedReId/%s_tsne.pkl"
 
     """for probe in PLACES:
         for gallery in PLACES:
@@ -38,14 +38,15 @@ def identificationByBody(metric, compression):
 
                 repository.addTest("AlignedReId", "None", "ResNet50", metric, cmc, mAP, probe, gallery)"""
     cmc, mAP = rs.identificationRunnersByBody(
-        os.path.join( folder %'Arucas_retinaface_none_vgg_face'),
+        os.path.join( folder %'%s_retinaface_none_all' % PLACES_PROBE_TEST),
         metric,
-        os.path.join( folder %'Teror_retinaface_none_vgg_face'),
+        os.path.join( folder %'%s_retinaface_none_all' % PLACES_GALLERY_TEST),
     )
-    #print(cmc, mAP)
+    print(cmc, mAP)
     if compression:
-        metric = "%s + %s" %('pca', metric)
-    repository.addTest("AlignedReId + Retinaface", "None", "VGG-Face", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
+        print('compresion')
+        metric = "%s + %s" %('tsne', metric)
+    #repository.addTest("AlignedReId + Retinaface", "None", "VGG-Face", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
