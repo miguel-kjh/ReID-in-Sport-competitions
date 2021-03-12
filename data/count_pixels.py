@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import os
 import json
 
-model     = "img2pose"
+model     = "retinaface"
 heuristic = "none"
 database  = "TGC2020v0.3_json_%s_%s" %(model, heuristic)
 

@@ -41,7 +41,7 @@ class RecognitionsController:
 
         model_file = "representations_%s.pkl" % model.lower().replace("-", "_")
         probe = os.path.join(probe, model_file)
-        gallery = os.path.join(self.facesGallery, galleryPlace, model_file)
+        gallery = os.path.join(galleryPlace, model_file)
 
         probes = self._loadServices.loadInformation(probe)
         gallery = [(getNumber(os.path.basename(file)), embedding)

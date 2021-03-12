@@ -16,10 +16,11 @@ def indentificationByFaces(database, model, metric):
         os.path.join(database, PLACES_PROBE_TEST),
         model,
         metric,
-        PLACES_GALLERY_TEST
+        os.path.join(database, PLACES_GALLERY_TEST)
     )
     faceModel, heuristic = extractModelAndHeuristics(database)
-    repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
+    print(mAP)
+    #repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 def identificationByBody(metric, compression):
     rs = RecognitionsController()

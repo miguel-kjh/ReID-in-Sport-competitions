@@ -5,7 +5,7 @@ import os
 
 PROBE = 'data/Probe_faces_retinaface_none/Arucas/5_Arucas_frame_01_26_18_000_0_faces.jpg'
 
-GALLERIES = ['data/TGC_places']
+GALLERIES = ['data/Probe_faces_retinafaceliif50_none']
 
 MODELS = ["VGG-Face", "Facenet", "OpenFace", "DeepFace"]
 
