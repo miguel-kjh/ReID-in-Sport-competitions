@@ -1,0 +1,784 @@
+########## retinaface  - none ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.0175
+rank 5: 0.055
+mAP(%): 3.7191
+----- - VGG-Face + euclidean - -----
+rank 1: 0.0125
+rank 5: 0.04
+mAP(%): 2.8927
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.0175
+rank 5: 0.055
+mAP(%): 3.7191
+----- - Facenet + cosine - -----
+rank 1: 0.0175
+rank 5: 0.05
+mAP(%): 3.3327
+----- - Facenet + euclidean - -----
+rank 1: 0.0125
+rank 5: 0.0425
+mAP(%): 3.1083
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.0175
+rank 5: 0.05
+mAP(%): 3.3327
+----- - OpenFace + cosine - -----
+rank 1: 0.02
+rank 5: 0.075
+mAP(%): 4.3839
+----- - OpenFace + euclidean - -----
+rank 1: 0.02
+rank 5: 0.075
+mAP(%): 4.3839
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.02
+rank 5: 0.075
+mAP(%): 4.3839
+----- - DeepFace + cosine - -----
+rank 1: 0.0275
+rank 5: 0.105
+mAP(%): 4.931
+----- - DeepFace + euclidean - -----
+rank 1: 0.0275
+rank 5: 0.0975
+mAP(%): 4.7663
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.0275
+rank 5: 0.105
+mAP(%): 4.931
+########## retinaface  - dimension ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.035398230088495575
+rank 5: 0.09734513274336283
+mAP(%): 8.6015
+----- - VGG-Face + euclidean - -----
+rank 1: 0.02654867256637168
+rank 5: 0.05309734513274336
+mAP(%): 6.4527
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.035398230088495575
+rank 5: 0.09734513274336283
+mAP(%): 8.6015
+----- - Facenet + cosine - -----
+rank 1: 0.02654867256637168
+rank 5: 0.035398230088495575
+mAP(%): 5.9013
+----- - Facenet + euclidean - -----
+rank 1: 0.02654867256637168
+rank 5: 0.035398230088495575
+mAP(%): 5.8286
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.02654867256637168
+rank 5: 0.035398230088495575
+mAP(%): 5.9013
+----- - OpenFace + cosine - -----
+rank 1: 0.02654867256637168
+rank 5: 0.08849557522123894
+mAP(%): 8.1808
+----- - OpenFace + euclidean - -----
+rank 1: 0.02654867256637168
+rank 5: 0.08849557522123894
+mAP(%): 8.1808
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.02654867256637168
+rank 5: 0.08849557522123894
+mAP(%): 8.1808
+----- - DeepFace + cosine - -----
+rank 1: 0.04424778761061947
+rank 5: 0.12389380530973451
+mAP(%): 8.8154
+----- - DeepFace + euclidean - -----
+rank 1: 0.02654867256637168
+rank 5: 0.12389380530973451
+mAP(%): 8.3897
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.04424778761061947
+rank 5: 0.12389380530973451
+mAP(%): 8.8154
+########## retinafaceliif50  - none ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.02
+rank 5: 0.0775
+mAP(%): 4.0898
+----- - VGG-Face + euclidean - -----
+rank 1: 0.0125
+rank 5: 0.045
+mAP(%): 2.9674
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.02
+rank 5: 0.0775
+mAP(%): 4.0898
+----- - Facenet + cosine - -----
+rank 1: 0.005
+rank 5: 0.0575
+mAP(%): 3.1143
+----- - Facenet + euclidean - -----
+rank 1: 0.0075
+rank 5: 0.0525
+mAP(%): 3.0452
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.005
+rank 5: 0.0575
+mAP(%): 3.1143
+----- - OpenFace + cosine - -----
+rank 1: 0.0125
+rank 5: 0.065
+mAP(%): 3.8125
+----- - OpenFace + euclidean - -----
+rank 1: 0.0125
+rank 5: 0.065
+mAP(%): 3.8125
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.0125
+rank 5: 0.065
+mAP(%): 3.8125
+----- - DeepFace + cosine - -----
+rank 1: 0.035
+rank 5: 0.0775
+mAP(%): 4.6932
+----- - DeepFace + euclidean - -----
+rank 1: 0.025
+rank 5: 0.075
+mAP(%): 4.2138
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.035
+rank 5: 0.0775
+mAP(%): 4.6932
+########## retinafaceliif50  - dimension ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.05309734513274336
+rank 5: 0.07079646017699115
+mAP(%): 8.7355
+----- - VGG-Face + euclidean - -----
+rank 1: 0.02654867256637168
+rank 5: 0.05309734513274336
+mAP(%): 6.2053
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.05309734513274336
+rank 5: 0.07079646017699115
+mAP(%): 8.7355
+----- - Facenet + cosine - -----
+rank 1: 0.008849557522123894
+rank 5: 0.04424778761061947
+mAP(%): 4.3743
+----- - Facenet + euclidean - -----
+rank 1: 0.008849557522123894
+rank 5: 0.04424778761061947
+mAP(%): 4.6227
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.008849557522123894
+rank 5: 0.04424778761061947
+mAP(%): 4.3743
+----- - OpenFace + cosine - -----
+rank 1: 0.017699115044247787
+rank 5: 0.07964601769911504
+mAP(%): 6.4627
+----- - OpenFace + euclidean - -----
+rank 1: 0.017699115044247787
+rank 5: 0.07964601769911504
+mAP(%): 6.4627
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.017699115044247787
+rank 5: 0.07964601769911504
+mAP(%): 6.4627
+----- - DeepFace + cosine - -----
+rank 1: 0.04424778761061947
+rank 5: 0.1415929203539823
+mAP(%): 9.1678
+----- - DeepFace + euclidean - -----
+rank 1: 0.02654867256637168
+rank 5: 0.1415929203539823
+mAP(%): 8.3605
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.04424778761061947
+rank 5: 0.1415929203539823
+mAP(%): 9.1678
+########## retinafaceliif100  - none ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.0175
+rank 5: 0.0625
+mAP(%): 3.7779
+----- - VGG-Face + euclidean - -----
+rank 1: 0.02
+rank 5: 0.0425
+mAP(%): 3.3276
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.0175
+rank 5: 0.0625
+mAP(%): 3.7779
+----- - Facenet + cosine - -----
+rank 1: 0.01
+rank 5: 0.055
+mAP(%): 3.2608
+----- - Facenet + euclidean - -----
+rank 1: 0.005
+rank 5: 0.05
+mAP(%): 3.0773
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.01
+rank 5: 0.055
+mAP(%): 3.2608
+----- - OpenFace + cosine - -----
+rank 1: 0.01
+rank 5: 0.0475
+mAP(%): 3.6095
+----- - OpenFace + euclidean - -----
+rank 1: 0.01
+rank 5: 0.0475
+mAP(%): 3.6095
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.01
+rank 5: 0.0475
+mAP(%): 3.6095
+----- - DeepFace + cosine - -----
+rank 1: 0.0175
+rank 5: 0.07
+mAP(%): 4.3047
+----- - DeepFace + euclidean - -----
+rank 1: 0.0225
+rank 5: 0.0675
+mAP(%): 4.2345
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.0175
+rank 5: 0.07
+mAP(%): 4.3047
+########## retinafaceliif100  - dimension ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.008849557522123894
+rank 5: 0.035398230088495575
+mAP(%): 4.2021
+----- - VGG-Face + euclidean - -----
+rank 1: 0.017699115044247787
+rank 5: 0.035398230088495575
+mAP(%): 4.5229
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.008849557522123894
+rank 5: 0.035398230088495575
+mAP(%): 4.2021
+----- - Facenet + cosine - -----
+rank 1: 0.008849557522123894
+rank 5: 0.035398230088495575
+mAP(%): 3.9274
+----- - Facenet + euclidean - -----
+rank 1: 0.0
+rank 5: 0.035398230088495575
+mAP(%): 3.4903
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.008849557522123894
+rank 5: 0.035398230088495575
+mAP(%): 3.9274
+----- - OpenFace + cosine - -----
+rank 1: 0.017699115044247787
+rank 5: 0.05309734513274336
+mAP(%): 5.2085
+----- - OpenFace + euclidean - -----
+rank 1: 0.017699115044247787
+rank 5: 0.05309734513274336
+mAP(%): 5.2085
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.017699115044247787
+rank 5: 0.05309734513274336
+mAP(%): 5.2085
+----- - DeepFace + cosine - -----
+rank 1: 0.035398230088495575
+rank 5: 0.12389380530973451
+mAP(%): 8.5809
+----- - DeepFace + euclidean - -----
+rank 1: 0.04424778761061947
+rank 5: 0.10619469026548672
+mAP(%): 8.5716
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.035398230088495575
+rank 5: 0.12389380530973451
+mAP(%): 8.5809
+########## retinafaceliif300  - none ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.0325
+rank 5: 0.08
+mAP(%): 4.7763
+----- - VGG-Face + euclidean - -----
+rank 1: 0.015
+rank 5: 0.0475
+mAP(%): 3.5186
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.0325
+rank 5: 0.08
+mAP(%): 4.7763
+----- - Facenet + cosine - -----
+rank 1: 0.005
+rank 5: 0.045
+mAP(%): 3.2566
+----- - Facenet + euclidean - -----
+rank 1: 0.005
+rank 5: 0.0425
+mAP(%): 3.2454
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.005
+rank 5: 0.045
+mAP(%): 3.2566
+----- - OpenFace + cosine - -----
+rank 1: 0.0225
+rank 5: 0.0675
+mAP(%): 3.9952
+----- - OpenFace + euclidean - -----
+rank 1: 0.0225
+rank 5: 0.0675
+mAP(%): 3.9952
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.0225
+rank 5: 0.0675
+mAP(%): 3.9952
+----- - DeepFace + cosine - -----
+rank 1: 0.015
+rank 5: 0.0675
+mAP(%): 4.2789
+----- - DeepFace + euclidean - -----
+rank 1: 0.015
+rank 5: 0.055
+mAP(%): 3.9448
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.015
+rank 5: 0.0675
+mAP(%): 4.2789
+########## retinafaceliif300  - dimension ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.035398230088495575
+rank 5: 0.10619469026548672
+mAP(%): 8.0591
+----- - VGG-Face + euclidean - -----
+rank 1: 0.02654867256637168
+rank 5: 0.05309734513274336
+mAP(%): 6.2832
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.035398230088495575
+rank 5: 0.10619469026548672
+mAP(%): 8.0591
+----- - Facenet + cosine - -----
+rank 1: 0.008849557522123894
+rank 5: 0.07079646017699115
+mAP(%): 5.0231
+----- - Facenet + euclidean - -----
+rank 1: 0.008849557522123894
+rank 5: 0.07079646017699115
+mAP(%): 4.882
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.008849557522123894
+rank 5: 0.07079646017699115
+mAP(%): 5.0231
+----- - OpenFace + cosine - -----
+rank 1: 0.0
+rank 5: 0.07079646017699115
+mAP(%): 5.316
+----- - OpenFace + euclidean - -----
+rank 1: 0.0
+rank 5: 0.07079646017699115
+mAP(%): 5.316
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.0
+rank 5: 0.07079646017699115
+mAP(%): 5.316
+----- - DeepFace + cosine - -----
+rank 1: 0.02654867256637168
+rank 5: 0.09734513274336283
+mAP(%): 7.385
+----- - DeepFace + euclidean - -----
+rank 1: 0.035398230088495575
+rank 5: 0.10619469026548672
+mAP(%): 8.9526
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.02654867256637168
+rank 5: 0.09734513274336283
+mAP(%): 7.385
+########## img2pose  - none ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.03418803418803419
+rank 5: 0.10826210826210826
+mAP(%): 4.7229
+----- - VGG-Face + euclidean - -----
+rank 1: 0.03133903133903134
+rank 5: 0.09401709401709402
+mAP(%): 4.4147
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.03418803418803419
+rank 5: 0.10826210826210826
+mAP(%): 4.7229
+----- - Facenet + cosine - -----
+rank 1: 0.019943019943019943
+rank 5: 0.06837606837606838
+mAP(%): 3.9417
+----- - Facenet + euclidean - -----
+rank 1: 0.019943019943019943
+rank 5: 0.06552706552706553
+mAP(%): 3.9359
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.019943019943019943
+rank 5: 0.06837606837606838
+mAP(%): 3.9417
+----- - OpenFace + cosine - -----
+rank 1: 0.019943019943019943
+rank 5: 0.09116809116809117
+mAP(%): 3.8673
+----- - OpenFace + euclidean - -----
+rank 1: 0.019943019943019943
+rank 5: 0.09116809116809117
+mAP(%): 3.8673
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.019943019943019943
+rank 5: 0.09116809116809117
+mAP(%): 3.8673
+----- - DeepFace + cosine - -----
+rank 1: 0.022792022792022793
+rank 5: 0.10256410256410256
+mAP(%): 5.1861
+----- - DeepFace + euclidean - -----
+rank 1: 0.03418803418803419
+rank 5: 0.11965811965811966
+mAP(%): 5.2676
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.022792022792022793
+rank 5: 0.10256410256410256
+mAP(%): 5.1861
+########## img2pose  - dimension ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.051470588235294115
+rank 5: 0.13970588235294118
+mAP(%): 10.2124
+----- - VGG-Face + euclidean - -----
+rank 1: 0.03676470588235294
+rank 5: 0.11764705882352941
+mAP(%): 7.7489
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.051470588235294115
+rank 5: 0.13970588235294118
+mAP(%): 10.2124
+----- - Facenet + cosine - -----
+rank 1: 0.022058823529411766
+rank 5: 0.09558823529411764
+mAP(%): 6.5235
+----- - Facenet + euclidean - -----
+rank 1: 0.022058823529411766
+rank 5: 0.09558823529411764
+mAP(%): 6.477
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.022058823529411766
+rank 5: 0.09558823529411764
+mAP(%): 6.5235
+----- - OpenFace + cosine - -----
+rank 1: 0.014705882352941176
+rank 5: 0.07352941176470588
+mAP(%): 4.9459
+----- - OpenFace + euclidean - -----
+rank 1: 0.014705882352941176
+rank 5: 0.07352941176470588
+mAP(%): 4.9459
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.014705882352941176
+rank 5: 0.07352941176470588
+mAP(%): 4.9459
+----- - DeepFace + cosine - -----
+rank 1: 0.03676470588235294
+rank 5: 0.11764705882352941
+mAP(%): 8.851
+----- - DeepFace + euclidean - -----
+rank 1: 0.051470588235294115
+rank 5: 0.08823529411764706
+mAP(%): 8.8674
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.03676470588235294
+rank 5: 0.11764705882352941
+mAP(%): 8.851
+########## img2poseliif50  - none ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.017094017094017096
+rank 5: 0.1282051282051282
+mAP(%): 4.839
+----- - VGG-Face + euclidean - -----
+rank 1: 0.02849002849002849
+rank 5: 0.09116809116809117
+mAP(%): 4.372
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.017094017094017096
+rank 5: 0.1282051282051282
+mAP(%): 4.839
+----- - Facenet + cosine - -----
+rank 1: 0.014245014245014245
+rank 5: 0.06552706552706553
+mAP(%): 4.0261
+----- - Facenet + euclidean - -----
+rank 1: 0.019943019943019943
+rank 5: 0.07122507122507123
+mAP(%): 4.0754
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.014245014245014245
+rank 5: 0.06552706552706553
+mAP(%): 4.0261
+----- - OpenFace + cosine - -----
+rank 1: 0.022792022792022793
+rank 5: 0.05698005698005698
+mAP(%): 3.796
+----- - OpenFace + euclidean - -----
+rank 1: 0.022792022792022793
+rank 5: 0.05698005698005698
+mAP(%): 3.796
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.022792022792022793
+rank 5: 0.05698005698005698
+mAP(%): 3.796
+----- - DeepFace + cosine - -----
+rank 1: 0.02564102564102564
+rank 5: 0.10256410256410256
+mAP(%): 4.595
+----- - DeepFace + euclidean - -----
+rank 1: 0.042735042735042736
+rank 5: 0.11965811965811966
+mAP(%): 5.261
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.02564102564102564
+rank 5: 0.10256410256410256
+mAP(%): 4.595
+########## img2poseliif50  - dimension ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.03676470588235294
+rank 5: 0.125
+mAP(%): 9.3459
+----- - VGG-Face + euclidean - -----
+rank 1: 0.029411764705882353
+rank 5: 0.125
+mAP(%): 7.1405
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.03676470588235294
+rank 5: 0.125
+mAP(%): 9.3459
+----- - Facenet + cosine - -----
+rank 1: 0.014705882352941176
+rank 5: 0.07352941176470588
+mAP(%): 5.8899
+----- - Facenet + euclidean - -----
+rank 1: 0.014705882352941176
+rank 5: 0.08823529411764706
+mAP(%): 5.9456
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.014705882352941176
+rank 5: 0.07352941176470588
+mAP(%): 5.8899
+----- - OpenFace + cosine - -----
+rank 1: 0.022058823529411766
+rank 5: 0.08088235294117647
+mAP(%): 6.0933
+----- - OpenFace + euclidean - -----
+rank 1: 0.022058823529411766
+rank 5: 0.08088235294117647
+mAP(%): 6.0933
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.022058823529411766
+rank 5: 0.08088235294117647
+mAP(%): 6.0933
+----- - DeepFace + cosine - -----
+rank 1: 0.04411764705882353
+rank 5: 0.14705882352941177
+mAP(%): 9.0729
+----- - DeepFace + euclidean - -----
+rank 1: 0.07352941176470588
+rank 5: 0.1323529411764706
+mAP(%): 10.6449
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.04411764705882353
+rank 5: 0.14705882352941177
+mAP(%): 9.0729
+########## img2poseliif100  - none ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.03133903133903134
+rank 5: 0.09971509971509972
+mAP(%): 4.8998
+----- - VGG-Face + euclidean - -----
+rank 1: 0.011396011396011397
+rank 5: 0.07407407407407407
+mAP(%): 3.5645
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.03133903133903134
+rank 5: 0.09971509971509972
+mAP(%): 4.8998
+----- - Facenet + cosine - -----
+rank 1: 0.014245014245014245
+rank 5: 0.06837606837606838
+mAP(%): 3.5962
+----- - Facenet + euclidean - -----
+rank 1: 0.017094017094017096
+rank 5: 0.07122507122507123
+mAP(%): 3.6558
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.014245014245014245
+rank 5: 0.06837606837606838
+mAP(%): 3.5962
+----- - OpenFace + cosine - -----
+rank 1: 0.017094017094017096
+rank 5: 0.06552706552706553
+mAP(%): 3.822
+----- - OpenFace + euclidean - -----
+rank 1: 0.017094017094017096
+rank 5: 0.06552706552706553
+mAP(%): 3.822
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.017094017094017096
+rank 5: 0.06552706552706553
+mAP(%): 3.822
+----- - DeepFace + cosine - -----
+rank 1: 0.017094017094017096
+rank 5: 0.10256410256410256
+mAP(%): 4.7865
+----- - DeepFace + euclidean - -----
+rank 1: 0.03133903133903134
+rank 5: 0.10541310541310542
+mAP(%): 4.894
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.017094017094017096
+rank 5: 0.10256410256410256
+mAP(%): 4.7865
+########## img2poseliif100  - dimension ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.03676470588235294
+rank 5: 0.13970588235294118
+mAP(%): 9.3357
+----- - VGG-Face + euclidean - -----
+rank 1: 0.022058823529411766
+rank 5: 0.10294117647058823
+mAP(%): 6.6969
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.03676470588235294
+rank 5: 0.13970588235294118
+mAP(%): 9.3357
+----- - Facenet + cosine - -----
+rank 1: 0.022058823529411766
+rank 5: 0.08088235294117647
+mAP(%): 6.6449
+----- - Facenet + euclidean - -----
+rank 1: 0.029411764705882353
+rank 5: 0.07352941176470588
+mAP(%): 6.9171
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.022058823529411766
+rank 5: 0.08088235294117647
+mAP(%): 6.6449
+----- - OpenFace + cosine - -----
+rank 1: 0.029411764705882353
+rank 5: 0.09558823529411764
+mAP(%): 7.1204
+----- - OpenFace + euclidean - -----
+rank 1: 0.029411764705882353
+rank 5: 0.09558823529411764
+mAP(%): 7.1204
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.029411764705882353
+rank 5: 0.09558823529411764
+mAP(%): 7.1204
+----- - DeepFace + cosine - -----
+rank 1: 0.03676470588235294
+rank 5: 0.16176470588235295
+mAP(%): 9.1809
+----- - DeepFace + euclidean - -----
+rank 1: 0.07352941176470588
+rank 5: 0.14705882352941177
+mAP(%): 11.1356
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.03676470588235294
+rank 5: 0.16176470588235295
+mAP(%): 9.1809
+########## img2poseliif300  - none ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.02849002849002849
+rank 5: 0.1111111111111111
+mAP(%): 5.0678
+----- - VGG-Face + euclidean - -----
+rank 1: 0.017094017094017096
+rank 5: 0.09686609686609686
+mAP(%): 4.2722
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.02849002849002849
+rank 5: 0.1111111111111111
+mAP(%): 5.0678
+----- - Facenet + cosine - -----
+rank 1: 0.03133903133903134
+rank 5: 0.07122507122507123
+mAP(%): 3.8398
+----- - Facenet + euclidean - -----
+rank 1: 0.03418803418803419
+rank 5: 0.07122507122507123
+mAP(%): 3.9379
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.03133903133903134
+rank 5: 0.07122507122507123
+mAP(%): 3.8398
+----- - OpenFace + cosine - -----
+rank 1: 0.014245014245014245
+rank 5: 0.07692307692307693
+mAP(%): 3.7665
+----- - OpenFace + euclidean - -----
+rank 1: 0.014245014245014245
+rank 5: 0.07692307692307693
+mAP(%): 3.7665
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.014245014245014245
+rank 5: 0.07692307692307693
+mAP(%): 3.7665
+----- - DeepFace + cosine - -----
+rank 1: 0.022792022792022793
+rank 5: 0.09401709401709402
+mAP(%): 4.6315
+----- - DeepFace + euclidean - -----
+rank 1: 0.02849002849002849
+rank 5: 0.11965811965811966
+mAP(%): 4.7397
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.022792022792022793
+rank 5: 0.09401709401709402
+mAP(%): 4.6315
+########## img2poseliif300  - dimension ############
+----- - VGG-Face + cosine - -----
+rank 1: 0.029411764705882353
+rank 5: 0.125
+mAP(%): 8.1879
+----- - VGG-Face + euclidean - -----
+rank 1: 0.014705882352941176
+rank 5: 0.11764705882352941
+mAP(%): 6.5738
+----- - VGG-Face + euclidean_l2 - -----
+rank 1: 0.029411764705882353
+rank 5: 0.125
+mAP(%): 8.1879
+----- - Facenet + cosine - -----
+rank 1: 0.04411764705882353
+rank 5: 0.08823529411764706
+mAP(%): 7.6124
+----- - Facenet + euclidean - -----
+rank 1: 0.04411764705882353
+rank 5: 0.09558823529411764
+mAP(%): 7.7668
+----- - Facenet + euclidean_l2 - -----
+rank 1: 0.04411764705882353
+rank 5: 0.08823529411764706
+mAP(%): 7.6124
+----- - OpenFace + cosine - -----
+rank 1: 0.014705882352941176
+rank 5: 0.0661764705882353
+mAP(%): 5.1627
+----- - OpenFace + euclidean - -----
+rank 1: 0.014705882352941176
+rank 5: 0.0661764705882353
+mAP(%): 5.1627
+----- - OpenFace + euclidean_l2 - -----
+rank 1: 0.014705882352941176
+rank 5: 0.0661764705882353
+mAP(%): 5.1627
+----- - DeepFace + cosine - -----
+rank 1: 0.022058823529411766
+rank 5: 0.11764705882352941
+mAP(%): 7.5626
+----- - DeepFace + euclidean - -----
+rank 1: 0.029411764705882353
+rank 5: 0.14705882352941177
+mAP(%): 8.9037
+----- - DeepFace + euclidean_l2 - -----
+rank 1: 0.022058823529411766
+rank 5: 0.11764705882352941
+mAP(%): 7.5626

@@ -139,3 +139,5 @@ dmypy.json
 .torch/
 
 img2pose/models/
+
+data

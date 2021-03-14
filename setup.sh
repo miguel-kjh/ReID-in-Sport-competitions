@@ -9,6 +9,12 @@ if(($# != 1)); then
 	die "Bad argument"
 fi
 
+metrics=(euclidean cosine)
+models=(retinaface retinafaceliif50 retinafaceliif100 retinafaceliif300
+  img2pose img2poseliif50 img2poseliif100 img2poseliif300)
+heuristics=(none dimension)
+embeddings=(vgg_face facenet openface deepface)
+
 if [ $1 == "--d" ];then
 
   python3 FacesDetection.py --f data/TGC2020v0.3_PRL/ --m retinaface  --heuristic none;
@@ -22,11 +28,15 @@ fi
 
 if [ $1 == "--if" ];then
 
-  python3 RunnersIdentifiaction.py --d data/Probe_faces_retinaface_none --all
-  python3 RunnersIdentifiaction.py --d data/Probe_faces_retinaface_dimension/ --all
-
-  python3 RunnersIdentifiaction.py --d data/Probe_faces_img2pose_none --all
-  python3 RunnersIdentifiaction.py --d data/Probe_faces_img2pose_dimension/ --all
+  #python3 RunnersIdentifiaction.py --d data/Probe_faces_retinaface_none --all
+  for model in "${models[@]}"
+  do
+    for heuristic in "${heuristics[@]}"
+    do
+      echo "########## $model  - $heuristic ############"
+      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all;
+    done
+  done
 
 fi
 
@@ -34,6 +44,28 @@ if [ $1 == "--ia" ];then
 
    python3 RunnersIdentifiaction.py --aligenReId --met cosine
    python3 RunnersIdentifiaction.py --aligenReId --met euclidean
+
+fi
+
+if [ $1 == "--ifb" ];then
+  for model in "${models[@]}"
+  do
+    for heuristic in "${heuristics[@]}"
+    do
+      echo "########## $model  - $heuristic ############"
+      for metric in "${metrics[@]}"
+      do
+        echo "-------- $metric -------- "
+        for embedding in "${embeddings[@]}"
+        do
+          echo "++++++ $embedding +++++"
+          python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding
+          echo "pca:"
+          python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --pca
+        done
+      done
+    done
+  done
 
 fi
 

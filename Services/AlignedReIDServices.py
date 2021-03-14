@@ -1,7 +1,7 @@
 import torch
 import os
 from Utils.FeatureExtractor import FeatureExtractor
-from Utils.constant import COMPRESSION_FACTOR, compressionMethod
+from Utils.constant import COMPRESSION_FACTOR
 from torchvision import transforms
 from IPython import embed
 import models
@@ -97,9 +97,9 @@ class AlignedReIDServices:
                 runners.append(getNumber(baseImg))
 
         embeddings = np.array(embeddings)
-        print(embeddings.shape)
+        #print(embeddings.shape)
         embeddings = self._pca.fit_transform(embeddings)
-        print(embeddings.shape)
+        #print(embeddings.shape)
 
         for runner, embedding, file in zip(runners, embeddings, filenames):
             collection.addBody(Body(runner, embedding, file))
@@ -120,7 +120,7 @@ class AlignedReIDServices:
         return embeddingCollection
 
     def compactedEmbeddings(self, faces: np.array, bodyCollection: BodyCollection,
-                            compression: compressionMethod = compressionMethod.none) -> None:
+                            compression: bool = False) -> None:
 
         #runners = [getNumber(os.path.basename(a[0])) for a in faces]
         files = [os.path.basename(a[0]) for a in faces]
@@ -131,27 +131,19 @@ class AlignedReIDServices:
             ocurrences = sorted([file for file in files if aux in file])
             try:
                 index = files.index(ocurrences[0]) #runners.index(body.dorsal)
-                print(index)
                 body.embedding = np.append(body.embedding, faces[index][1])
             except:
                 body.embedding = np.append(body.embedding, np.zeros(dim))
 
 
-        if compression == compressionMethod.pca:
-            print('com')
+        if compression:
             X, _ = bodyCollection.get_dataset()
             X = self._pca.fit_transform(X)
             bodyCollection.set_embeddings(X)
 
-        if compression == compressionMethod.tsne:
-            print('com')
-            X, _ = bodyCollection.get_dataset()
-            X = self._tsne.fit_transform(X)
-            bodyCollection.set_embeddings(X)
-
 
     def compactedAllEmbeddings(self, faces: list, dimension: int,  bodyCollection: BodyCollection,
-                               compression: compressionMethod = compressionMethod.none) -> None:
+                               compression: bool = False) -> None:
 
         files = [os.path.basename(a[0]) for a in faces[0]]
 
@@ -166,15 +158,8 @@ class AlignedReIDServices:
                 body.embedding = np.append(body.embedding, np.zeros(dimension))
 
 
-        if compression == compressionMethod.pca:
-            print('com')
+        if compression:
             X, _ = bodyCollection.get_dataset()
             X = self._pca.fit_transform(X)
-            bodyCollection.set_embeddings(X)
-
-        if compression == compressionMethod.tsne:
-            print('com')
-            X, _ = bodyCollection.get_dataset()
-            X = self._tsne.fit_transform(X)
             bodyCollection.set_embeddings(X)
 
