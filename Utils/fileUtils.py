@@ -1,8 +1,15 @@
 import re
 import os
 import shutil
+from datetime import timedelta
+
 def isImage(filename: str):
     return re.search(".jpg$", filename)
+
+def getTime(filename: str) -> timedelta:
+    matchs = re.findall(r'(\d{2})', filename)
+    step = 1 if len(matchs) == 5 else 0
+    return timedelta(hours = int(matchs[0 + step]), minutes = int(matchs[1 + step]), seconds = int(matchs[2 + step]))
 
 def getPlace(filename: str) -> str:
     match = re.search(r'\d+_(\w+)_frame', filename)
