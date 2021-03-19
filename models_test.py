@@ -78,7 +78,7 @@ load_model(img2pose_model.fpn_model, MODEL_PATH, cpu_mode=str(img2pose_model.dev
 img2pose_model.evaluate()
 
 # change to a folder with images, or another list containing image paths
-images_path = "data/TGC2020v0.3_PRL/1"
+images_path = "data/TGC_places/Arucas"
 
 threshold = 0.8
 
@@ -100,6 +100,12 @@ for img_path in tqdm(img_paths):
     image = cv2.imread(img_path)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     annotation = model.predict_jsons(image)
+    aumentation_faces = 25
+    for i,a in enumerate(annotation[0]['bbox']):
+        if i >= 2:
+            annotation[0]['bbox'][i] += aumentation_faces
+        else:
+            annotation[0]['bbox'][i] -= 25
     image_name = os.path.split(img_path)[1]
 
     (w, h) = img.size

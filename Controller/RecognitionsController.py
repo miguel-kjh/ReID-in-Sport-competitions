@@ -1,7 +1,8 @@
 from Services.FacesRecognitionServices import FacesRecognitionService
 from Services.BodyRecognitionServices import BodyRecognitionServices
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
-from Utils.fileUtils import getNumber
+from Utils.fileUtils import getNumber, getTime
+from Utils.constant import PLACES
 
 from statistics import mean
 
@@ -32,26 +33,30 @@ class RecognitionsController:
         return sum(averagePrecision)
 
 
-    def identificationRunnersByFaces(self, probe: str, model: str, metric: str, galleryPlace: str, topNum: int = 107) -> tuple:
+    def identificationRunnersByFaces(self, probe: str, model: str, metric: str,
+                                     galleryPlace: str, topNum: int = 107,
+                                     pca: bool = False, temporalCoherence: bool = False) -> tuple:
 
         self._face_recognition.checkMetricAndModel(model, metric)
 
         matches = np.zeros(topNum)
         average_precision = []
+        isOrder = PLACES.index(os.path.basename(probe)) < PLACES.index(os.path.basename(galleryPlace))
 
-        model_file = "representations_%s.pkl" % model.lower().replace("-", "_")
+        model_file = "representations_%s.pkl" % (model if not pca else "%s_pca" % model).lower().replace("-", "_")
         probe = os.path.join(probe, model_file)
         gallery = os.path.join(galleryPlace, model_file)
 
         probes = self._loadServices.loadInformation(probe)
-        gallery = [(getNumber(os.path.basename(file)), embedding)
+        gallery = [(getNumber(os.path.basename(file)), embedding, getTime(os.path.basename(file)))
                    for file, embedding in self._loadServices.loadInformation(gallery)]
 
         for query in probes:
             dorsal = getNumber(os.path.basename(query[0]))
-            classification = self._face_recognition.computeClassification(query[1], gallery, metric = metric)
-
-
+            classification = self._face_recognition.computeClassification(query, gallery,
+                                                                          metric = metric,
+                                                                          temporalCoherence=temporalCoherence,
+                                                                          isOrder=isOrder)
             try:
                 matches[classification.index(dorsal)] += 1
             except Exception:

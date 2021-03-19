@@ -1,6 +1,6 @@
 MODELS  = ["VGG-Face", "Facenet", "OpenFace", "DeepFace"]
 METRICS = ['cosine', 'euclidean', 'euclidean_l2']
-PLACES  = ["Arucas", "Ayagaures", "ParqueSur", "PresaDeHornos", "Teror"]
+PLACES  = ["Arucas","Teror", "PresaDeHornos",  "Ayagaures", "ParqueSur" ] # sorted by run's control point
 FACES_MODELS = ["retinaface","retinafaceliif50", "retinafaceliif100", "retinafaceliif300",
                 "img2pose", "img2poseliif50", "img2poseliif100", "img2poseliif300"]
 HEURISTICS = ["none", "dimension"]

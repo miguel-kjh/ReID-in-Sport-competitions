@@ -28,7 +28,6 @@ class AlignedReIDController:
     def compactedEmbeddingsUsingAllFaces(self, places: str, bodies: str, filename: str, compression: bool = False):
         body_collection = self._saveService.loadInformation(bodies)
 
-        models = ["VGG-Face", "OpenFace", "DeepFace"]
         faces = []
         for model in MODELS:
             model = model.lower().replace('-', '_')

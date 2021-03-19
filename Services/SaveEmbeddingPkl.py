@@ -2,6 +2,7 @@ from Domain.BodyCollection import BodyCollection
 from Services.SaveEmbeddingService import SaveEmbeddingService
 
 import pickle
+import numpy as np
 import os
 
 class SaveEmbeddingPkl(SaveEmbeddingService):
@@ -18,3 +19,7 @@ class SaveEmbeddingPkl(SaveEmbeddingService):
             collection = pickle.load(f)
 
         return collection
+
+    def saveFacesInformation(self, filename: str, collection):
+        with open(filename, 'wb') as output:
+            pickle.dump(collection, output, pickle.HIGHEST_PROTOCOL)

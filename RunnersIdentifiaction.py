@@ -13,7 +13,7 @@ def printResults(cmc, mAP):
     print("mAP(%):", round(mAP*100,4))
 
 
-def indentificationByFaces(database, model, metric):
+def indentificationByFaces(database, model, metric, applyPca, temporalCoherence):
     rs = RecognitionsController()
     repository = ReidentificationRepository()
 
@@ -21,11 +21,13 @@ def indentificationByFaces(database, model, metric):
         os.path.join(database, PLACES_PROBE_TEST),
         model,
         metric,
-        os.path.join(database, PLACES_GALLERY_TEST)
+        os.path.join(database, PLACES_GALLERY_TEST),
+        pca=applyPca,
+        temporalCoherence=temporalCoherence
     )
     faceModel, heuristic = extractModelAndHeuristics(database)
     printResults(cmc, mAP)
-    repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
+    #repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 def identificationByBody(metric, compression):
     rs = RecognitionsController()
@@ -84,7 +86,7 @@ if __name__ == '__main__':
     parser.add_argument("--aligenReId", action='count', help="using only body information")
     parser.add_argument("--combine", action='count', help="using only body information")
     parser.add_argument("--pca", action='count', help="apply pca to reduction the dimensions")
-
+    parser.add_argument("--temp", action='count', help="apply temporal coherence")
 
     args = parser.parse_args()
     if args.aligenReId:
@@ -93,13 +95,13 @@ if __name__ == '__main__':
         identificationByBodyAndFaces(args.model, args.heu, args.metric, args.emb, args.pca)
     else:
         if not args.all:
-           indentificationByFaces(args.database, args.model, args.metric)
+           indentificationByFaces(args.database, args.model, args.metric, args.pca, args.temp)
         else:
             hastag = "-" * 5
             for model in MODELS:
                 for metric in METRICS:
                     print("%s - %s + %s - %s" %(hastag, model, metric, hastag))
-                    indentificationByFaces(args.database, model, metric)
+                    indentificationByFaces(args.database, model, metric, args.pca, args.temp)
 
         #print("%s - [ Ensemble ] - %s" %(hastag, hastag))
         #indentification(args.database, "Ensemble")
