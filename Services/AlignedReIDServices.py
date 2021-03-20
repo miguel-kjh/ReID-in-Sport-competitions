@@ -1,16 +1,11 @@
-import torch
-import os
 from Utils.FeatureExtractor import FeatureExtractor
 from Utils.constant import COMPRESSION_FACTOR
 from torchvision import transforms
-from IPython import embed
 import models
-from scipy.spatial.distance import cosine, euclidean
 from Utils.utils import *
-from Utils.distance import compute_dist, shortest_dist
 from sklearn.preprocessing import normalize
 from Utils.pool2d import pool2d
-from Utils.fileUtils import getNumber, isImage
+from Utils.fileUtils import getNumber, isImage, getTime
 from Domain.Body import Body
 from Domain.BodyCollection import BodyCollection
 
@@ -70,6 +65,7 @@ class AlignedReIDServices:
                 collection.addBody(Body(
                     getNumber(baseImg),
                     embedding.reshape(embedding.shape[0] * embedding.shape[1]),
+                    getTime(baseImg),
                     baseImg
                 ))
 
@@ -97,12 +93,10 @@ class AlignedReIDServices:
                 runners.append(getNumber(baseImg))
 
         embeddings = np.array(embeddings)
-        #print(embeddings.shape)
         embeddings = self._pca.fit_transform(embeddings)
-        #print(embeddings.shape)
 
         for runner, embedding, file in zip(runners, embeddings, filenames):
-            collection.addBody(Body(runner, embedding, file))
+            collection.addBody(Body(runner, embedding, getTime(file), file))
 
         return collection
 

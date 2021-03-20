@@ -78,52 +78,55 @@ load_model(img2pose_model.fpn_model, MODEL_PATH, cpu_mode=str(img2pose_model.dev
 img2pose_model.evaluate()
 
 # change to a folder with images, or another list containing image paths
-images_path = "data/TGC_places/Arucas"
+images_path = "data/TGC_places/ParqueSur"
 
 threshold = 0.8
 
 def isImage(filename: str):
     return re.search(".jpg$", filename)
 
-if os.path.isfile(images_path):
-    img_paths = pd.read_csv(images_path, delimiter=" ", header=None)
-    img_paths = np.asarray(img_paths).squeeze()
-else:
-    img_paths = [
-        os.path.join(images_path, img_path)
-        for img_path in os.listdir(images_path)
-        if isImage(img_path)
-    ]
+if __name__ == '__main__':
+    if os.path.isfile(images_path):
+        img_paths = pd.read_csv(images_path, delimiter=" ", header=None)
+        img_paths = np.asarray(img_paths).squeeze()
+    else:
+        img_paths = [
+            os.path.join(images_path, img_path)
+            for img_path in os.listdir(images_path)
+            if isImage(img_path)
+        ]
 
-for img_path in tqdm(img_paths):
-    img = Image.open(img_path).convert("RGB")
-    image = cv2.imread(img_path)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    annotation = model.predict_jsons(image)
-    aumentation_faces = 25
-    for i,a in enumerate(annotation[0]['bbox']):
-        if i >= 2:
-            annotation[0]['bbox'][i] += aumentation_faces
-        else:
-            annotation[0]['bbox'][i] -= 25
-    image_name = os.path.split(img_path)[1]
+    for img_path in tqdm(img_paths):
+        img = Image.open(img_path).convert("RGB")
+        image = cv2.imread(img_path)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        annotation = model.predict_jsons(image)
+        aumentation_faces = 25
+        for i,a in enumerate(annotation[0]['bbox']):
+            if i >= 2:
+                annotation[0]['bbox'][i] += aumentation_faces
+            else:
+                annotation[0]['bbox'][i] -= aumentation_faces
+                if annotation[0]['bbox'][i] < 0:
+                    annotation[0]['bbox'][i] = 0
+        image_name = os.path.split(img_path)[1]
 
-    (w, h) = img.size
-    image_intrinsics = np.array([[w + h, 0, w // 2], [0, w + h, h // 2], [0, 0, 1]])
+        (w, h) = img.size
+        image_intrinsics = np.array([[w + h, 0, w // 2], [0, w + h, h // 2], [0, 0, 1]])
 
-    res = img2pose_model.predict([transform(img)])[0]
+        res = img2pose_model.predict([transform(img)])[0]
 
-    all_bboxes = res["boxes"].cpu().numpy().astype('float')
+        all_bboxes = res["boxes"].cpu().numpy().astype('float')
 
-    poses = []
-    bboxes = []
-    for i in range(len(all_bboxes)):
-        if res["scores"][i] > threshold:
-            bbox = all_bboxes[i]
-            pose_pred = res["dofs"].cpu().numpy()[i].astype('float')
-            pose_pred = pose_pred.squeeze()
+        poses = []
+        bboxes = []
+        for i in range(len(all_bboxes)):
+            if res["scores"][i] > threshold:
+                bbox = all_bboxes[i]
+                pose_pred = res["dofs"].cpu().numpy()[i].astype('float')
+                pose_pred = pose_pred.squeeze()
 
-            poses.append(pose_pred)
-            bboxes.append(bbox)
+                poses.append(pose_pred)
+                bboxes.append(bbox)
 
-    render_plot(img.copy(),image,annotation, poses, bboxes)
+        render_plot(img.copy(),image,annotation, poses, bboxes)

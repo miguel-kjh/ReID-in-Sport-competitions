@@ -1,5 +1,6 @@
 from deepface import DeepFace
 from Utils.fileUtils import getNumber, getTime
+from Utils.constant import COMPRESSION_FACTOR
 from deepface.commons import distance as dst
 from sklearn.decomposition import PCA
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
@@ -17,8 +18,7 @@ class FacesRecognitionService:
             'euclidean': dst.findEuclideanDistance,
             'euclidean_l2': self._l2Dst
         }
-        self._reduction = 0.95
-        self._pca = PCA(n_components=self._reduction)
+        self._pca = PCA(n_components=COMPRESSION_FACTOR)
 
     def _l2Dst(self, first_emd: np.array, second_emd: np.array) -> float:
         return dst.findEuclideanDistance(

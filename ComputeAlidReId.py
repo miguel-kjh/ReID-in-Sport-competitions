@@ -1,5 +1,6 @@
 from Controller.AlignedReIDController import AlignedReIDController
-from Utils.constant import PLACES, MODELS, FACES_MODELS, HEURISTICS
+from Utils.constant import PLACES, MODELS, FACES_MODELS, HEURISTICS, PLACES_PROBE_TEST, PLACES_GALLERY_TEST
+import argparse
 
 
 FOLDER = "data/TGC_places"
@@ -11,32 +12,34 @@ def computeEmbeddings(compression=False):
 def computeBodyAndFacesEmbeddings(faces, bodies, filename, compression=False):
     controller.compactedEmbeddings(faces, bodies, filename, compression=compression)
 
-
 def computeBodyAndAllFacesEmbeddings(places, bodies, filename, compression=False):
     controller.compactedEmbeddingsUsingAllFaces(places, bodies, filename, compression=compression)
 
 if __name__ == '__main__':
-    #computeEmbeddings()
-    for place in ['Arucas', 'Teror']:
-        for faceModel in FACES_MODELS:
-            print(faceModel)
-            for heuristic in HEURISTICS:
-                for model in MODELS:
-                    model = model.lower().replace('-', '_')
-                    computeBodyAndFacesEmbeddings(
-                        'data/Probe_faces_%s_%s/%s/representations_%s.pkl' %(faceModel, heuristic, place, model),
-                        'data/TCG_alignedReId/%s.pkl' %place,
-                        '%s_%s_%s_%s' % (place,faceModel, heuristic, model)
-                    )
-                    computeBodyAndFacesEmbeddings(
-                        'data/Probe_faces_%s_%s/%s/representations_%s.pkl' %(faceModel, heuristic, place, model),
-                        'data/TCG_alignedReId/%s.pkl' %place,
-                        '%s_%s_%s_%s_pca' % (place,faceModel, heuristic, model),
-                        compression=True
-                    )
-    """for place in ['Ayagaures', 'ParqueSur']:
-        computeBodyAndAllFacesEmbeddings(
-            'data/Probe_faces_retinaface_none/%s' %place,
-            'data/TCG_alignedReId/%s.pkl' %place,
-            '%s_retinaface_none_all' % place
-        )"""
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--combine", action='count', help="create embedding combine faces and body")
+    parser.add_argument("--pca", action='count', help="apply pca to reduction the dimensions")
+
+    args = parser.parse_args()
+    if not args.combine:
+        computeEmbeddings(args.pca)
+    else:
+        for place in [PLACES_PROBE_TEST, PLACES_GALLERY_TEST]:
+            for faceModel in FACES_MODELS:
+                print(faceModel)
+                for heuristic in HEURISTICS:
+                    for model in MODELS:
+                        model = model.lower().replace('-', '_')
+                        if not args.pca:
+                            computeBodyAndFacesEmbeddings(
+                                'data/Probe_faces_%s_%s/%s/representations_%s.pkl' %(faceModel, heuristic, place, model),
+                                'data/TCG_alignedReId/%s.pkl' %place,
+                                '%s_%s_%s_%s' % (place,faceModel, heuristic, model)
+                            )
+                        else:
+                            computeBodyAndFacesEmbeddings(
+                                'data/Probe_faces_%s_%s/%s/representations_%s.pkl' %(faceModel, heuristic, place, model),
+                                'data/TCG_alignedReId/%s.pkl' %place,
+                                '%s_%s_%s_%s_pca' % (place,faceModel, heuristic, model),
+                                compression=True
+                            )

@@ -60,8 +60,8 @@ if [ $1 == "--ifb" ];then
         do
           echo "++++++ $embedding +++++"
           python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding
-          echo "pca:"
-          python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --pca
+          echo "coherence temporal"
+          python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --temp
         done
       done
     done

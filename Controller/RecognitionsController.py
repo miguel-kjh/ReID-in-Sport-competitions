@@ -71,16 +71,23 @@ class RecognitionsController:
 
         return cmc, sum(average_precision) / len(probes)
 
-    def identificationRunnersByBody(self, probe: str, metric: str, galleryPlace: str, topNum: int = 107) -> tuple:
+    def identificationRunnersByBody(self, probe: str, metric: str, galleryPlace: str,
+                                    topNum: int = 107, temporalCoherence: bool = False) -> tuple:
         matches = np.zeros(topNum)
         average_precision = []
+        isOrder = PLACES.index(os.path.basename(probe).replace(".pkl", '').split('_')[0]) \
+                  < PLACES.index(os.path.basename(galleryPlace).replace(".pkl", '').split('_')[0])
 
         probe = self._loadServices.loadInformation(probe)
         gallery = self._loadServices.loadInformation(galleryPlace)
 
         for query in probe.bodies:
 
-            classification = self._body_recognition.computeClassification(query, gallery, metric)
+            classification = self._body_recognition.computeClassification(query,
+                                                                          gallery,
+                                                                          metric,
+                                                                          temporalCoherence=temporalCoherence,
+                                                                          isOrder=isOrder)
 
 
             try:

@@ -29,7 +29,7 @@ def indentificationByFaces(database, model, metric, applyPca, temporalCoherence)
     printResults(cmc, mAP)
     #repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
-def identificationByBody(metric, compression):
+def identificationByBody(metric, compression, temp):
     rs = RecognitionsController()
     repository = ReidentificationRepository()
     folder = "data/TCG_alignedReId/%s.pkl" if not compression else "data/TCG_alignedReId/%s_pca.pkl"
@@ -45,11 +45,14 @@ def identificationByBody(metric, compression):
                 cmc, mAP = rs.identificationRunnersByBody(
                     os.path.join(folder %probe),
                     metric,
-                    os.path.join(folder %gallery)
-                )
-                repository.addTest("AlignedReId", "None", "ResNet50", nameMetric, cmc, mAP, probe, gallery)
+                    os.path.join(folder %gallery),
+                    temporalCoherence=temp
 
-def identificationByBodyAndFaces(model, heuristics, metric, embedding, compression):
+                )
+                printResults(cmc, mAP)
+                #repository.addTest("AlignedReId", "None", "ResNet50", nameMetric, cmc, mAP, probe, gallery)
+
+def identificationByBodyAndFaces(model, heuristics, metric, embedding, compression, temp):
     rs = RecognitionsController()
     repository = ReidentificationRepository()
     folder = "data/TCG_alignedReId/%s.pkl" if not compression else "data/TCG_alignedReId/%s_pca.pkl"
@@ -69,11 +72,12 @@ def identificationByBodyAndFaces(model, heuristics, metric, embedding, compressi
         os.path.join( folder %'%s_%s_%s_%s' % (PLACES_PROBE_TEST, model, heuristics, embedding)),
         metric,
         os.path.join( folder %'%s_%s_%s_%s' % (PLACES_GALLERY_TEST, model, heuristics, embedding)),
+        temporalCoherence=temp
     )
     printResults(cmc, mAP)
-    if compression:
-        metric = "%s + %s" %('pca', metric)
-    repository.addTest("AlignedReId + Retinaface", "None", "VGG-Face", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
+    #if compression:
+    #    metric = "%s + %s" %('pca', metric)
+    #repository.addTest("AlignedReId + Retinaface", "None", "VGG-Face", metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -90,9 +94,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     if args.aligenReId:
-        identificationByBody(args.metric, args.pca)
+        identificationByBody(args.metric, args.pca, args.temp)
     elif args.combine:
-        identificationByBodyAndFaces(args.model, args.heu, args.metric, args.emb, args.pca)
+        identificationByBodyAndFaces(args.model, args.heu, args.metric, args.emb, args.pca, args.temp)
     else:
         if not args.all:
            indentificationByFaces(args.database, args.model, args.metric, args.pca, args.temp)

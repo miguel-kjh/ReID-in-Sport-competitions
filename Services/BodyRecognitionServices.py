@@ -33,6 +33,12 @@ class BodyRecognitionServices:
 
         return self._metrics[metric](v1, v2)
 
+    def _computeTemporalClassification(self, dateProbe, dateGallery, isOrder) -> bool:
+        if isOrder:
+            return dateProbe < dateGallery
+        else:
+            return dateProbe > dateGallery
+
     """def computeClassification(self, query: Body, gallery: BodyCollection, metric: str = "euclidean") -> list:
         if not self._isDistance(metric):
             raise ValueError("%s is not a distance function" % metric)
@@ -49,12 +55,18 @@ class BodyRecognitionServices:
 
         return [ runner[0] for runner in dist]"""
 
-    def computeClassification(self, query: Body, gallery: BodyCollection, metric: str = "euclidean") -> list:
+    def computeClassification(self, query: Body, gallery: BodyCollection,
+                              metric: str = "euclidean", temporalCoherence: bool = False, isOrder: bool = True) -> list:
         if not self._isDistance(metric):
             raise ValueError("%s is not a distance function" % metric)
 
-        dist = [(galleryData.dorsal, self.computeDistance(query.embedding, galleryData.embedding, metric))
-                for galleryData in gallery.bodies]
+        if temporalCoherence:
+            dist = [(galleryData.dorsal, self.computeDistance(query.embedding, galleryData.embedding, metric))
+                    for galleryData in gallery.bodies
+                    if self._computeTemporalClassification(query.date, galleryData.date, isOrder)]
+        else:
+            dist = [(galleryData.dorsal, self.computeDistance(query.embedding, galleryData.embedding, metric))
+                    for galleryData in gallery.bodies]
 
         dist.sort(key = lambda ele: ele[1])
 
