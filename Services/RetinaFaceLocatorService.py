@@ -3,6 +3,7 @@ from retinaface.pre_trained_models import get_model
 from Domain.Face import Face
 from Domain.FacesCollection import FacesCollection
 from Services.FacesLocator import FacesLocator
+from Utils.constant import FACE_ENHANCEMENT_FACTOR
 import torch
 
 
@@ -22,7 +23,9 @@ class RetinaFacesLocatorService(FacesLocator):
             for id, annotation in enumerate(annotations):
                 if annotation['bbox']:
                     posX   = annotation['bbox'][0]
+                    #if posX < 0: posX = 0
                     posY   = annotation['bbox'][1]
+                    #if posY < 0: posY = 0
                     width  = annotation['bbox'][2]
                     height = annotation['bbox'][3]
                     collection.addFace(Face(id, posX, posY, width, height, annotation['score']))

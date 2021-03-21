@@ -16,6 +16,6 @@ class SaveFacesJson(SaveFacesServices):
             json.dump(details, json_file)
 
     def loadFaces(self, facesFile: str) -> FacesCollection:
-        with open(facesFile) as f:
+        with open(facesFile, 'rb') as f:
             faces: dict = json.load(f)
         return FacesCollection(data = faces)

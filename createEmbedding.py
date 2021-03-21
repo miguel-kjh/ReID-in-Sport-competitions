@@ -6,7 +6,7 @@ import os
 
 PROBE = 'data/Probe_faces_retinaface_none/Arucas/5_Arucas_frame_01_26_18_000_0_faces.jpg'
 
-GALLERIES = ["data/Probe_faces_retinaface_none"]
+GALLERIES = ["data/Probe_faces_img2pose_none", "data/Probe_faces_retinaface_none", "data/Probe_faces_retinaface_dimension"]
 
 MODELS = ["VGG-Face", "Facenet", "OpenFace", "DeepFace"]
 
@@ -30,5 +30,5 @@ def reductionDimension():
                         )
 
 if __name__ == '__main__':
-    #createEmbedding()
-    reductionDimension()
+    createEmbedding()
+    #reductionDimension()

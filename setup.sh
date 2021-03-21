@@ -34,7 +34,7 @@ if [ $1 == "--if" ];then
     for heuristic in "${heuristics[@]}"
     do
       echo "########## $model  - $heuristic ############"
-      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all;
+      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all --temp;
     done
   done
 
@@ -42,8 +42,17 @@ fi
 
 if [ $1 == "--ia" ];then
 
+   echo "#### without CT ####"
+   echo "--- Cosine ---"
    python3 RunnersIdentifiaction.py --aligenReId --met cosine
+   echo "--- Euclidean ---"
    python3 RunnersIdentifiaction.py --aligenReId --met euclidean
+
+   echo "#### with CT ####"
+   echo "--- Cosine ---"
+   python3 RunnersIdentifiaction.py --aligenReId --met cosine --temp
+   echo "--- Euclidean ---"
+   python3 RunnersIdentifiaction.py --aligenReId --met euclidean --temp
 
 fi
 
@@ -59,9 +68,9 @@ if [ $1 == "--ifb" ];then
         for embedding in "${embeddings[@]}"
         do
           echo "++++++ $embedding +++++"
-          python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding
-          echo "coherence temporal"
           python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --temp
+          #echo "pca"
+          #python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --pca --temp
         done
       done
     done

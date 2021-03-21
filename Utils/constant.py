@@ -10,6 +10,8 @@ PLACES_GALLERY_TEST = "Ayagaures"
 
 COMPRESSION_FACTOR = 0.95
 
+FACE_ENHANCEMENT_FACTOR = 25
+
 #from enum import Enum
 
 #compressionMethod = Enum('compressionMethod', 'none pca tsne')

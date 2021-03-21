@@ -5,8 +5,6 @@ from Controller.FaceClippingController import FaceClippingController
 TGC = "data/TGC_places"
 
 def testCliping(directory):
-    folders = [name for name in os.listdir(directory)]
-    folders.sort(key = lambda folder: int(folder))
     fc = FaceClippingController(directory)
     fc.getImageClippings(TGC)
 

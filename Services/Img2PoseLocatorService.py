@@ -6,6 +6,7 @@ from img2pose.model_loader import load_model
 from PIL import Image
 from torchvision import transforms
 import numpy as np
+from Utils.constant import FACE_ENHANCEMENT_FACTOR
 
 
 class Img2PoseLocatorService(FacesLocator):
@@ -44,7 +45,9 @@ class Img2PoseLocatorService(FacesLocator):
         for index, box in enumerate(bboxes):
             if res["scores"][index] > self.threshold:
                 posX   = round(box[0])
+                #if posX < 0: posX = 0
                 posY   = round(box[1])
+                #if posY < 0: posY = 0
                 width  = round(box[2])
                 height = round(box[3])
                 score  = res["scores"][index].cpu().item()

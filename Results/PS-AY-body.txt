@@ -1,0 +1,326 @@
+#### without CT ####
+--- Cosine ---
+[ Arucas - Teror]
+rank 1: 0.16753926701570682
+rank 5: 0.32722513089005234
+mAP(%): 20.4037
+[ Arucas - PresaDeHornos]
+rank 1: 0.07591623036649214
+rank 5: 0.28272251308900526
+mAP(%): 12.2761
+[ Arucas - Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4368
+[ Arucas - ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23298429319371727
+mAP(%): 16.2015
+[ Teror - Arucas]
+rank 1: 0.15675675675675677
+rank 5: 0.32432432432432434
+mAP(%): 14.961
+[ Teror - PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0293
+[ Teror - Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23243243243243245
+mAP(%): 11.2962
+[ Teror - ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.1132
+[ PresaDeHornos - Arucas]
+rank 1: 0.07142857142857142
+rank 5: 0.20168067226890757
+mAP(%): 9.1908
+[ PresaDeHornos - Teror]
+rank 1: 0.037815126050420166
+rank 5: 0.11764705882352941
+mAP(%): 7.2241
+[ PresaDeHornos - Ayagaures]
+rank 1: 0.10504201680672269
+rank 5: 0.2689075630252101
+mAP(%): 16.5716
+[ PresaDeHornos - ParqueSur]
+rank 1: 0.029411764705882353
+rank 5: 0.07983193277310924
+mAP(%): 7.3092
+[ Ayagaures - Arucas]
+rank 1: 0.25980392156862747
+rank 5: 0.46078431372549017
+mAP(%): 23.0425
+[ Ayagaures - Teror]
+rank 1: 0.09313725490196079
+rank 5: 0.27941176470588236
+mAP(%): 13.5664
+[ Ayagaures - PresaDeHornos]
+rank 1: 0.19117647058823528
+rank 5: 0.3333333333333333
+mAP(%): 19.448
+[ Ayagaures - ParqueSur]
+rank 1: 0.3137254901960784
+rank 5: 0.5588235294117647
+mAP(%): 38.0444
+[ ParqueSur - Arucas]
+rank 1: 0.2863070539419087
+rank 5: 0.4730290456431535
+mAP(%): 22.6568
+[ ParqueSur - Teror]
+rank 1: 0.22406639004149378
+rank 5: 0.37344398340248963
+mAP(%): 20.5703
+[ ParqueSur - PresaDeHornos]
+rank 1: 0.16182572614107885
+rank 5: 0.25311203319502074
+mAP(%): 15.1454
+[ ParqueSur - Ayagaures]
+rank 1: 0.4315352697095436
+rank 5: 0.7551867219917012
+mAP(%): 48.3732
+--- Euclidean ---
+[ Arucas - Teror]
+rank 1: 0.16753926701570682
+rank 5: 0.32722513089005234
+mAP(%): 20.4037
+[ Arucas - PresaDeHornos]
+rank 1: 0.07591623036649214
+rank 5: 0.28272251308900526
+mAP(%): 12.2761
+[ Arucas - Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4368
+[ Arucas - ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23298429319371727
+mAP(%): 16.2015
+[ Teror - Arucas]
+rank 1: 0.15675675675675677
+rank 5: 0.32432432432432434
+mAP(%): 14.961
+[ Teror - PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0293
+[ Teror - Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23243243243243245
+mAP(%): 11.2962
+[ Teror - ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.1132
+[ PresaDeHornos - Arucas]
+rank 1: 0.07142857142857142
+rank 5: 0.20168067226890757
+mAP(%): 9.1908
+[ PresaDeHornos - Teror]
+rank 1: 0.037815126050420166
+rank 5: 0.11764705882352941
+mAP(%): 7.2246
+[ PresaDeHornos - Ayagaures]
+rank 1: 0.10504201680672269
+rank 5: 0.2689075630252101
+mAP(%): 16.5716
+[ PresaDeHornos - ParqueSur]
+rank 1: 0.029411764705882353
+rank 5: 0.07983193277310924
+mAP(%): 7.3092
+[ Ayagaures - Arucas]
+rank 1: 0.25980392156862747
+rank 5: 0.46078431372549017
+mAP(%): 23.0425
+[ Ayagaures - Teror]
+rank 1: 0.09313725490196079
+rank 5: 0.27941176470588236
+mAP(%): 13.5664
+[ Ayagaures - PresaDeHornos]
+rank 1: 0.19117647058823528
+rank 5: 0.3333333333333333
+mAP(%): 19.448
+[ Ayagaures - ParqueSur]
+rank 1: 0.3137254901960784
+rank 5: 0.5588235294117647
+mAP(%): 38.0444
+[ ParqueSur - Arucas]
+rank 1: 0.2863070539419087
+rank 5: 0.4730290456431535
+mAP(%): 22.6568
+[ ParqueSur - Teror]
+rank 1: 0.22406639004149378
+rank 5: 0.37344398340248963
+mAP(%): 20.5703
+[ ParqueSur - PresaDeHornos]
+rank 1: 0.16182572614107885
+rank 5: 0.25311203319502074
+mAP(%): 15.1454
+[ ParqueSur - Ayagaures]
+rank 1: 0.4315352697095436
+rank 5: 0.7551867219917012
+mAP(%): 48.3732
+#### with CT ####
+--- Cosine ---
+[ Arucas - Teror]
+rank 1: 0.17015706806282724
+rank 5: 0.3324607329842932
+mAP(%): 20.8938
+[ Arucas - PresaDeHornos]
+rank 1: 0.07591623036649214
+rank 5: 0.28272251308900526
+mAP(%): 12.2761
+[ Arucas - Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4368
+[ Arucas - ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23298429319371727
+mAP(%): 16.2015
+[ Teror - Arucas]
+rank 1: 0.16756756756756758
+rank 5: 0.34054054054054056
+mAP(%): 15.6391
+[ Teror - PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0293
+[ Teror - Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23243243243243245
+mAP(%): 11.2962
+[ Teror - ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.1132
+[ PresaDeHornos - Arucas]
+rank 1: 0.07142857142857142
+rank 5: 0.20168067226890757
+mAP(%): 9.1908
+[ PresaDeHornos - Teror]
+rank 1: 0.037815126050420166
+rank 5: 0.11764705882352941
+mAP(%): 7.2241
+[ PresaDeHornos - Ayagaures]
+rank 1: 0.10504201680672269
+rank 5: 0.2689075630252101
+mAP(%): 16.6125
+[ PresaDeHornos - ParqueSur]
+rank 1: 0.029411764705882353
+rank 5: 0.07983193277310924
+mAP(%): 7.3205
+[ Ayagaures - Arucas]
+rank 1: 0.25980392156862747
+rank 5: 0.46078431372549017
+mAP(%): 23.0425
+[ Ayagaures - Teror]
+rank 1: 0.09313725490196079
+rank 5: 0.27941176470588236
+mAP(%): 13.5664
+[ Ayagaures - PresaDeHornos]
+rank 1: 0.19607843137254902
+rank 5: 0.3431372549019608
+mAP(%): 20.0611
+[ Ayagaures - ParqueSur]
+rank 1: 0.43137254901960786
+rank 5: 0.6764705882352942
+mAP(%): 48.7264
+[ ParqueSur - Arucas]
+rank 1: 0.2863070539419087
+rank 5: 0.4730290456431535
+mAP(%): 22.6568
+[ ParqueSur - Teror]
+rank 1: 0.22406639004149378
+rank 5: 0.37344398340248963
+mAP(%): 20.5703
+[ ParqueSur - PresaDeHornos]
+rank 1: 0.16182572614107885
+rank 5: 0.25311203319502074
+mAP(%): 15.1699
+[ ParqueSur - Ayagaures]
+rank 1: 0.4896265560165975
+rank 5: 0.8049792531120332
+mAP(%): 53.8839
+--- Euclidean ---
+[ Arucas - Teror]
+rank 1: 0.17015706806282724
+rank 5: 0.3324607329842932
+mAP(%): 20.8938
+[ Arucas - PresaDeHornos]
+rank 1: 0.07591623036649214
+rank 5: 0.28272251308900526
+mAP(%): 12.2761
+[ Arucas - Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4368
+[ Arucas - ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23298429319371727
+mAP(%): 16.2015
+[ Teror - Arucas]
+rank 1: 0.16756756756756758
+rank 5: 0.34054054054054056
+mAP(%): 15.6391
+[ Teror - PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0293
+[ Teror - Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23243243243243245
+mAP(%): 11.2962
+[ Teror - ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.1132
+[ PresaDeHornos - Arucas]
+rank 1: 0.07142857142857142
+rank 5: 0.20168067226890757
+mAP(%): 9.1908
+[ PresaDeHornos - Teror]
+rank 1: 0.037815126050420166
+rank 5: 0.11764705882352941
+mAP(%): 7.2246
+[ PresaDeHornos - Ayagaures]
+rank 1: 0.10504201680672269
+rank 5: 0.2689075630252101
+mAP(%): 16.6125
+[ PresaDeHornos - ParqueSur]
+rank 1: 0.029411764705882353
+rank 5: 0.07983193277310924
+mAP(%): 7.3205
+[ Ayagaures - Arucas]
+rank 1: 0.25980392156862747
+rank 5: 0.46078431372549017
+mAP(%): 23.0425
+[ Ayagaures - Teror]
+rank 1: 0.09313725490196079
+rank 5: 0.27941176470588236
+mAP(%): 13.5664
+[ Ayagaures - PresaDeHornos]
+rank 1: 0.19607843137254902
+rank 5: 0.3431372549019608
+mAP(%): 20.0611
+[ Ayagaures - ParqueSur]
+rank 1: 0.43137254901960786
+rank 5: 0.6764705882352942
+mAP(%): 48.7264
+[ ParqueSur - Arucas]
+rank 1: 0.2863070539419087
+rank 5: 0.4730290456431535
+mAP(%): 22.6568
+[ ParqueSur - Teror]
+rank 1: 0.22406639004149378
+rank 5: 0.37344398340248963
+mAP(%): 20.5703
+[ ParqueSur - PresaDeHornos]
+rank 1: 0.16182572614107885
+rank 5: 0.25311203319502074
+mAP(%): 15.1699
+[ ParqueSur - Ayagaures]
+rank 1: 0.4896265560165975
+rank 5: 0.8049792531120332
+mAP(%): 53.8839
