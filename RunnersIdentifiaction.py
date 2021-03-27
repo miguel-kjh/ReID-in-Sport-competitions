@@ -38,19 +38,15 @@ def identificationByBody(metric, compression, temp):
     if compression:
         nameMetric = "%s + %s" %('pca', nameMetric)
 
-    for probe in PLACES:
-        for gallery in PLACES:
-            if probe != gallery:
-                print("[ %s - %s]" % (probe, gallery))
-                cmc, mAP = rs.identificationRunnersByBody(
-                    os.path.join(folder %probe),
-                    metric,
-                    os.path.join(folder %gallery),
-                    temporalCoherence=temp
+    cmc, mAP = rs.identificationRunnersByBody(
+        os.path.join(folder %PLACES_PROBE_TEST),
+        metric,
+        os.path.join(folder %PLACES_GALLERY_TEST),
+        temporalCoherence=temp
 
-                )
-                printResults(cmc, mAP)
-                #repository.addTest("AlignedReId", "None", "ResNet50", nameMetric, cmc, mAP, probe, gallery)
+    )
+    printResults(cmc, mAP)
+    #repository.addTest("AlignedReId", "None", "ResNet50", nameMetric, cmc, mAP, probe, gallery)
 
 def identificationByBodyAndFaces(model, heuristics, metric, embedding, compression, temp):
     rs = RecognitionsController()

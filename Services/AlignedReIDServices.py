@@ -41,7 +41,7 @@ class AlignedReIDServices:
         ])
 
         #compression
-        self._pca = PCA(n_components = COMPRESSION_FACTOR)
+        self._pca = PCA(n_components=COMPRESSION_FACTOR)
         REDUCTION = 3
         self._tsne = TSNE(n_components = REDUCTION)
 
@@ -76,6 +76,7 @@ class AlignedReIDServices:
 
         embeddings = []
         runners = []
+        filenames = [file for file in filenames if isImage(file)]
         for baseImg in filenames:
             if isImage(baseImg):
                 imgBase = read_image(os.path.join(dirpath, baseImg))

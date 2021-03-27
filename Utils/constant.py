@@ -12,6 +12,9 @@ COMPRESSION_FACTOR = 0.95
 
 FACE_ENHANCEMENT_FACTOR = 25
 
+from datetime import timedelta
+MINIMUM_DURATION = timedelta(hours=1, minutes=17)
+
 #from enum import Enum
 
 #compressionMethod = Enum('compressionMethod', 'none pca tsne')

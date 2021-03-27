@@ -6,6 +6,8 @@ from Utils.re_ranking import re_ranking
 import torch
 from deepface.commons import distance as dst
 
+from Utils.constant import MINIMUM_DURATION
+
 
 class BodyRecognitionServices:
 
@@ -35,9 +37,9 @@ class BodyRecognitionServices:
 
     def _computeTemporalClassification(self, dateProbe, dateGallery, isOrder) -> bool:
         if isOrder:
-            return dateProbe < dateGallery
+            return dateProbe < dateGallery and abs(dateProbe - dateGallery) >= MINIMUM_DURATION
         else:
-            return dateProbe > dateGallery
+            return dateProbe > dateGallery and abs(dateProbe - dateGallery) >= MINIMUM_DURATION
 
     """def computeClassification(self, query: Body, gallery: BodyCollection, metric: str = "euclidean") -> list:
         if not self._isDistance(metric):

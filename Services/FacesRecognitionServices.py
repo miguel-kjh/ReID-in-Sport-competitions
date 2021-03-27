@@ -1,6 +1,6 @@
 from deepface import DeepFace
 from Utils.fileUtils import getNumber, getTime
-from Utils.constant import COMPRESSION_FACTOR
+from Utils.constant import COMPRESSION_FACTOR, MINIMUM_DURATION
 from deepface.commons import distance as dst
 from sklearn.decomposition import PCA
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
@@ -43,9 +43,9 @@ class FacesRecognitionService:
 
     def _computeTemporalClassification(self, dateProbe, dateGallery, isOrder) -> bool:
         if isOrder:
-            return dateProbe < dateGallery
+            return dateProbe < dateGallery and abs(dateProbe - dateGallery) >= MINIMUM_DURATION
         else:
-            return dateProbe > dateGallery
+            return dateProbe > dateGallery and abs(dateProbe - dateGallery) >= MINIMUM_DURATION
 
     def checkMetricAndModel(self, model, metric):
         if model not in self._models:
