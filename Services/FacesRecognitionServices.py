@@ -1,6 +1,6 @@
 from deepface import DeepFace
 from Utils.fileUtils import getNumber, getTime
-from Utils.constant import COMPRESSION_FACTOR, MINIMUM_DURATION
+from Utils.constant import COMPRESSION_FACTOR, MINIMUM_DURATION, PLACES_PROBE_TEST, PLACES, PLACES_GALLERY_TEST
 from deepface.commons import distance as dst
 from sklearn.decomposition import PCA
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
@@ -11,7 +11,8 @@ import os
 
 class FacesRecognitionService:
 
-    def __init__(self):
+    def __init__(self, databaseFaces):
+        self._loadServices = SaveEmbeddingPkl(databaseFaces)
         self._models  = ["VGG-Face", "Facenet", "OpenFace", "DeepFace", "DeepID", "ArcFace", "Dlib", "Ensemble"]
         self._metrics = {
             'cosine': dst.findCosineDistance,
@@ -72,8 +73,9 @@ class FacesRecognitionService:
         saveService.saveFacesInformation(saveFolder, embedding)
 
 
-    def computeClassification(self, probe: np.array, gallery: list,
-                              metric: str = "cosine", temporalCoherence: bool = False, isOrder: bool = True) -> list:
+    def computeClassification(self, probe: np.array, gallery: list, model_file: str,
+                              metric: str = "cosine", temporalCoherence: bool = False,
+                              isOrder: bool = True, filledGallery: bool = True) -> list:
         if temporalCoherence:
             distances = [
                 (dorsal, self.computeDistance(embedding, probe[1], metric))
@@ -85,6 +87,18 @@ class FacesRecognitionService:
                 (dorsal, self.computeDistance(embedding, probe[1], metric))
                 for dorsal, embedding, _ in gallery
             ]
+
+        if filledGallery:
+            dorsals = [runner[0] for runner in distances]
+            for index, place in enumerate(PLACES):
+                if place is not PLACES_PROBE_TEST and index < PLACES.index(PLACES_GALLERY_TEST):
+                    extra_gallery = self._loadServices.loadInformation(os.path.join(place, model_file.replace('.pkl', '')), ispath=False)
+                    for file, embedding in extra_gallery:
+                        dorsal = getNumber(os.path.basename(file))
+                        if dorsal in dorsals:
+                            distances.append(
+                                (dorsal, self.computeDistance(embedding, probe[1], metric))
+                            )
 
         distances.sort(key = lambda dist: dist[1])
         return [dorsal for dorsal, _ in distances]

@@ -1,13 +1,13 @@
 import numpy as np
 from Domain.BodyCollection import BodyCollection, Body
+from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
 from Utils.distance import compute_dist
 from Utils.utils import dtw
 from Utils.re_ranking import re_ranking
 import torch
 from deepface.commons import distance as dst
 
-from Utils.constant import MINIMUM_DURATION
-
+from Utils.constant import MINIMUM_DURATION, PLACES, PLACES_GALLERY_TEST, PLACES_PROBE_TEST
 
 class BodyRecognitionServices:
 
@@ -16,6 +16,8 @@ class BodyRecognitionServices:
             'cosine': dst.findCosineDistance,
             'euclidean': dst.findEuclideanDistance
         }
+        alignedGallery = "data/TCG_alignedReId"
+        self._loadServices  = SaveEmbeddingPkl(alignedGallery)
 
     def _isDistance(self, metric: str) -> bool:
         return metric in self._metrics.keys()
@@ -58,7 +60,8 @@ class BodyRecognitionServices:
         return [ runner[0] for runner in dist]"""
 
     def computeClassification(self, query: Body, gallery: BodyCollection,
-                              metric: str = "euclidean", temporalCoherence: bool = False, isOrder: bool = True) -> list:
+                              metric: str = "euclidean", temporalCoherence: bool = False,
+                              isOrder: bool = True, filledGallery: bool = False) -> list:
         if not self._isDistance(metric):
             raise ValueError("%s is not a distance function" % metric)
 
@@ -70,6 +73,16 @@ class BodyRecognitionServices:
             dist = [(galleryData.dorsal, self.computeDistance(query.embedding, galleryData.embedding, metric))
                     for galleryData in gallery.bodies]
 
-        dist.sort(key = lambda ele: ele[1])
+        if filledGallery:
+            dorsals = [ runner[0] for runner in dist ]
+            for index, place in enumerate(PLACES):
+                if place is not PLACES_PROBE_TEST and index < PLACES.index(PLACES_GALLERY_TEST):
+                    extra_gallery = self._loadServices.loadInformation(place, ispath=False)
+                    for sample in extra_gallery.bodies:
+                        if sample.dorsal in dorsals:
+                            dist.append(
+                                (sample.dorsal, self.computeDistance(query.embedding, sample.embedding, metric))
+                            )
 
+        dist.sort(key = lambda ele: ele[1])
         return [ runner[0] for runner in dist ]

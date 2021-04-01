@@ -14,7 +14,7 @@ def printResults(cmc, mAP):
 
 
 def indentificationByFaces(database, model, metric, applyPca, temporalCoherence):
-    rs = RecognitionsController()
+    rs = RecognitionsController(database)
     repository = ReidentificationRepository()
 
     cmc, mAP = rs.identificationRunnersByFaces(

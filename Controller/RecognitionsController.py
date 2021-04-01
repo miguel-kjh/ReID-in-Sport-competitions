@@ -4,17 +4,14 @@ from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
 from Utils.fileUtils import getNumber, getTime
 from Utils.constant import PLACES
 
-from statistics import mean
-
 import os
 import numpy as np
 
 class RecognitionsController:
 
-    def __init__(self):
-        self._face_recognition = FacesRecognitionService()
+    def __init__(self, databaseFaces: str = ""):
+        self._face_recognition = FacesRecognitionService(databaseFaces)
         self._body_recognition = BodyRecognitionServices()
-        self.facesGallery = "data/TGC_places"
         self.alignedGallery = "data/TCG_alignedReId"
         self._loadServices = SaveEmbeddingPkl(self.alignedGallery)
 
@@ -29,7 +26,6 @@ class RecognitionsController:
             if dorsal == query:
                 count += 1
                 averagePrecision.append(count / (index + 1))
-
         return sum(averagePrecision)
 
 
@@ -53,7 +49,7 @@ class RecognitionsController:
 
         for query in probes:
             dorsal = getNumber(os.path.basename(query[0]))
-            classification = self._face_recognition.computeClassification(query, gallery,
+            classification = self._face_recognition.computeClassification(query, gallery, model_file,
                                                                           metric = metric,
                                                                           temporalCoherence=temporalCoherence,
                                                                           isOrder=isOrder)
@@ -96,12 +92,14 @@ class RecognitionsController:
                 pass
 
             countTP = classification.count(query.dorsal)
+
             countTP = 0 if countTP == 0 else 1 / countTP
             ap = self._calculateAveragePrecision(classification, query.dorsal)
             average_precision.append(countTP * ap)
 
+        #print(average_precision)
         cmc = np.cumsum(matches) / len(probe.bodies)
-        return cmc, mean(average_precision)
+        return cmc, sum(average_precision) / len(probe.bodies)
 
 
 
