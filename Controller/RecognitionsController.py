@@ -3,6 +3,7 @@ from Services.BodyRecognitionServices import BodyRecognitionServices
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
 from Utils.fileUtils import getNumber, getTime
 from Utils.constant import PLACES
+from sklearn.metrics import average_precision_score, precision_recall_curve, auc
 
 import os
 import numpy as np
@@ -15,23 +16,27 @@ class RecognitionsController:
         self.alignedGallery = "data/TCG_alignedReId"
         self._loadServices = SaveEmbeddingPkl(self.alignedGallery)
 
-    def _calculateAveragePrecision(self, dorsalList: list, query: int) -> float:
+    def _calculateAveragePrecision(self, dorsalList: list, dist: list,  query: int) -> float:
         if not dorsalList or query not in dorsalList:
             return 0.
 
-        averagePrecision = []
+        """averagePrecision = []
         count = 0
 
         for index, dorsal in enumerate(dorsalList):
             if dorsal == query:
                 count += 1
                 averagePrecision.append(count / (index + 1))
-        return sum(averagePrecision)
+        return sum(averagePrecision)"""
+        gallery_match = np.array([1 if i == query else 0 for i in dorsalList])
+        dist = np.array(dist)
+        similarity = 1 - dist / np.amax(dist)
+        return average_precision_score(gallery_match, similarity, average='macro', pos_label=1)
 
 
     def identificationRunnersByFaces(self, probe: str, model: str, metric: str,
                                      galleryPlace: str, topNum: int = 107,
-                                     pca: bool = False, temporalCoherence: bool = False) -> tuple:
+                                     pca: bool = False, temporalCoherence: bool = False, filling: bool = False) -> tuple:
 
         self._face_recognition.checkMetricAndModel(model, metric)
 
@@ -49,26 +54,27 @@ class RecognitionsController:
 
         for query in probes:
             dorsal = getNumber(os.path.basename(query[0]))
-            classification = self._face_recognition.computeClassification(query, gallery, model_file,
+            classification, dist = self._face_recognition.computeClassification(query, gallery, model_file,
                                                                           metric = metric,
                                                                           temporalCoherence=temporalCoherence,
-                                                                          isOrder=isOrder)
+                                                                          isOrder=isOrder,
+                                                                          filledGallery=filling)
             try:
                 matches[classification.index(dorsal)] += 1
             except Exception:
                 pass
 
-            countTP = classification.count(dorsal)
-            countTP = 0 if countTP == 0 else 1 / countTP
-            ap = self._calculateAveragePrecision(classification, dorsal)
-            average_precision.append(countTP * ap)
+            average_precision.append(
+                self._calculateAveragePrecision(classification, dist, dorsal)
+            )
 
         cmc = np.cumsum(matches) / len(probes)
 
-        return cmc, sum(average_precision) / len(probes)
+        return cmc, np.mean(average_precision)
 
     def identificationRunnersByBody(self, probe: str, metric: str, galleryPlace: str,
-                                    topNum: int = 107, temporalCoherence: bool = False) -> tuple:
+                                    topNum: int = 107, temporalCoherence: bool = False,
+                                    filling: bool = False, model: str = "") -> tuple:
         matches = np.zeros(topNum)
         average_precision = []
         isOrder = PLACES.index(os.path.basename(probe).replace(".pkl", '').split('_')[0]) \
@@ -79,11 +85,13 @@ class RecognitionsController:
 
         for query in probe.bodies:
 
-            classification = self._body_recognition.computeClassification(query,
+            classification, dist = self._body_recognition.computeClassification(query,
                                                                           gallery,
                                                                           metric,
                                                                           temporalCoherence=temporalCoherence,
-                                                                          isOrder=isOrder)
+                                                                          isOrder=isOrder,
+                                                                          filledGallery=filling,
+                                                                          model=model)
 
 
             try:
@@ -91,15 +99,12 @@ class RecognitionsController:
             except Exception:
                 pass
 
-            countTP = classification.count(query.dorsal)
+            average_precision.append(
+                self._calculateAveragePrecision(classification, dist, query.dorsal)
+            )
 
-            countTP = 0 if countTP == 0 else 1 / countTP
-            ap = self._calculateAveragePrecision(classification, query.dorsal)
-            average_precision.append(countTP * ap)
-
-        #print(average_precision)
         cmc = np.cumsum(matches) / len(probe.bodies)
-        return cmc, sum(average_precision) / len(probe.bodies)
+        return cmc, np.mean(average_precision)
 
 
 

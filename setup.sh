@@ -34,7 +34,7 @@ if [ $1 == "--if" ];then
     for heuristic in "${heuristics[@]}"
     do
       echo "########## $model  - $heuristic ############"
-      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all --temp;
+      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all --temp --filling;
     done
   done
 

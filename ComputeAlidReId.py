@@ -24,7 +24,7 @@ if __name__ == '__main__':
     if not args.combine:
         computeEmbeddings(args.pca)
     else:
-        for place in [PLACES_PROBE_TEST, PLACES_GALLERY_TEST]:
+        for place in ["Arucas", "Teror", "PresaDeHornos"]:
             for faceModel in FACES_MODELS:
                 print(faceModel)
                 for heuristic in HEURISTICS:

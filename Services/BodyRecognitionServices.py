@@ -56,12 +56,11 @@ class BodyRecognitionServices:
                     for galleryData in gallery.bodies]
 
         dist.sort(key = lambda ele: ele[1])
-
         return [ runner[0] for runner in dist]"""
 
     def computeClassification(self, query: Body, gallery: BodyCollection,
                               metric: str = "euclidean", temporalCoherence: bool = False,
-                              isOrder: bool = True, filledGallery: bool = False) -> list:
+                              isOrder: bool = True, filledGallery: bool = False, model: str = "") -> tuple:
         if not self._isDistance(metric):
             raise ValueError("%s is not a distance function" % metric)
 
@@ -77,7 +76,7 @@ class BodyRecognitionServices:
             dorsals = [ runner[0] for runner in dist ]
             for index, place in enumerate(PLACES):
                 if place is not PLACES_PROBE_TEST and index < PLACES.index(PLACES_GALLERY_TEST):
-                    extra_gallery = self._loadServices.loadInformation(place, ispath=False)
+                    extra_gallery = self._loadServices.loadInformation("%s%s" %(place, model), ispath=False)
                     for sample in extra_gallery.bodies:
                         if sample.dorsal in dorsals:
                             dist.append(
@@ -85,4 +84,5 @@ class BodyRecognitionServices:
                             )
 
         dist.sort(key = lambda ele: ele[1])
-        return [ runner[0] for runner in dist ]
+
+        return [ runner[0] for runner in dist ], [ runner[1] for runner in dist ]

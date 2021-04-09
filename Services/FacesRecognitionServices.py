@@ -75,7 +75,7 @@ class FacesRecognitionService:
 
     def computeClassification(self, probe: np.array, gallery: list, model_file: str,
                               metric: str = "cosine", temporalCoherence: bool = False,
-                              isOrder: bool = True, filledGallery: bool = True) -> list:
+                              isOrder: bool = True, filledGallery: bool = True) -> tuple:
         if temporalCoherence:
             distances = [
                 (dorsal, self.computeDistance(embedding, probe[1], metric))
@@ -101,4 +101,4 @@ class FacesRecognitionService:
                             )
 
         distances.sort(key = lambda dist: dist[1])
-        return [dorsal for dorsal, _ in distances]
+        return [dorsal for dorsal, _ in distances], [distance for _, distance in distances]
