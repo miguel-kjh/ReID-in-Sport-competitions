@@ -34,15 +34,21 @@ if [ $1 == "--if" ];then
     for heuristic in "${heuristics[@]}"
     do
       echo "########## $model  - $heuristic ############"
-      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all --temp --filling;
+      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all #--temp #--filling;
     done
   done
 
 fi
 
-if [ $1 == "--ia" ];then
+if [ $1 == "--ib" ];then
 
    echo "#### without CT ####"
+   echo "--- Cosine ---"
+   python3 RunnersIdentifiaction.py --aligenReId --met cosine
+   echo "--- Euclidean ---"
+   python3 RunnersIdentifiaction.py --aligenReId --met euclidean
+
+   echo "#### without CT + pca ####"
    echo "--- Cosine ---"
    python3 RunnersIdentifiaction.py --aligenReId --met cosine
    echo "--- Euclidean ---"
@@ -53,6 +59,12 @@ if [ $1 == "--ia" ];then
    python3 RunnersIdentifiaction.py --aligenReId --met cosine --temp
    echo "--- Euclidean ---"
    python3 RunnersIdentifiaction.py --aligenReId --met euclidean --temp
+
+   echo "#### with CT + filling ####"
+   echo "--- Cosine ---"
+   python3 RunnersIdentifiaction.py --aligenReId --met cosine --temp --filling
+   echo "--- Euclidean ---"
+   python3 RunnersIdentifiaction.py --aligenReId --met euclidean --temp --filling
 
 fi
 

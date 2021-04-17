@@ -17,28 +17,35 @@ def indentificationByFaces(database, model, metric, applyPca, temporalCoherence,
     rs = RecognitionsController(database)
     repository = ReidentificationRepository()
 
-    cmc, mAP = rs.identificationRunnersByFaces(
-        os.path.join(database, PLACES_PROBE_TEST),
-        model,
-        metric,
-        os.path.join(database, PLACES_GALLERY_TEST),
-        pca=applyPca,
-        temporalCoherence=temporalCoherence,
-        filling=filling
-    )
-    #faceModel, heuristic = extractModelAndHeuristics(database)
-    printResults(cmc, mAP)
-    #repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
+    for p1 in PLACES:
+        for p2 in PLACES:
+            if p1 != p2:
+                print("[ Probe: %s - Gallery: %s]" %(p1, p2))
+                cmc, mAP = rs.identificationRunnersByFaces(
+                    os.path.join(database, p1),
+                    model,
+                    metric,
+                    os.path.join(database, p2),
+                    pca=applyPca,
+                    temporalCoherence=temporalCoherence,
+                    filling=filling
+                )
+                #faceModel, heuristic = extractModelAndHeuristics(database)
+                printResults(cmc, mAP)
+                #repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
 def identificationByBody(metric, compression, temp, filling):
     rs = RecognitionsController()
-    repository = ReidentificationRepository()
+    #repository = ReidentificationRepository()
     folder = "data/TCG_alignedReId/%s.pkl" if not compression else "data/TCG_alignedReId/%s_pca.pkl"
-    nameMetric = metric
+    #nameMetric = metric
 
-    if compression:
-        nameMetric = "%s + %s" %('pca', nameMetric)
-
+    #if compression:
+    #    nameMetric = "%s + %s" %('pca', nameMetric)
+    """for p1 in PLACES:
+        for p2 in PLACES:
+            if p1 != p2:
+                print("[ Probe: %s - Gallery: %s]" %(p1, p2))"""
     cmc, mAP = rs.identificationRunnersByBody(
         os.path.join(folder %PLACES_PROBE_TEST),
         metric,

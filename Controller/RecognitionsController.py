@@ -2,8 +2,8 @@ from Services.FacesRecognitionServices import FacesRecognitionService
 from Services.BodyRecognitionServices import BodyRecognitionServices
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
 from Utils.fileUtils import getNumber, getTime
-from Utils.constant import PLACES
-from sklearn.metrics import average_precision_score, precision_recall_curve, auc
+from Utils.constant import PLACES, MINIMUM_DURATION, timers
+from sklearn.metrics import average_precision_score
 
 import os
 import numpy as np
@@ -20,14 +20,6 @@ class RecognitionsController:
         if not dorsalList or query not in dorsalList:
             return 0.
 
-        """averagePrecision = []
-        count = 0
-
-        for index, dorsal in enumerate(dorsalList):
-            if dorsal == query:
-                count += 1
-                averagePrecision.append(count / (index + 1))
-        return sum(averagePrecision)"""
         gallery_match = np.array([1 if i == query else 0 for i in dorsalList])
         dist = np.array(dist)
         similarity = 1 - dist / np.amax(dist)
@@ -42,7 +34,9 @@ class RecognitionsController:
 
         matches = np.zeros(topNum)
         average_precision = []
-        isOrder = PLACES.index(os.path.basename(probe)) < PLACES.index(os.path.basename(galleryPlace))
+        index_probe = PLACES.index(os.path.basename(probe))
+        index_gallery = PLACES.index(os.path.basename(galleryPlace))
+        isOrder = index_probe < index_gallery
 
         model_file = "representations_%s.pkl" % (model if not pca else "%s_pca" % model).lower().replace("-", "_")
         probe = os.path.join(probe, model_file)
@@ -57,6 +51,7 @@ class RecognitionsController:
             classification, dist = self._face_recognition.computeClassification(query, gallery, model_file,
                                                                           metric = metric,
                                                                           temporalCoherence=temporalCoherence,
+                                                                          index=(index_probe, index_gallery),
                                                                           isOrder=isOrder,
                                                                           filledGallery=filling)
             try:
@@ -77,8 +72,9 @@ class RecognitionsController:
                                     filling: bool = False, model: str = "") -> tuple:
         matches = np.zeros(topNum)
         average_precision = []
-        isOrder = PLACES.index(os.path.basename(probe).replace(".pkl", '').split('_')[0]) \
-                  < PLACES.index(os.path.basename(galleryPlace).replace(".pkl", '').split('_')[0])
+        index_probe = PLACES.index(os.path.basename(probe).replace(".pkl", '').split('_')[0])
+        index_gallery = PLACES.index(os.path.basename(galleryPlace).replace(".pkl", '').split('_')[0])
+        isOrder = index_probe < index_gallery
 
         probe = self._loadServices.loadInformation(probe)
         gallery = self._loadServices.loadInformation(galleryPlace)
@@ -89,6 +85,7 @@ class RecognitionsController:
                                                                           gallery,
                                                                           metric,
                                                                           temporalCoherence=temporalCoherence,
+                                                                          index=(index_probe, index_gallery),
                                                                           isOrder=isOrder,
                                                                           filledGallery=filling,
                                                                           model=model)

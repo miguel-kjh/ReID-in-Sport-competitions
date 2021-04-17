@@ -7,7 +7,7 @@ from Utils.re_ranking import re_ranking
 import torch
 from deepface.commons import distance as dst
 
-from Utils.constant import MINIMUM_DURATION, PLACES, PLACES_GALLERY_TEST, PLACES_PROBE_TEST
+from Utils.constant import timers, PLACES, PLACES_GALLERY_TEST, PLACES_PROBE_TEST
 
 class BodyRecognitionServices:
 
@@ -37,11 +37,13 @@ class BodyRecognitionServices:
 
         return self._metrics[metric](v1, v2)
 
-    def _computeTemporalClassification(self, dateProbe, dateGallery, isOrder) -> bool:
+    def _computeTemporalClassification(self, dateProbe, dateGallery, isOrder, index) -> bool:
         if isOrder:
-            return dateProbe < dateGallery and abs(dateProbe - dateGallery) >= MINIMUM_DURATION
+            min_duration = np.sum(timers[index[0]:index[1]])
+            return dateProbe < dateGallery and abs(dateProbe - dateGallery) >= min_duration
         else:
-            return dateProbe > dateGallery and abs(dateProbe - dateGallery) >= MINIMUM_DURATION
+            min_duration = np.sum(timers[index[1]:index[0]])
+            return dateProbe > dateGallery and abs(dateProbe - dateGallery) >= min_duration
 
     """def computeClassification(self, query: Body, gallery: BodyCollection, metric: str = "euclidean") -> list:
         if not self._isDistance(metric):
@@ -59,7 +61,7 @@ class BodyRecognitionServices:
         return [ runner[0] for runner in dist]"""
 
     def computeClassification(self, query: Body, gallery: BodyCollection,
-                              metric: str = "euclidean", temporalCoherence: bool = False,
+                              metric: str = "euclidean", temporalCoherence: bool = False, index: tuple = None,
                               isOrder: bool = True, filledGallery: bool = False, model: str = "") -> tuple:
         if not self._isDistance(metric):
             raise ValueError("%s is not a distance function" % metric)
@@ -67,15 +69,19 @@ class BodyRecognitionServices:
         if temporalCoherence:
             dist = [(galleryData.dorsal, self.computeDistance(query.embedding, galleryData.embedding, metric))
                     for galleryData in gallery.bodies
-                    if self._computeTemporalClassification(query.date, galleryData.date, isOrder)]
+                    if self._computeTemporalClassification(query.date, galleryData.date, isOrder, index)]
         else:
             dist = [(galleryData.dorsal, self.computeDistance(query.embedding, galleryData.embedding, metric))
                     for galleryData in gallery.bodies]
 
-        if filledGallery:
+        if filledGallery and temporalCoherence:
+            if isOrder:
+                probe_index, gallery_index = index
+            else:
+                gallery_index, probe_index = index
             dorsals = [ runner[0] for runner in dist ]
-            for index, place in enumerate(PLACES):
-                if place is not PLACES_PROBE_TEST and index < PLACES.index(PLACES_GALLERY_TEST):
+            for place in PLACES:
+                if place is not PLACES[probe_index] and place is not PLACES[gallery_index]:
                     extra_gallery = self._loadServices.loadInformation("%s%s" %(place, model), ispath=False)
                     for sample in extra_gallery.bodies:
                         if sample.dorsal in dorsals:

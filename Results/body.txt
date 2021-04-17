@@ -1,0 +1,652 @@
+#### without CT ####
+--- Cosine ---
+[ Probe: Arucas - Gallery: Teror]
+rank 1: 0.16753926701570682
+rank 5: 0.32722513089005234
+mAP(%): 20.4037
+[ Probe: Arucas - Gallery: PresaDeHornos]
+rank 1: 0.07591623036649214
+rank 5: 0.28272251308900526
+mAP(%): 12.2761
+[ Probe: Arucas - Gallery: Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4368
+[ Probe: Arucas - Gallery: ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23298429319371727
+mAP(%): 16.2015
+[ Probe: Teror - Gallery: Arucas]
+rank 1: 0.15675675675675677
+rank 5: 0.32432432432432434
+mAP(%): 14.961
+[ Probe: Teror - Gallery: PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0293
+[ Probe: Teror - Gallery: Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23243243243243245
+mAP(%): 11.2962
+[ Probe: Teror - Gallery: ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.1132
+[ Probe: PresaDeHornos - Gallery: Arucas]
+rank 1: 0.07142857142857142
+rank 5: 0.20168067226890757
+mAP(%): 9.1908
+[ Probe: PresaDeHornos - Gallery: Teror]
+rank 1: 0.037815126050420166
+rank 5: 0.11764705882352941
+mAP(%): 7.2241
+[ Probe: PresaDeHornos - Gallery: Ayagaures]
+rank 1: 0.10504201680672269
+rank 5: 0.2689075630252101
+mAP(%): 16.5716
+[ Probe: PresaDeHornos - Gallery: ParqueSur]
+rank 1: 0.029411764705882353
+rank 5: 0.07983193277310924
+mAP(%): 7.3092
+[ Probe: Ayagaures - Gallery: Arucas]
+rank 1: 0.25980392156862747
+rank 5: 0.46078431372549017
+mAP(%): 23.0425
+[ Probe: Ayagaures - Gallery: Teror]
+rank 1: 0.09313725490196079
+rank 5: 0.27941176470588236
+mAP(%): 13.5664
+[ Probe: Ayagaures - Gallery: PresaDeHornos]
+rank 1: 0.19117647058823528
+rank 5: 0.3333333333333333
+mAP(%): 19.448
+[ Probe: Ayagaures - Gallery: ParqueSur]
+rank 1: 0.3137254901960784
+rank 5: 0.5588235294117647
+mAP(%): 38.0444
+[ Probe: ParqueSur - Gallery: Arucas]
+rank 1: 0.2863070539419087
+rank 5: 0.4730290456431535
+mAP(%): 22.6568
+[ Probe: ParqueSur - Gallery: Teror]
+rank 1: 0.22406639004149378
+rank 5: 0.37344398340248963
+mAP(%): 20.5703
+[ Probe: ParqueSur - Gallery: PresaDeHornos]
+rank 1: 0.16182572614107885
+rank 5: 0.25311203319502074
+mAP(%): 15.1454
+[ Probe: ParqueSur - Gallery: Ayagaures]
+rank 1: 0.4315352697095436
+rank 5: 0.7551867219917012
+mAP(%): 48.3732
+--- Euclidean ---
+[ Probe: Arucas - Gallery: Teror]
+rank 1: 0.16753926701570682
+rank 5: 0.32722513089005234
+mAP(%): 20.4037
+[ Probe: Arucas - Gallery: PresaDeHornos]
+rank 1: 0.07591623036649214
+rank 5: 0.28272251308900526
+mAP(%): 12.2761
+[ Probe: Arucas - Gallery: Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4368
+[ Probe: Arucas - Gallery: ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23298429319371727
+mAP(%): 16.2015
+[ Probe: Teror - Gallery: Arucas]
+rank 1: 0.15675675675675677
+rank 5: 0.32432432432432434
+mAP(%): 14.961
+[ Probe: Teror - Gallery: PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0293
+[ Probe: Teror - Gallery: Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23243243243243245
+mAP(%): 11.2962
+[ Probe: Teror - Gallery: ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.1132
+[ Probe: PresaDeHornos - Gallery: Arucas]
+rank 1: 0.07142857142857142
+rank 5: 0.20168067226890757
+mAP(%): 9.1908
+[ Probe: PresaDeHornos - Gallery: Teror]
+rank 1: 0.037815126050420166
+rank 5: 0.11764705882352941
+mAP(%): 7.2246
+[ Probe: PresaDeHornos - Gallery: Ayagaures]
+rank 1: 0.10504201680672269
+rank 5: 0.2689075630252101
+mAP(%): 16.5716
+[ Probe: PresaDeHornos - Gallery: ParqueSur]
+rank 1: 0.029411764705882353
+rank 5: 0.07983193277310924
+mAP(%): 7.3092
+[ Probe: Ayagaures - Gallery: Arucas]
+rank 1: 0.25980392156862747
+rank 5: 0.46078431372549017
+mAP(%): 23.0425
+[ Probe: Ayagaures - Gallery: Teror]
+rank 1: 0.09313725490196079
+rank 5: 0.27941176470588236
+mAP(%): 13.5664
+[ Probe: Ayagaures - Gallery: PresaDeHornos]
+rank 1: 0.19117647058823528
+rank 5: 0.3333333333333333
+mAP(%): 19.448
+[ Probe: Ayagaures - Gallery: ParqueSur]
+rank 1: 0.3137254901960784
+rank 5: 0.5588235294117647
+mAP(%): 38.0444
+[ Probe: ParqueSur - Gallery: Arucas]
+rank 1: 0.2863070539419087
+rank 5: 0.4730290456431535
+mAP(%): 22.6568
+[ Probe: ParqueSur - Gallery: Teror]
+rank 1: 0.22406639004149378
+rank 5: 0.37344398340248963
+mAP(%): 20.5703
+[ Probe: ParqueSur - Gallery: PresaDeHornos]
+rank 1: 0.16182572614107885
+rank 5: 0.25311203319502074
+mAP(%): 15.1454
+[ Probe: ParqueSur - Gallery: Ayagaures]
+rank 1: 0.4315352697095436
+rank 5: 0.7551867219917012
+mAP(%): 48.3732
+#### without CT + pca ####
+--- Cosine ---
+[ Probe: Arucas - Gallery: Teror]
+rank 1: 0.16753926701570682
+rank 5: 0.32722513089005234
+mAP(%): 20.4037
+[ Probe: Arucas - Gallery: PresaDeHornos]
+rank 1: 0.07591623036649214
+rank 5: 0.28272251308900526
+mAP(%): 12.2761
+[ Probe: Arucas - Gallery: Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4368
+[ Probe: Arucas - Gallery: ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23298429319371727
+mAP(%): 16.2015
+[ Probe: Teror - Gallery: Arucas]
+rank 1: 0.15675675675675677
+rank 5: 0.32432432432432434
+mAP(%): 14.961
+[ Probe: Teror - Gallery: PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0293
+[ Probe: Teror - Gallery: Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23243243243243245
+mAP(%): 11.2962
+[ Probe: Teror - Gallery: ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.1132
+[ Probe: PresaDeHornos - Gallery: Arucas]
+rank 1: 0.07142857142857142
+rank 5: 0.20168067226890757
+mAP(%): 9.1908
+[ Probe: PresaDeHornos - Gallery: Teror]
+rank 1: 0.037815126050420166
+rank 5: 0.11764705882352941
+mAP(%): 7.2241
+[ Probe: PresaDeHornos - Gallery: Ayagaures]
+rank 1: 0.10504201680672269
+rank 5: 0.2689075630252101
+mAP(%): 16.5716
+[ Probe: PresaDeHornos - Gallery: ParqueSur]
+rank 1: 0.029411764705882353
+rank 5: 0.07983193277310924
+mAP(%): 7.3092
+[ Probe: Ayagaures - Gallery: Arucas]
+rank 1: 0.25980392156862747
+rank 5: 0.46078431372549017
+mAP(%): 23.0425
+[ Probe: Ayagaures - Gallery: Teror]
+rank 1: 0.09313725490196079
+rank 5: 0.27941176470588236
+mAP(%): 13.5664
+[ Probe: Ayagaures - Gallery: PresaDeHornos]
+rank 1: 0.19117647058823528
+rank 5: 0.3333333333333333
+mAP(%): 19.448
+[ Probe: Ayagaures - Gallery: ParqueSur]
+rank 1: 0.3137254901960784
+rank 5: 0.5588235294117647
+mAP(%): 38.0444
+[ Probe: ParqueSur - Gallery: Arucas]
+rank 1: 0.2863070539419087
+rank 5: 0.4730290456431535
+mAP(%): 22.6568
+[ Probe: ParqueSur - Gallery: Teror]
+rank 1: 0.22406639004149378
+rank 5: 0.37344398340248963
+mAP(%): 20.5703
+[ Probe: ParqueSur - Gallery: PresaDeHornos]
+rank 1: 0.16182572614107885
+rank 5: 0.25311203319502074
+mAP(%): 15.1454
+[ Probe: ParqueSur - Gallery: Ayagaures]
+rank 1: 0.4315352697095436
+rank 5: 0.7551867219917012
+mAP(%): 48.3732
+--- Euclidean ---
+[ Probe: Arucas - Gallery: Teror]
+rank 1: 0.16753926701570682
+rank 5: 0.32722513089005234
+mAP(%): 20.4037
+[ Probe: Arucas - Gallery: PresaDeHornos]
+rank 1: 0.07591623036649214
+rank 5: 0.28272251308900526
+mAP(%): 12.2761
+[ Probe: Arucas - Gallery: Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4368
+[ Probe: Arucas - Gallery: ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23298429319371727
+mAP(%): 16.2015
+[ Probe: Teror - Gallery: Arucas]
+rank 1: 0.15675675675675677
+rank 5: 0.32432432432432434
+mAP(%): 14.961
+[ Probe: Teror - Gallery: PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0293
+[ Probe: Teror - Gallery: Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23243243243243245
+mAP(%): 11.2962
+[ Probe: Teror - Gallery: ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.1132
+[ Probe: PresaDeHornos - Gallery: Arucas]
+rank 1: 0.07142857142857142
+rank 5: 0.20168067226890757
+mAP(%): 9.1908
+[ Probe: PresaDeHornos - Gallery: Teror]
+rank 1: 0.037815126050420166
+rank 5: 0.11764705882352941
+mAP(%): 7.2246
+[ Probe: PresaDeHornos - Gallery: Ayagaures]
+rank 1: 0.10504201680672269
+rank 5: 0.2689075630252101
+mAP(%): 16.5716
+[ Probe: PresaDeHornos - Gallery: ParqueSur]
+rank 1: 0.029411764705882353
+rank 5: 0.07983193277310924
+mAP(%): 7.3092
+[ Probe: Ayagaures - Gallery: Arucas]
+rank 1: 0.25980392156862747
+rank 5: 0.46078431372549017
+mAP(%): 23.0425
+[ Probe: Ayagaures - Gallery: Teror]
+rank 1: 0.09313725490196079
+rank 5: 0.27941176470588236
+mAP(%): 13.5664
+[ Probe: Ayagaures - Gallery: PresaDeHornos]
+rank 1: 0.19117647058823528
+rank 5: 0.3333333333333333
+mAP(%): 19.448
+[ Probe: Ayagaures - Gallery: ParqueSur]
+rank 1: 0.3137254901960784
+rank 5: 0.5588235294117647
+mAP(%): 38.0444
+[ Probe: ParqueSur - Gallery: Arucas]
+rank 1: 0.2863070539419087
+rank 5: 0.4730290456431535
+mAP(%): 22.6568
+[ Probe: ParqueSur - Gallery: Teror]
+rank 1: 0.22406639004149378
+rank 5: 0.37344398340248963
+mAP(%): 20.5703
+[ Probe: ParqueSur - Gallery: PresaDeHornos]
+rank 1: 0.16182572614107885
+rank 5: 0.25311203319502074
+mAP(%): 15.1454
+[ Probe: ParqueSur - Gallery: Ayagaures]
+rank 1: 0.4315352697095436
+rank 5: 0.7551867219917012
+mAP(%): 48.3732
+#### with CT ####
+--- Cosine ---
+[ Probe: Arucas - Gallery: Teror]
+rank 1: 0.18324607329842932
+rank 5: 0.33507853403141363
+mAP(%): 21.7817
+[ Probe: Arucas - Gallery: PresaDeHornos]
+rank 1: 0.07853403141361257
+rank 5: 0.2931937172774869
+mAP(%): 12.445
+[ Probe: Arucas - Gallery: Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4511
+[ Probe: Arucas - Gallery: ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23821989528795812
+mAP(%): 16.659
+[ Probe: Teror - Gallery: Arucas]
+rank 1: 0.1891891891891892
+rank 5: 0.3621621621621622
+mAP(%): 17.8705
+[ Probe: Teror - Gallery: PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0825
+[ Probe: Teror - Gallery: Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23783783783783785
+mAP(%): 11.5341
+[ Probe: Teror - Gallery: ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.2302
+[ Probe: PresaDeHornos - Gallery: Arucas]
+rank 1: 0.08403361344537816
+rank 5: 0.21428571428571427
+mAP(%): 10.3101
+[ Probe: PresaDeHornos - Gallery: Teror]
+rank 1: 0.046218487394957986
+rank 5: 0.13445378151260504
+mAP(%): 8.2429
+[ Probe: PresaDeHornos - Gallery: Ayagaures]
+rank 1: 0.1092436974789916
+rank 5: 0.3025210084033613
+mAP(%): 18.4734
+[ Probe: PresaDeHornos - Gallery: ParqueSur]
+rank 1: 0.058823529411764705
+rank 5: 0.18487394957983194
+mAP(%): 11.267
+[ Probe: Ayagaures - Gallery: Arucas]
+rank 1: 0.27450980392156865
+rank 5: 0.47058823529411764
+mAP(%): 24.2307
+[ Probe: Ayagaures - Gallery: Teror]
+rank 1: 0.10294117647058823
+rank 5: 0.29901960784313725
+mAP(%): 14.9094
+[ Probe: Ayagaures - Gallery: PresaDeHornos]
+rank 1: 0.2696078431372549
+rank 5: 0.47549019607843135
+mAP(%): 27.4119
+[ Probe: Ayagaures - Gallery: ParqueSur]
+rank 1: 0.5294117647058824
+rank 5: 0.7843137254901961
+mAP(%): 58.737
+[ Probe: ParqueSur - Gallery: Arucas]
+rank 1: 0.2987551867219917
+rank 5: 0.4896265560165975
+mAP(%): 23.5197
+[ Probe: ParqueSur - Gallery: Teror]
+rank 1: 0.23651452282157676
+rank 5: 0.3817427385892116
+mAP(%): 21.7159
+[ Probe: ParqueSur - Gallery: PresaDeHornos]
+rank 1: 0.1950207468879668
+rank 5: 0.34439834024896265
+mAP(%): 19.6729
+[ Probe: ParqueSur - Gallery: Ayagaures]
+rank 1: 0.5809128630705395
+rank 5: 0.8464730290456431
+mAP(%): 61.9346
+--- Euclidean ---
+[ Probe: Arucas - Gallery: Teror]
+rank 1: 0.18324607329842932
+rank 5: 0.33507853403141363
+mAP(%): 21.7817
+[ Probe: Arucas - Gallery: PresaDeHornos]
+rank 1: 0.07853403141361257
+rank 5: 0.2931937172774869
+mAP(%): 12.445
+[ Probe: Arucas - Gallery: Ayagaures]
+rank 1: 0.225130890052356
+rank 5: 0.4293193717277487
+mAP(%): 28.4511
+[ Probe: Arucas - Gallery: ParqueSur]
+rank 1: 0.12041884816753927
+rank 5: 0.23821989528795812
+mAP(%): 16.659
+[ Probe: Teror - Gallery: Arucas]
+rank 1: 0.1891891891891892
+rank 5: 0.3621621621621622
+mAP(%): 17.8705
+[ Probe: Teror - Gallery: PresaDeHornos]
+rank 1: 0.07027027027027027
+rank 5: 0.15675675675675677
+mAP(%): 10.0825
+[ Probe: Teror - Gallery: Ayagaures]
+rank 1: 0.043243243243243246
+rank 5: 0.23783783783783785
+mAP(%): 11.5341
+[ Probe: Teror - Gallery: ParqueSur]
+rank 1: 0.06486486486486487
+rank 5: 0.1837837837837838
+mAP(%): 11.2302
+[ Probe: PresaDeHornos - Gallery: Arucas]
+rank 1: 0.08403361344537816
+rank 5: 0.21428571428571427
+mAP(%): 10.3101
+[ Probe: PresaDeHornos - Gallery: Teror]
+rank 1: 0.046218487394957986
+rank 5: 0.13445378151260504
+mAP(%): 8.2434
+[ Probe: PresaDeHornos - Gallery: Ayagaures]
+rank 1: 0.1092436974789916
+rank 5: 0.3025210084033613
+mAP(%): 18.4734
+[ Probe: PresaDeHornos - Gallery: ParqueSur]
+rank 1: 0.058823529411764705
+rank 5: 0.18487394957983194
+mAP(%): 11.267
+[ Probe: Ayagaures - Gallery: Arucas]
+rank 1: 0.27450980392156865
+rank 5: 0.47058823529411764
+mAP(%): 24.2307
+[ Probe: Ayagaures - Gallery: Teror]
+rank 1: 0.10294117647058823
+rank 5: 0.29901960784313725
+mAP(%): 14.9094
+[ Probe: Ayagaures - Gallery: PresaDeHornos]
+rank 1: 0.2696078431372549
+rank 5: 0.47549019607843135
+mAP(%): 27.4119
+[ Probe: Ayagaures - Gallery: ParqueSur]
+rank 1: 0.5294117647058824
+rank 5: 0.7843137254901961
+mAP(%): 58.737
+[ Probe: ParqueSur - Gallery: Arucas]
+rank 1: 0.2987551867219917
+rank 5: 0.4896265560165975
+mAP(%): 23.5197
+[ Probe: ParqueSur - Gallery: Teror]
+rank 1: 0.23651452282157676
+rank 5: 0.3817427385892116
+mAP(%): 21.7159
+[ Probe: ParqueSur - Gallery: PresaDeHornos]
+rank 1: 0.1950207468879668
+rank 5: 0.34439834024896265
+mAP(%): 19.6729
+[ Probe: ParqueSur - Gallery: Ayagaures]
+rank 1: 0.5809128630705395
+rank 5: 0.8464730290456431
+mAP(%): 61.9346
+#### with CT + filling ####
+--- Cosine ---
+[ Probe: Arucas - Gallery: Teror]
+rank 1: 0.2670157068062827
+rank 5: 0.5130890052356021
+mAP(%): 14.2031
+[ Probe: Arucas - Gallery: PresaDeHornos]
+rank 1: 0.23036649214659685
+rank 5: 0.43717277486910994
+mAP(%): 12.3918
+[ Probe: Arucas - Gallery: Ayagaures]
+rank 1: 0.23036649214659685
+rank 5: 0.43717277486910994
+mAP(%): 12.3732
+[ Probe: Arucas - Gallery: ParqueSur]
+rank 1: 0.23036649214659685
+rank 5: 0.43717277486910994
+mAP(%): 12.3724
+[ Probe: Teror - Gallery: Arucas]
+rank 1: 0.1783783783783784
+rank 5: 0.34054054054054056
+mAP(%): 10.0148
+[ Probe: Teror - Gallery: PresaDeHornos]
+rank 1: 0.15135135135135136
+rank 5: 0.2972972972972973
+mAP(%): 7.8821
+[ Probe: Teror - Gallery: Ayagaures]
+rank 1: 0.15135135135135136
+rank 5: 0.2972972972972973
+mAP(%): 7.8493
+[ Probe: Teror - Gallery: ParqueSur]
+rank 1: 0.15135135135135136
+rank 5: 0.2972972972972973
+mAP(%): 7.8397
+[ Probe: PresaDeHornos - Gallery: Arucas]
+rank 1: 0.13025210084033614
+rank 5: 0.28991596638655465
+mAP(%): 7.0326
+[ Probe: PresaDeHornos - Gallery: Teror]
+rank 1: 0.12605042016806722
+rank 5: 0.28991596638655465
+mAP(%): 6.8824
+[ Probe: PresaDeHornos - Gallery: Ayagaures]
+rank 1: 0.12184873949579832
+rank 5: 0.2773109243697479
+mAP(%): 6.9512
+[ Probe: PresaDeHornos - Gallery: ParqueSur]
+rank 1: 0.12184873949579832
+rank 5: 0.2773109243697479
+mAP(%): 6.6555
+[ Probe: Ayagaures - Gallery: Arucas]
+rank 1: 0.35294117647058826
+rank 5: 0.6519607843137255
+mAP(%): 17.3175
+[ Probe: Ayagaures - Gallery: Teror]
+rank 1: 0.35784313725490197
+rank 5: 0.6519607843137255
+mAP(%): 17.7976
+[ Probe: Ayagaures - Gallery: PresaDeHornos]
+rank 1: 0.38235294117647056
+rank 5: 0.6715686274509803
+mAP(%): 20.4166
+[ Probe: Ayagaures - Gallery: ParqueSur]
+rank 1: 0.46078431372549017
+rank 5: 0.7352941176470589
+mAP(%): 22.0875
+[ Probe: ParqueSur - Gallery: Arucas]
+rank 1: 0.47717842323651455
+rank 5: 0.7883817427385892
+mAP(%): 18.8971
+[ Probe: ParqueSur - Gallery: Teror]
+rank 1: 0.47717842323651455
+rank 5: 0.7883817427385892
+mAP(%): 19.1188
+[ Probe: ParqueSur - Gallery: PresaDeHornos]
+rank 1: 0.5103734439834025
+rank 5: 0.8008298755186722
+mAP(%): 21.2427
+[ Probe: ParqueSur - Gallery: Ayagaures]
+rank 1: 0.6348547717842323
+rank 5: 0.8879668049792531
+mAP(%): 26.2338
+--- Euclidean ---
+[ Probe: Arucas - Gallery: Teror]
+rank 1: 0.2670157068062827
+rank 5: 0.5130890052356021
+mAP(%): 14.203
+[ Probe: Arucas - Gallery: PresaDeHornos]
+rank 1: 0.23036649214659685
+rank 5: 0.43717277486910994
+mAP(%): 12.3918
+[ Probe: Arucas - Gallery: Ayagaures]
+rank 1: 0.23036649214659685
+rank 5: 0.43717277486910994
+mAP(%): 12.3732
+[ Probe: Arucas - Gallery: ParqueSur]
+rank 1: 0.23036649214659685
+rank 5: 0.43717277486910994
+mAP(%): 12.3724
+[ Probe: Teror - Gallery: Arucas]
+rank 1: 0.1783783783783784
+rank 5: 0.34054054054054056
+mAP(%): 10.0148
+[ Probe: Teror - Gallery: PresaDeHornos]
+rank 1: 0.15135135135135136
+rank 5: 0.2972972972972973
+mAP(%): 7.8821
+[ Probe: Teror - Gallery: Ayagaures]
+rank 1: 0.15135135135135136
+rank 5: 0.2972972972972973
+mAP(%): 7.8493
+[ Probe: Teror - Gallery: ParqueSur]
+rank 1: 0.15135135135135136
+rank 5: 0.2972972972972973
+mAP(%): 7.8397
+[ Probe: PresaDeHornos - Gallery: Arucas]
+rank 1: 0.13025210084033614
+rank 5: 0.28991596638655465
+mAP(%): 7.0326
+[ Probe: PresaDeHornos - Gallery: Teror]
+rank 1: 0.12605042016806722
+rank 5: 0.28991596638655465
+mAP(%): 6.8825
+[ Probe: PresaDeHornos - Gallery: Ayagaures]
+rank 1: 0.12184873949579832
+rank 5: 0.2773109243697479
+mAP(%): 6.9512
+[ Probe: PresaDeHornos - Gallery: ParqueSur]
+rank 1: 0.12184873949579832
+rank 5: 0.2773109243697479
+mAP(%): 6.6555
+[ Probe: Ayagaures - Gallery: Arucas]
+rank 1: 0.35294117647058826
+rank 5: 0.6519607843137255
+mAP(%): 17.3175
+[ Probe: Ayagaures - Gallery: Teror]
+rank 1: 0.35784313725490197
+rank 5: 0.6519607843137255
+mAP(%): 17.7976
+[ Probe: Ayagaures - Gallery: PresaDeHornos]
+rank 1: 0.38235294117647056
+rank 5: 0.6715686274509803
+mAP(%): 20.4166
+[ Probe: Ayagaures - Gallery: ParqueSur]
+rank 1: 0.46078431372549017
+rank 5: 0.7352941176470589
+mAP(%): 22.0875
+[ Probe: ParqueSur - Gallery: Arucas]
+rank 1: 0.47717842323651455
+rank 5: 0.7883817427385892
+mAP(%): 18.8971
+[ Probe: ParqueSur - Gallery: Teror]
+rank 1: 0.47717842323651455
+rank 5: 0.7883817427385892
+mAP(%): 19.1188
+[ Probe: ParqueSur - Gallery: PresaDeHornos]
+rank 1: 0.5103734439834025
+rank 5: 0.8008298755186722
+mAP(%): 21.2427
+[ Probe: ParqueSur - Gallery: Ayagaures]
+rank 1: 0.6348547717842323
+rank 5: 0.8879668049792531
+mAP(%): 26.2338

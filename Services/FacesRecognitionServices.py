@@ -1,6 +1,6 @@
 from deepface import DeepFace
 from Utils.fileUtils import getNumber, getTime
-from Utils.constant import COMPRESSION_FACTOR, MINIMUM_DURATION, PLACES_PROBE_TEST, PLACES, PLACES_GALLERY_TEST
+from Utils.constant import COMPRESSION_FACTOR, timers, PLACES
 from deepface.commons import distance as dst
 from sklearn.decomposition import PCA
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
@@ -42,11 +42,13 @@ class FacesRecognitionService:
 
         return self._metrics[metric](v1, v2)
 
-    def _computeTemporalClassification(self, dateProbe, dateGallery, isOrder) -> bool:
+    def _computeTemporalClassification(self, dateProbe, dateGallery, isOrder, index) -> bool:
         if isOrder:
-            return dateProbe < dateGallery and abs(dateProbe - dateGallery) >= MINIMUM_DURATION
+            min_duration = np.sum(timers[index[0]:index[1]])
+            return dateProbe < dateGallery and abs(dateProbe - dateGallery) >= min_duration
         else:
-            return dateProbe > dateGallery and abs(dateProbe - dateGallery) >= MINIMUM_DURATION
+            min_duration = np.sum(timers[index[1]:index[0]])
+            return dateProbe > dateGallery and abs(dateProbe - dateGallery) >= min_duration
 
     def checkMetricAndModel(self, model, metric):
         if model not in self._models:
@@ -74,13 +76,13 @@ class FacesRecognitionService:
 
 
     def computeClassification(self, probe: np.array, gallery: list, model_file: str,
-                              metric: str = "cosine", temporalCoherence: bool = False,
+                              metric: str = "cosine", temporalCoherence: bool = False, index: tuple = None,
                               isOrder: bool = True, filledGallery: bool = True) -> tuple:
         if temporalCoherence:
             distances = [
                 (dorsal, self.computeDistance(embedding, probe[1], metric))
                 for dorsal, embedding, galleryDate in gallery
-                if self._computeTemporalClassification(getTime(os.path.basename(probe[0])), galleryDate, isOrder)
+                if self._computeTemporalClassification(getTime(os.path.basename(probe[0])), galleryDate, isOrder, index)
             ]
         else:
             distances = [
@@ -88,11 +90,17 @@ class FacesRecognitionService:
                 for dorsal, embedding, _ in gallery
             ]
 
-        if filledGallery:
+        if filledGallery and temporalCoherence:
+            if isOrder:
+                probe_index, gallery_index = index
+            else:
+                gallery_index, probe_index = index
             dorsals = [runner[0] for runner in distances]
-            for index, place in enumerate(PLACES):
-                if place is not PLACES_PROBE_TEST and index < PLACES.index(PLACES_GALLERY_TEST):
-                    extra_gallery = self._loadServices.loadInformation(os.path.join(place, model_file.replace('.pkl', '')), ispath=False)
+            for place in PLACES:
+                if place is not PLACES[probe_index] and place is not PLACES[gallery_index]:
+                    extra_gallery = self._loadServices.loadInformation(os.path.join(place,
+                                                                                    model_file.replace('.pkl', '')),
+                                                                       ispath=False)
                     for file, embedding in extra_gallery:
                         dorsal = getNumber(os.path.basename(file))
                         if dorsal in dorsals:
