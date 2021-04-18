@@ -6,6 +6,7 @@ from Utils.utils import dtw
 from Utils.re_ranking import re_ranking
 import torch
 from deepface.commons import distance as dst
+from sklearn.ensemble import RandomForestRegressor
 
 from Utils.constant import timers, PLACES, PLACES_GALLERY_TEST, PLACES_PROBE_TEST
 

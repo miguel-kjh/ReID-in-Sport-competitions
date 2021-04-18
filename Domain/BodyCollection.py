@@ -4,8 +4,10 @@ import numpy as np
 
 class BodyCollection:
 
-    def __init__(self):
-        self._bodies = []
+    def __init__(self, collection=None):
+        if collection is None:
+            collection = []
+        self._bodies = collection
 
     def addBody(self, body: Body):
         self._bodies.append(body)
