@@ -34,7 +34,14 @@ if [ $1 == "--if" ];then
     for heuristic in "${heuristics[@]}"
     do
       echo "########## $model  - $heuristic ############"
-      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all #--temp #--filling;
+      echo "------- Normal ------"
+      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all;
+      echo "------- CT ------"
+      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all --temp;
+      echo "------- CT + filling ------"
+      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all --temp --filling;
+      echo "------- CT + Regression ------"
+      python3 RunnersIdentifiaction.py --d data/Probe_faces_${model}_${heuristic} --all --temp --regr;
     done
   done
 
@@ -42,25 +49,31 @@ fi
 
 if [ $1 == "--ib" ];then
 
-   echo "#### without CT ####"
+   echo "#### Normal ####"
    echo "--- Cosine ---"
    python3 RunnersIdentifiaction.py --aligenReId --met cosine
    echo "--- Euclidean ---"
    python3 RunnersIdentifiaction.py --aligenReId --met euclidean
 
-   echo "#### without CT + pca ####"
+   echo "#### PCA ####"
    echo "--- Cosine ---"
-   python3 RunnersIdentifiaction.py --aligenReId --met cosine
+   python3 RunnersIdentifiaction.py --aligenReId --met cosine --pca
    echo "--- Euclidean ---"
-   python3 RunnersIdentifiaction.py --aligenReId --met euclidean
+   python3 RunnersIdentifiaction.py --aligenReId --met euclidean --pca
 
-   echo "#### with CT ####"
+   echo "#### CT ####"
    echo "--- Cosine ---"
    python3 RunnersIdentifiaction.py --aligenReId --met cosine --temp
    echo "--- Euclidean ---"
    python3 RunnersIdentifiaction.py --aligenReId --met euclidean --temp
 
-   echo "#### with CT + filling ####"
+   echo "#### CT + Regression ####"
+   echo "--- Cosine ---"
+   python3 RunnersIdentifiaction.py --aligenReId --met cosine --temp --regr
+   echo "--- Euclidean ---"
+   python3 RunnersIdentifiaction.py --aligenReId --met euclidean --temp --regr
+
+   echo "#### CT + filling ####"
    echo "--- Cosine ---"
    python3 RunnersIdentifiaction.py --aligenReId --met cosine --temp --filling
    echo "--- Euclidean ---"
@@ -80,7 +93,7 @@ if [ $1 == "--ifb" ];then
         for embedding in "${embeddings[@]}"
         do
           echo "++++++ $embedding +++++"
-          python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --temp
+          python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --temp --regr
           #echo "pca"
           #python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --pca --temp
         done

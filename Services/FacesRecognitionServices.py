@@ -1,6 +1,6 @@
 from deepface import DeepFace
 from Utils.fileUtils import getNumber, getTime
-from Utils.constant import COMPRESSION_FACTOR, timers, PLACES
+from Utils.constant import COMPRESSION_FACTOR, timers, PLACES, PLACES_GALLERY_TEST, PLACES_PROBE_TEST
 from deepface.commons import distance as dst
 from sklearn.decomposition import PCA
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl

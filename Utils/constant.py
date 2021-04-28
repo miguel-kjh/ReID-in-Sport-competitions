@@ -5,8 +5,8 @@ FACES_MODELS = ["retinaface","retinafaceliif50", "retinafaceliif100", "retinafac
                 "img2pose", "img2poseliif50", "img2poseliif100", "img2poseliif300"]
 HEURISTICS = ["none", "dimension"]
 
-PLACES_PROBE_TEST   = "ParqueSur"
-PLACES_GALLERY_TEST = "Ayagaures"
+PLACES_PROBE_TEST   = "Ayagaures"
+PLACES_GALLERY_TEST = "PresaDeHornos"
 
 COMPRESSION_FACTOR = 0.95
 

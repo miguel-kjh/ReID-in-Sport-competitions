@@ -18,7 +18,7 @@ class BodyRecognitionServices:
             'euclidean': dst.findEuclideanDistance
         }
         alignedGallery = "data/TCG_alignedReId"
-        self._loadServices  = SaveEmbeddingPkl(alignedGallery)
+        self._loadServices = SaveEmbeddingPkl(alignedGallery)
 
     def _isDistance(self, metric: str) -> bool:
         return metric in self._metrics.keys()
