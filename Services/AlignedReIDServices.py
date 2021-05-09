@@ -119,22 +119,27 @@ class AlignedReIDServices:
 
         #runners = [getNumber(os.path.basename(a[0])) for a in faces]
         files = [os.path.basename(a[0]) for a in faces]
-        dim = len(faces[0][1])
+        newBodyCollection = BodyCollection()
 
         for body in bodyCollection.bodies:
             aux = body.file.replace('.jpg','')
             ocurrences = sorted([file for file in files if aux in file])
             try:
                 index = files.index(ocurrences[0]) #runners.index(body.dorsal)
-                body.embedding = np.append(body.embedding, faces[index][1])
+                face_emb = faces[index][1]
+                body.embedding = np.append(body.embedding, face_emb)
+                newBodyCollection.addBody(body)
             except:
-                body.embedding = np.append(body.embedding, np.zeros(dim))
+                continue
+                #body.embedding = np.append(body.embedding, np.zeros(dim))
 
 
         if compression:
-            X, _ = bodyCollection.get_dataset()
+            X, _ = newBodyCollection.get_dataset()
             X = self._pca.fit_transform(X)
-            bodyCollection.set_embeddings(X)
+            newBodyCollection.set_embeddings(X)
+
+        bodyCollection = newBodyCollection
 
 
     def compactedAllEmbeddings(self, faces: list, dimension: int,  bodyCollection: BodyCollection,

@@ -46,7 +46,7 @@ def re_ranking(probFea, galFea, k1 = 20, k2 = 6, lambda_value = 0.3, local_distm
     V = np.zeros_like(original_dist).astype(np.float16)
     initial_rank = np.argsort(original_dist).astype(np.int32)
 
-    #print('starting re_ranking')
+    print('starting re_ranking')
     for i in range(all_num):
         # k-reciprocal neighbors
         forward_k_neigh_index = initial_rank[i, :k1 + 1]

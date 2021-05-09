@@ -8,6 +8,7 @@ from Utils.constant import PLACES, MINIMUM_DURATION, timers
 from sklearn.metrics import average_precision_score
 from sklearn.ensemble import RandomForestRegressor
 from joblib import parallel_backend
+import matplotlib.pyplot as plt
 
 
 import os
@@ -21,7 +22,7 @@ class RecognitionsController:
         self._body_recognition = BodyRecognitionServices()
         self.alignedGallery = os.path.join("data", "TCG_alignedReId")
         file_df = os.path.join("data", "tgc_2020_tiempos_pasos_editado.xlsx")
-        self._step_time = 16500 #4800
+        self._step_time = 4800 #16500
         self._df = pd.read_excel(file_df)
         keys = self._df.keys()
         self._times = list(keys[7:18])
@@ -64,7 +65,7 @@ class RecognitionsController:
     def identificationRunnersByFaces(self, probe: str, model: str, metric: str,
                                      galleryPlace: str, topNum: int = 107,
                                      pca: bool = False, temporalCoherence: bool = False,
-                                     filling: bool = False, regression: bool = False) -> tuple:
+                                     filling: bool = False, regression: bool = False, verbose: bool = True) -> tuple:
 
         self._face_recognition.checkMetricAndModel(model, metric)
         probe_places = os.path.basename(probe)
@@ -86,6 +87,9 @@ class RecognitionsController:
 
         last_query = getNumber(os.path.basename(probes[0][0]))
         queries_done = []
+        average_dist_success = []
+        average_dist_fail = []
+        average_dist_position_fail = []
 
         for i, query in enumerate(probes):
             dorsal = getNumber(os.path.basename(query[0]))
@@ -113,11 +117,22 @@ class RecognitionsController:
                                                                           index=(index_probe, index_gallery),
                                                                           isOrder=isOrder,
                                                                           filledGallery=filling)
-            #print(len(classification))
             try:
                 matches[classification.index(dorsal)] += 1
             except Exception:
                 pass
+
+            if verbose:
+                if dorsal != classification[0] and dorsal in classification:
+                    print(os.path.basename(query[0]))
+                    print("index:", classification.index(dorsal) + 1)
+                    print("positions:", classification[0:classification.index(dorsal)+1])
+                    print("distances:", dist[0:classification.index(dorsal)+1])
+                    #self._plot_dist(dist, "%s distance fail" % metric, os.path.join(file2Save, "fail", ))
+                    average_dist_position_fail.append(dist[classification.index(dorsal)])
+                    average_dist_fail.append(dist[0])
+                elif dorsal != classification[0]:
+                    average_dist_success.append(dist[0])
 
             average_precision.append(
                 self._calculateAveragePrecision(classification, dist, dorsal)
@@ -125,16 +140,29 @@ class RecognitionsController:
 
         cmc = np.cumsum(matches) / len(probes)
 
+        if verbose:
+            print("Average distance success: ", np.mean(average_dist_success))
+            print("Average distance fail: ", np.mean(average_dist_fail))
+            print("Average distance fail position dorsal: ", np.mean(average_dist_position_fail))
+
         return cmc, np.mean(average_precision)
 
     def _filter_bodies_by_regression(self, query, gallery, classification, runners_times, index):
         delta = self._apply_regression(query.date, classification, runners_times, index)
         return [sample for sample in gallery.bodies if query.date - delta <= sample.date <= query.date + delta]
 
+    def _plot_dist(self, dist, title, fileSave):
+        plt.plot(dist)
+        plt.title(title)
+        plt.xlabel("Classification")
+        plt.ylabel("Distances")
+        plt.savefig(fileSave)
+
 
     def identificationRunnersByBody(self, probe: str, metric: str, galleryPlace: str,
                                     topNum: int = 107, temporalCoherence: bool = False,
-                                    filling: bool = False, regression: bool = False, model: str = "") -> tuple:
+                                    filling: bool = False, regression: bool = False,
+                                    model: str = "", verbose: bool = True) -> tuple:
         matches = np.zeros(topNum)
         average_precision = []
         probe_places = os.path.basename(probe).replace(".pkl", '').split('_')[0]
@@ -150,8 +178,15 @@ class RecognitionsController:
 
         last_query = 1
         queries_done = []
+        average_dist_success = []
+        average_dist_fail = []
+        average_dist_position_fail = []
+
+        file2Save = os.path.join("Results", "dist")
 
         for i, query in enumerate(queries):
+            if query.dorsal not in [body.dorsal for body in gallery.bodies]:
+                continue
 
             gallery_query = gallery
             if regression:
@@ -186,11 +221,28 @@ class RecognitionsController:
             except Exception:
                 pass
 
+            if verbose:
+                if query.dorsal != classification[0] and query.dorsal in classification:
+                    print(query.file)
+                    print("index:", classification.index(query.dorsal) + 1)
+                    print("positions:", classification[0:classification.index(query.dorsal)+1])
+                    print("distances:", dist[0:classification.index(query.dorsal)+1])
+                    self._plot_dist(dist, "%s distance fail" % metric, os.path.join(file2Save, "fail", ))
+                    average_dist_position_fail.append(dist[classification.index(query.dorsal)])
+                    average_dist_fail.append(dist[0])
+                elif query.dorsal != classification[0]:
+                    average_dist_success.append(dist[0])
+
+
             average_precision.append(
                 self._calculateAveragePrecision(classification, dist, query.dorsal)
             )
 
         cmc = np.cumsum(matches) / len(probe.bodies)
+        if verbose:
+            print("Average distance success: ", np.mean(average_dist_success))
+            print("Average distance fail: ", np.mean(average_dist_fail))
+            print("Average distance fail position dorsal: ", np.mean(average_dist_position_fail))
         return cmc, np.mean(average_precision)
 
 
