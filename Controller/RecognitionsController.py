@@ -91,6 +91,8 @@ class RecognitionsController:
         average_dist_fail = []
         average_dist_position_fail = []
 
+        file2Save = os.path.join("Results", "dist", "faces")
+
         for i, query in enumerate(probes):
             dorsal = getNumber(os.path.basename(query[0]))
             gallery_query = gallery
@@ -128,7 +130,7 @@ class RecognitionsController:
                     print("index:", classification.index(dorsal) + 1)
                     print("positions:", classification[0:classification.index(dorsal)+1])
                     print("distances:", dist[0:classification.index(dorsal)+1])
-                    #self._plot_dist(dist, "%s distance fail" % metric, os.path.join(file2Save, "fail", ))
+                    self._plot_dist(dist, "%s distance fail" % metric, os.path.join(file2Save, os.path.basename(query[0])))
                     average_dist_position_fail.append(dist[classification.index(dorsal)])
                     average_dist_fail.append(dist[0])
                 elif dorsal != classification[0]:
@@ -157,12 +159,13 @@ class RecognitionsController:
         plt.xlabel("Classification")
         plt.ylabel("Distances")
         plt.savefig(fileSave)
+        plt.clf()
 
 
     def identificationRunnersByBody(self, probe: str, metric: str, galleryPlace: str,
                                     topNum: int = 107, temporalCoherence: bool = False,
                                     filling: bool = False, regression: bool = False,
-                                    model: str = "", verbose: bool = True) -> tuple:
+                                    model: str = "", verbose: bool = False) -> tuple:
         matches = np.zeros(topNum)
         average_precision = []
         probe_places = os.path.basename(probe).replace(".pkl", '').split('_')[0]
@@ -182,7 +185,7 @@ class RecognitionsController:
         average_dist_fail = []
         average_dist_position_fail = []
 
-        file2Save = os.path.join("Results", "dist")
+        file2Save = os.path.join("Results", "dist", "body")
 
         for i, query in enumerate(queries):
             if query.dorsal not in [body.dorsal for body in gallery.bodies]:
@@ -227,7 +230,7 @@ class RecognitionsController:
                     print("index:", classification.index(query.dorsal) + 1)
                     print("positions:", classification[0:classification.index(query.dorsal)+1])
                     print("distances:", dist[0:classification.index(query.dorsal)+1])
-                    self._plot_dist(dist, "%s distance fail" % metric, os.path.join(file2Save, "fail", ))
+                    self._plot_dist(dist, "%s distance fail" % metric, os.path.join(file2Save, query.file))
                     average_dist_position_fail.append(dist[classification.index(query.dorsal)])
                     average_dist_fail.append(dist[0])
                 elif query.dorsal != classification[0]:

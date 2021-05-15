@@ -10,6 +10,7 @@ from Utils.constant import PLACES_PROBE_TEST, PLACES_GALLERY_TEST, MODELS, METRI
 def printResults(cmc, mAP):
     print("rank 1:", cmc[0])
     print("rank 5:", cmc[4])
+    print("rank 10:", cmc[9])
     print("mAP(%):", round(mAP*100,4))
 
 
@@ -35,10 +36,11 @@ def indentificationByFaces(database, model, metric, applyPca, temporalCoherence,
     printResults(cmc, mAP)
     #repository.addTest(faceModel, heuristic, model, metric, cmc, mAP, PLACES_PROBE_TEST, PLACES_GALLERY_TEST)
 
-def identificationByBody(metric, compression, temp, filling, regr):
+def identificationByBody(metric, compression, temp, filling, regr, isLigthModel):
     rs = RecognitionsController()
     #repository = ReidentificationRepository()
-    folder = "data/TCG_alignedReId/%s.pkl" if not compression else "data/TCG_alignedReId/%s_pca.pkl"
+    database = "data/TCG_alignedReId/" if not isLigthModel else "data/TGC_ligthReId/"
+    folder = database + "%s.pkl" if not compression else database + "%s_pca.pkl"
     #nameMetric = metric
 
     #if compression:
@@ -97,7 +99,8 @@ if __name__ == '__main__':
     parser.add_argument("--heu", action='store', type=str, help="introduce the heuristic")
     parser.add_argument("--emb", action='store', type=str, help="introduce the heuristic")
     parser.add_argument("--all", action='count', help="test with all models and metrics")
-    parser.add_argument("--aligenReId", action='count', help="using only body information")
+    parser.add_argument("--aligenReId", action='count', help="using only body information with AligenReId")
+    parser.add_argument("--ligthReId", action='count', help="using only body information with ligthReId")
     parser.add_argument("--combine", action='count', help="using only body information")
     parser.add_argument("--pca", action='count', help="apply pca to reduction the dimensions")
     parser.add_argument("--temp", action='count', help="apply temporal coherence")
@@ -105,8 +108,8 @@ if __name__ == '__main__':
     parser.add_argument("--filling", action='count', help="apply the filling of the galleria")
 
     args = parser.parse_args()
-    if args.aligenReId:
-        identificationByBody(args.metric, args.pca, args.temp, args.filling, args.regr)
+    if args.aligenReId or args.ligthReId:
+        identificationByBody(args.metric, args.pca, args.temp, args.filling, args.regr, args.ligthReId)
     elif args.combine:
         identificationByBodyAndFaces(args.model, args.heu, args.metric, args.emb, args.pca, args.temp, args.filling, args.regr)
     else:

@@ -101,7 +101,7 @@ if __name__ == '__main__':
         image = cv2.imread(img_path)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         annotation = model.predict_jsons(image)
-        aumentation_faces = 25
+        aumentation_faces = 0
         for i,a in enumerate(annotation[0]['bbox']):
             if i >= 2:
                 annotation[0]['bbox'][i] += aumentation_faces
