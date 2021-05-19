@@ -120,7 +120,7 @@ class AlignedReIDServices:
         #runners = [getNumber(os.path.basename(a[0])) for a in faces]
         files = [os.path.basename(a[0]) for a in faces]
         newBodyCollection = BodyCollection()
-
+        print(bodyCollection.bodies[0].embedding.shape)
         for body in bodyCollection.bodies:
             aux = body.file.replace('.jpg','')
             ocurrences = sorted([file for file in files if aux in file])
@@ -140,6 +140,7 @@ class AlignedReIDServices:
             newBodyCollection.set_embeddings(X)
 
         bodyCollection = newBodyCollection
+        print(bodyCollection.bodies[0].embedding.shape)
 
 
     def compactedAllEmbeddings(self, faces: list, dimension: int,  bodyCollection: BodyCollection,

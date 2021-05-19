@@ -93,7 +93,7 @@ if [ $1 == "--ifb" ];then
         for embedding in "${embeddings[@]}"
         do
           echo "++++++ $embedding +++++"
-          python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding
+          python3 RunnersIdentifiaction.py --combine --ligth --met $metric --heu $heuristic --model $model --emb $embedding
           #echo "pca"
           #python3 RunnersIdentifiaction.py --combine --met $metric --heu $heuristic --model $model --emb $embedding --pca --temp
         done

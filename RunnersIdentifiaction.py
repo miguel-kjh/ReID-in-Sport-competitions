@@ -61,10 +61,11 @@ def identificationByBody(metric, compression, temp, filling, regr, isLigthModel)
     printResults(cmc, mAP)
     #repository.addTest("AlignedReId", "None", "ResNet50", nameMetric, cmc, mAP, probe, gallery)
 
-def identificationByBodyAndFaces(model, heuristics, metric, embedding, compression, temp, filling, regr):
+def identificationByBodyAndFaces(model, heuristics, metric, embedding, compression, temp, filling, regr, isLigthModel):
     rs = RecognitionsController()
     repository = ReidentificationRepository()
-    folder = "data/TCG_alignedReId/%s.pkl" if not compression else "data/TCG_alignedReId/%s_pca.pkl"
+    database = "data/TCG_alignedReId/" if not isLigthModel else "data/TGC_ligthReId/"
+    folder = database + "%s.pkl" if not compression else database + "%s_pca.pkl"
 
     """for probe in PLACES:
         for gallery in PLACES:
@@ -108,10 +109,10 @@ if __name__ == '__main__':
     parser.add_argument("--filling", action='count', help="apply the filling of the galleria")
 
     args = parser.parse_args()
-    if args.aligenReId or args.ligthReId:
+    if (args.aligenReId or args.ligthReId) and not args.combine:
         identificationByBody(args.metric, args.pca, args.temp, args.filling, args.regr, args.ligthReId)
     elif args.combine:
-        identificationByBodyAndFaces(args.model, args.heu, args.metric, args.emb, args.pca, args.temp, args.filling, args.regr)
+        identificationByBodyAndFaces(args.model, args.heu, args.metric, args.emb, args.pca, args.temp, args.filling, args.regr, args.ligthReId)
     else:
         if not args.all:
            indentificationByFaces(args.database, args.model, args.metric, args.pca, args.temp, args.filling, args.regr)

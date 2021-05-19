@@ -1,3 +1,5 @@
+import os.path
+
 from Controller.AlignedReIDController import AlignedReIDController
 from Utils.constant import PLACES, MODELS, FACES_MODELS, HEURISTICS, PLACES_PROBE_TEST, PLACES_GALLERY_TEST
 import argparse
@@ -18,12 +20,19 @@ def computeBodyAndAllFacesEmbeddings(places, bodies, filename, compression=False
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--combine", action='count', help="create embedding combine faces and body")
+    parser.add_argument("--light", action='count', help="create embedding combine faces and body with logthreid")
     parser.add_argument("--pca", action='count', help="apply pca to reduction the dimensions")
 
     args = parser.parse_args()
     if not args.combine:
         computeEmbeddings(args.pca)
     else:
+
+        database = os.path.join("data", "TCG_alignedReId")
+        if args.light:
+            database = os.path.join("data", "TGC_ligthReId")
+            controller.setFolder(database)
+
         for place in ["ParqueSur", "Ayagaures"]:
             for faceModel in FACES_MODELS:
                 print(faceModel)
@@ -33,13 +42,13 @@ if __name__ == '__main__':
                         if not args.pca:
                             computeBodyAndFacesEmbeddings(
                                 'data/Probe_faces_%s_%s/%s/representations_%s.pkl' %(faceModel, heuristic, place, model),
-                                'data/TCG_alignedReId/%s.pkl' %place,
+                                '%s/%s.pkl' %(database, place),
                                 '%s_%s_%s_%s' % (place,faceModel, heuristic, model)
                             )
                         else:
                             computeBodyAndFacesEmbeddings(
                                 'data/Probe_faces_%s_%s/%s/representations_%s.pkl' %(faceModel, heuristic, place, model),
-                                'data/TCG_alignedReId/%s.pkl' %place,
+                                '%s/%s.pkl' %(database, place),
                                 '%s_%s_%s_%s_pca' % (place,faceModel, heuristic, model),
                                 compression=True
                             )
