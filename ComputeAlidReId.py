@@ -33,7 +33,7 @@ if __name__ == '__main__':
             database = os.path.join("data", "TGC_ligthReId")
             controller.setFolder(database)
 
-        for place in ["ParqueSur", "Ayagaures"]:
+        for place in PLACES:
             for faceModel in FACES_MODELS:
                 print(faceModel)
                 for heuristic in HEURISTICS:

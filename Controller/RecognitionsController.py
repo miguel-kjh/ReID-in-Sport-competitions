@@ -4,7 +4,7 @@ from Domain.BodyCollection import BodyCollection
 from Services.SaveEmbeddingPkl import SaveEmbeddingPkl
 from datetime import timedelta
 from Utils.fileUtils import getNumber, getTime
-from Utils.constant import PLACES, MINIMUM_DURATION, timers
+from Utils.constant import PLACES, MINIMUM_DURATION, timers, GAP
 from sklearn.metrics import average_precision_score
 from sklearn.ensemble import RandomForestRegressor
 from joblib import parallel_backend
@@ -22,7 +22,7 @@ class RecognitionsController:
         self._body_recognition = BodyRecognitionServices()
         self.alignedGallery = os.path.join("data", "TCG_alignedReId")
         file_df = os.path.join("data", "tgc_2020_tiempos_pasos_editado.xlsx")
-        self._step_time = 4800 #16500
+        self._step_time = GAP
         self._df = pd.read_excel(file_df)
         keys = self._df.keys()
         self._times = list(keys[7:18])
@@ -65,7 +65,7 @@ class RecognitionsController:
     def identificationRunnersByFaces(self, probe: str, model: str, metric: str,
                                      galleryPlace: str, topNum: int = 107,
                                      pca: bool = False, temporalCoherence: bool = False,
-                                     filling: bool = False, regression: bool = False, verbose: bool = True) -> tuple:
+                                     filling: bool = False, regression: bool = False, verbose: bool = False) -> tuple:
 
         self._face_recognition.checkMetricAndModel(model, metric)
         probe_places = os.path.basename(probe)
@@ -103,9 +103,9 @@ class RecognitionsController:
                         queries_done.remove(dorsal)
                     queries_done.append(last_query)
                     last_query = dorsal
-                index_probe = self._cls_positions.index(probe_places)
-                cls = self._cls_positions[:index_probe]
-                runners_times = self._times[:index_probe]
+                index_probe_ds = self._cls_positions.index(probe_places)
+                cls = self._cls_positions[:index_probe_ds]
+                runners_times = self._times[:index_probe_ds]
                 index = list(self._df[probe_places]).index(i + 1)
                 gallery_query = [
                     sample
@@ -198,9 +198,9 @@ class RecognitionsController:
                         queries_done.remove(query.dorsal)
                     queries_done.append(last_query)
                     last_query = query.dorsal
-                index_probe = self._cls_positions.index(probe_places)
-                cls = self._cls_positions[:index_probe]
-                runners_times = self._times[:index_probe]
+                index_probe_ds = self._cls_positions.index(probe_places)
+                cls = self._cls_positions[:index_probe_ds]
+                runners_times = self._times[:index_probe_ds]
                 index = list(self._df[probe_places]).index(i + 1)
                 gallery_query = BodyCollection(
                     collection=[

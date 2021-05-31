@@ -20,6 +20,7 @@ from img2pose.utils.pose_operations import get_pose
 from img2pose.img2pose import img2poseModel
 from img2pose.model_loader import load_model
 import re
+from time import time
 
 import cv2
 from matplotlib import pyplot as plt
@@ -78,7 +79,7 @@ load_model(img2pose_model.fpn_model, MODEL_PATH, cpu_mode=str(img2pose_model.dev
 img2pose_model.evaluate()
 
 # change to a folder with images, or another list containing image paths
-images_path = "data/TGC_places/ParqueSur"
+images_path = "data/TGC_places/Teror"
 
 threshold = 0.8
 
@@ -95,12 +96,17 @@ if __name__ == '__main__':
             for img_path in os.listdir(images_path)
             if isImage(img_path)
         ]
-
+    length = 0
+    time_retina = 0
+    time_img2pose = 0
     for img_path in tqdm(img_paths):
+        length += 1
         img = Image.open(img_path).convert("RGB")
         image = cv2.imread(img_path)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        start_time = time()
         annotation = model.predict_jsons(image)
+        time_retina += time() - start_time
         aumentation_faces = 0
         for i,a in enumerate(annotation[0]['bbox']):
             if i >= 2:
@@ -114,7 +120,9 @@ if __name__ == '__main__':
         (w, h) = img.size
         image_intrinsics = np.array([[w + h, 0, w // 2], [0, w + h, h // 2], [0, 0, 1]])
 
+        start_time = time()
         res = img2pose_model.predict([transform(img)])[0]
+        time_img2pose += time() - start_time
 
         all_bboxes = res["boxes"].cpu().numpy().astype('float')
 
@@ -130,3 +138,6 @@ if __name__ == '__main__':
                 bboxes.append(bbox)
 
         render_plot(img.copy(),image,annotation, poses, bboxes)
+
+    print("Retinaface", time_retina/length)
+    print("Img2pose", time_img2pose/length)
