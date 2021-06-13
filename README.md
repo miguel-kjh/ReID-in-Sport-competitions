@@ -1,4 +1,4 @@
-# Study of the combination of modalities and coherence for the re-identification of participants in  Ultra-Running  Scenario.
+# Study of the combination of modalities and coherence for the ReID of participants in  Ultra-Running  Scenario.
 
 
 In the context of ultra-running, verification of participant's identities is necessary in order to 
